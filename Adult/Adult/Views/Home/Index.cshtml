@@ -1,68 +1,18 @@
 ﻿<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-xs-2">
-            <!--logo-->
-        </div>
-        <div class="col-xs-8">
-            <!--button-->
-        </div>
-        <div class="col-xs-2">
-            <!--login-->
-        </div>
+
+
+<div data-ng-app="body.directives">
+
+            <all-video></all-video>
+
     </div>
-</div>
-
-
-<div class ="container-fluid">
-    <div class="row">
-        <div class="col-xs-2">
-            <!--This is where the catagory table goes-->
-            <table class="table table-bordered table-hover">
-                <!--table-->
-                <tr><td>
-                    <button role="checkbox" class="btn">catagory</button>
-                    <span class="caret"></span>
-                </td></tr>
-                <tr><td>
-                    <button role="checkbox" class="btn">catagory</button>
-                    <span class="caret"></span>
-                </td></tr>
-            </table>
-        </div>
-
-        <div class="col-xs-8">
-            <!--videos on show-->
-        </div>
-        <div class="col-xs-2">
-            <!--Advertisement banner-->
-        </div>
-
-        <!--this should be dynamically made each time-->
-        <div class="col-xs-8">
-                <!--next layer or we just expand the last one-->
-        </div>
-        <div class="col-xs-2">
-            <!--Advertisement banner, first one will be PPC
-                consequtive ones will be VPM-->
-        </div>
-    </div>
-</div>
-   
-
-
-
-
-
-
-
-
 
 
 
 @section scripts{
     @Scripts.Render("http://code.jquery.com/jquery-2.0.0.js")
     @Scripts.Render("https://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js")
+    @Scripts.Render("~/assets/app/body/directives/directives.js")
 }
