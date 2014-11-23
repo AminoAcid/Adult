@@ -4,7 +4,7 @@ angular.module('body.directives', [])
         return {
             restrict: 'E',
 
-            templateUrl: '~/assets/app/body/templates/videos.cshtml'
+            templateUrl: '/assets/app/body/templates/videos.cshtml'
       
         };
     });
