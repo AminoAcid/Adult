@@ -1,8 +1,10 @@
 ﻿
 angular.module('body.directives', [])
-    .directive('all-video', function () {
+    .directive('allVideo', function () {
         return {
             restrict: 'E',
-            template: "hi"
+
+            templateUrl: '~/assets/app/body/templates/videos.cshtml'
+      
         };
     });
