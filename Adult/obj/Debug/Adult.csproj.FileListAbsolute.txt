@@ -47,6 +47,5 @@ C:\Users\Burton\Desktop\repos\adult\Adult\bin\System.Web.WebPages.Deployment.xml
 C:\Users\Burton\Desktop\repos\adult\Adult\bin\System.Web.WebPages.Razor.xml
 C:\Users\Burton\Desktop\repos\adult\Adult\bin\Antlr3.Runtime.pdb
 C:\Users\Burton\Desktop\repos\adult\Adult\bin\Newtonsoft.Json.xml
-C:\Users\Burton\Desktop\repos\adult\Adult\obj\Debug\Adult.csprojResolveAssemblyReference.cache
 C:\Users\Burton\Desktop\repos\adult\Adult\obj\Debug\Adult.dll
 C:\Users\Burton\Desktop\repos\adult\Adult\obj\Debug\Adult.pdb

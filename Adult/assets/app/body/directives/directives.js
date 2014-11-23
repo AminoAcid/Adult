@@ -1,4 +1,5 @@
-﻿angular.module('body.directives', [])
+﻿
+angular.module('body.directives', [])
     .directive('all-video', function () {
         return {
             restrict: 'E',
