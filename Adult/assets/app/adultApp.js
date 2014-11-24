@@ -1,7 +1,7 @@
-﻿angular.module('adultApp', ['head.directive', 'body.directive', 'ngRoute'])
+﻿angular.module('adultApp', ['directives', 'ngRoute'])
     .config(function ($routeProvider) {
         $routeProvider
             .when('/', {
-                templateUrl: '/assets/app/body/templates/body.html'
+                templateUrl: '/assets/app/templates/dashboard.html'
             });
     });

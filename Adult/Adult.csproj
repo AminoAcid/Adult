@@ -119,10 +119,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="assets\app\adultApp.js" />
-    <Content Include="assets\app\body\directives\directives.js" />
-    <Content Include="assets\app\body\templates\body.html" />
-    <Content Include="assets\app\body\templates\category.html" />
-    <Content Include="assets\app\head\directives\directives.js" />
+    <Content Include="assets\app\directives\directives.js" />
+    <Content Include="assets\app\templates\dashboard.html" />
+    <Content Include="assets\app\templates\category.html" />
+    <Content Include="assets\app\templates\login.html" />
+    <Content Include="assets\app\templates\logo.html" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="favicon.ico" />
@@ -135,7 +136,6 @@
     <Content Include="Scripts\angular.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="assets\app\head\templates\header.cshtml" />
     <Content Include="Scripts\angular-route.min.js.map" />
     <Content Include="Scripts\angular.min.js.map" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
@@ -167,8 +167,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="assets\app\body\controllers\" />
-    <Folder Include="assets\app\head\controllers\" />
+    <Folder Include="assets\app\controllers\" />
     <Folder Include="assets\venders\angularjs\" />
     <Folder Include="Models\" />
   </ItemGroup>
