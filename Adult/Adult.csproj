@@ -121,9 +121,11 @@
     <Content Include="assets\app\adultApp.js" />
     <Content Include="assets\app\directives\directives.js" />
     <Content Include="assets\app\templates\dashboard.html" />
-    <Content Include="assets\app\templates\category.html" />
-    <Content Include="assets\app\templates\login.html" />
-    <Content Include="assets\app\templates\logo.html" />
+    <Content Include="assets\app\templates\body\category.html" />
+    <Content Include="assets\app\templates\head\login.html" />
+    <Content Include="assets\app\templates\head\logo.html" />
+    <Content Include="assets\app\templates\head\main-button.html" />
+    <Content Include="assets\img\homer.svg" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="favicon.ico" />

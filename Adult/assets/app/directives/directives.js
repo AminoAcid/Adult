@@ -2,18 +2,18 @@
     .directive('category', function () {
         return {
             restrict: 'E',
-            templateUrl: '/assets/app/templates/category.html'
+            templateUrl: '/assets/app/templates/body/category.html'
         };
     })
     .directive('login', function () {
         return {
             restrict: 'E',
-            templateUrl: '/assets/app/templates/login.html'
+            templateUrl: '/assets/app/templates/head/login.html'
         }
     })
     .directive('logo', function () {
         return {
             restrict: 'E',
-            templateUrl: '/assets/app/templates/logo.html'
+            templateUrl: '/assets/app/templates/head/logo.html'
         };
     });
