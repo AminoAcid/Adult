@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace Adult.Controllers
 {
+    [Route("~/")]
     public class HomeController : Controller
     {
         public ActionResult Index()
