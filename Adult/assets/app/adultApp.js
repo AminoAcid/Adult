@@ -1,4 +1,4 @@
-﻿angular.module('adultApp', ['directives', 'ngRoute'])
+﻿angular.module('adultApp', ['directives', 'tooltip.init', 'ngRoute'])
     .config(function ($routeProvider) {
         $routeProvider
             .when('/', {

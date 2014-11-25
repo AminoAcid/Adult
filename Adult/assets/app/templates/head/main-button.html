@@ -1,13 +1,22 @@
 ﻿<div class="panel panel-default">
-    <div class="panel-body" data-toggle="modal" data-target=".somemodal">
-        
+    <div class="panel-body" data-toggle="modal" data-target=".videoModal">
+        <div class="col-xs-10">Pinned Videos</div>
+        <span class="badge col-xs-1" data-toggle="tooltip" data-placement="top" title="0 videos pinned" toolinit">34</span>
     </div>
 </div>
 
-<div class="modal fade somemodal" role="dialog">
+<div class="modal fade videoModal" role="dialog">
     <div class="modal-dialog" modal-lg>
         <div class="modal-content">
-            This is modal.
+            <div class="modal-header">
+                This is modal.
+            </div>
+            <div class="modal-body">
+                this is the modal body.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+            </div>
         </div>
     </div>
 </div>

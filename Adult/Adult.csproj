@@ -120,6 +120,7 @@
   <ItemGroup>
     <Content Include="assets\app\adultApp.js" />
     <Content Include="assets\app\directives\directives.js" />
+    <Content Include="assets\app\shared\directives\tooltip-init.js" />
     <Content Include="assets\app\templates\dashboard.html" />
     <Content Include="assets\app\templates\body\category.html" />
     <Content Include="assets\app\templates\head\login.html" />
