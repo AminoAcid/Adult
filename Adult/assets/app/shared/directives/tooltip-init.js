@@ -3,7 +3,7 @@
         return {
             restrict: 'A',
             link: function (scope, element, attrs) {
-                angular.element(element).tooltip();
+                 $(element).tooltip();
             }
         };
     });
