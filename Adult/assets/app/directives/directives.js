@@ -11,6 +11,12 @@
             templateUrl: '/assets/app/templates/head/login.html'
         }
     })
+    .directive('mainButton', function () {
+        return {
+            restrict: 'E',
+            templateUrl: '/assets/app/templates/head/main-button.html'
+        }
+    })
     .directive('logo', function () {
         return {
             restrict: 'E',
