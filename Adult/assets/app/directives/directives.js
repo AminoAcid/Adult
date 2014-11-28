@@ -1,4 +1,9 @@
 ﻿angular.module('directives', [])
+    .directive('videos', function(){
+        return{
+
+        };
+    })
     .directive('category', function () {
         return {
             restrict: 'E',
@@ -8,7 +13,8 @@
     .directive('login', function () {
         return {
             restrict: 'E',
-            templateUrl: '/assets/app/templates/head/login.html'
+            templateUrl: '/assets/app/templates/head/login.html',
+            controller: 'LoginCtrl'
         }
     })
     .directive('mainButton', function () {
