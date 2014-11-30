@@ -50,3 +50,14 @@ C:\Users\Burton\Desktop\repos\adult\Adult\bin\Newtonsoft.Json.xml
 C:\Users\Burton\Desktop\repos\adult\Adult\obj\Debug\Adult.csprojResolveAssemblyReference.cache
 C:\Users\Burton\Desktop\repos\adult\Adult\obj\Debug\Adult.dll
 C:\Users\Burton\Desktop\repos\adult\Adult\obj\Debug\Adult.pdb
+C:\Users\Burton\Desktop\repos\adult\Adult\bin\AutoMapper.Net4.dll
+C:\Users\Burton\Desktop\repos\adult\Adult\bin\Adult.Domain.dll
+C:\Users\Burton\Desktop\repos\adult\Adult\bin\AutoMapper.dll
+C:\Users\Burton\Desktop\repos\adult\Adult\bin\MongoDB.Bson.dll
+C:\Users\Burton\Desktop\repos\adult\Adult\bin\Adult.Domain.pdb
+C:\Users\Burton\Desktop\repos\adult\Adult\bin\AutoMapper.xml
+C:\Users\Burton\Desktop\repos\adult\Adult\bin\MongoDB.Bson.xml
+C:\Users\Burton\Desktop\repos\adult\Adult\bin\Server.dll
+C:\Users\Burton\Desktop\repos\adult\Adult\bin\MongoDB.Driver.dll
+C:\Users\Burton\Desktop\repos\adult\Adult\bin\Server.pdb
+C:\Users\Burton\Desktop\repos\adult\Adult\bin\MongoDB.Driver.xml

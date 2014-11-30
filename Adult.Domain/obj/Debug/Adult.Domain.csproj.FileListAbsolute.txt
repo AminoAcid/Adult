@@ -1,0 +1,9 @@
+C:\Users\Burton\Desktop\repos\adult\Adult.Domain\bin\Debug\Adult.Domain.dll
+C:\Users\Burton\Desktop\repos\adult\Adult.Domain\bin\Debug\Adult.Domain.pdb
+C:\Users\Burton\Desktop\repos\adult\Adult.Domain\bin\Debug\MongoDB.Bson.dll
+C:\Users\Burton\Desktop\repos\adult\Adult.Domain\bin\Debug\MongoDB.Driver.dll
+C:\Users\Burton\Desktop\repos\adult\Adult.Domain\bin\Debug\MongoDB.Bson.xml
+C:\Users\Burton\Desktop\repos\adult\Adult.Domain\bin\Debug\MongoDB.Driver.xml
+C:\Users\Burton\Desktop\repos\adult\Adult.Domain\obj\Debug\Adult.Domain.csprojResolveAssemblyReference.cache
+C:\Users\Burton\Desktop\repos\adult\Adult.Domain\obj\Debug\Adult.Domain.dll
+C:\Users\Burton\Desktop\repos\adult\Adult.Domain\obj\Debug\Adult.Domain.pdb

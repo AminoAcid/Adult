@@ -1,6 +1,11 @@
-﻿<div ng-app="adultApp">
+﻿@model Adult.Models.VideoViewModel
+
+<div ng-app="adultApp">
     <div ng-view></div>
 </div>
+
+<!--create a factory that serializes this model-->
+
 
 @Scripts.Render("~/Scripts/angular.min.js")
 @Scripts.Render("~/Scripts/angular-route.min.js")

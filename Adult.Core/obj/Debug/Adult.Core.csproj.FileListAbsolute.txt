@@ -1,0 +1,5 @@
+C:\Users\Burton\Desktop\repos\adult\Adult.Core\bin\Debug\Adult.Core.dll
+C:\Users\Burton\Desktop\repos\adult\Adult.Core\bin\Debug\Adult.Core.pdb
+C:\Users\Burton\Desktop\repos\adult\Adult.Core\obj\Debug\Adult.Core.csprojResolveAssemblyReference.cache
+C:\Users\Burton\Desktop\repos\adult\Adult.Core\obj\Debug\Adult.Core.dll
+C:\Users\Burton\Desktop\repos\adult\Adult.Core\obj\Debug\Adult.Core.pdb
