@@ -13,7 +13,7 @@ namespace Adult.Domain.Mongo.Domain.video
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
         public String _id { get; set; }
-        public String name { get; set; }
+        public String Name { get; set; }
 
     }
 }

@@ -11,13 +11,16 @@ namespace Adult.Models
     public class VideoViewModel
     {
         public String _id { get; set; }
-        public String name { get; set; }
-
+        public String Name { get; set; }
+        public VideoViewModel()
+        {
+            createMaps();
+        }
         public void createMaps()
         {
-            Mapper.CreateMap<VideoViewModel, Video>()
+            Mapper.CreateMap<Video, VideoViewModel>()
                 .ForMember(dest => dest._id, opt => opt.MapFrom(src => src._id))
-                .ForMember(dest => dest.name, opt => opt.MapFrom(src => src.name)
+                .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Name)
             );
         }
     }

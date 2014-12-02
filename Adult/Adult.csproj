@@ -124,6 +124,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Builder\VideoBuilder.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -135,7 +136,9 @@
     <Content Include="assets\app\adultApp.js" />
     <Content Include="assets\app\controllers\controllers.js" />
     <Content Include="assets\app\directives\directives.js" />
+    <Content Include="assets\app\shared\services\bootstrapper.js" />
     <Content Include="assets\app\shared\directives\tooltip-init.js" />
+    <Content Include="assets\app\templates\body\videos.html" />
     <Content Include="assets\app\templates\dashboard.html" />
     <Content Include="assets\app\templates\body\category.html" />
     <Content Include="assets\app\templates\head\login.html" />
@@ -180,7 +183,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Shared\Index.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Home\Index.cshtml" />
   </ItemGroup>

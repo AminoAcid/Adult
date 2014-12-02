@@ -1,7 +1,9 @@
 ﻿angular.module('directives', [])
     .directive('videos', function(){
         return{
-
+            restrict: 'E',
+            templateUrl: '/assets/app/templates/body/videos.html',
+            controller: 'VideoCtrl'
         };
     })
     .directive('category', function () {
