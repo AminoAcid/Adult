@@ -8,7 +8,7 @@ using AutoMapper;
 
 namespace Adult.Builder
 {
-    public class VideoBuilder
+    public class ModelBuilder
     {
         public VideoViewModel videoViewModelBuilder()
         {
@@ -16,6 +16,7 @@ namespace Adult.Builder
             new VideoViewModel();
 
             var videoModel = Mapper.Map<Video, VideoViewModel>(new Video (){ _id = "1", Name = "hi" });
+            
             return videoModel;
         }
     }

@@ -124,7 +124,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Builder\VideoBuilder.cs" />
+    <Compile Include="Builder\ModelBuilder.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -169,6 +169,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\ng-infinite-scroll.min.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
@@ -197,6 +198,10 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Adult.Core\Adult.Core.csproj">
+      <Project>{a85ee808-2586-4194-bfe2-3038e258a3a8}</Project>
+      <Name>Adult.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Adult.Domain\Adult.Domain.csproj">
       <Project>{4a153aa0-6cef-4cbf-934b-4f45ecc77966}</Project>
       <Name>Adult.Domain</Name>

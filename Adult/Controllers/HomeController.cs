@@ -7,23 +7,27 @@ using Server.Mongo;
 using Adult.Domain.Mongo.Domain.video;
 using Adult.Models;
 using Adult.Builder;
+using Adult.Core.JSON;
 
 namespace Adult.Controllers
 {
-    [Route("~/")]
     public class HomeController : Controller
     {
+        private ModelBuilder _ModelBuilder
+        {
+            get { return new ModelBuilder(); }
+        }
+        [Route("~/")]
         [HttpGet]
         public ActionResult Index()
         {
-            //return View(Json(new VideoBuilder().videoViewModelBuilder(), JsonRequestBehavior.AllowGet));
-
-            return View();
+            var model = _ModelBuilder.videoViewModelBuilder();
+            return View("Index", "", model.Serialize());
         }
         [HttpGet]
-        public JsonResult Video(VideoViewModel model)
+        public ActionResult Video(VideoViewModel model)
         {
-            return Json(new VideoBuilder().videoViewModelBuilder(), JsonRequestBehavior.AllowGet);
+            return Json(_ModelBuilder.videoViewModelBuilder(), JsonRequestBehavior.DenyGet);
         }
         //add the model stuff to the database here then return sucess or failure as json to angular
         //[HttpPost]

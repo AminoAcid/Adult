@@ -61,3 +61,5 @@ C:\Users\Burton\Desktop\repos\adult\Adult\bin\Server.dll
 C:\Users\Burton\Desktop\repos\adult\Adult\bin\MongoDB.Driver.dll
 C:\Users\Burton\Desktop\repos\adult\Adult\bin\Server.pdb
 C:\Users\Burton\Desktop\repos\adult\Adult\bin\MongoDB.Driver.xml
+C:\Users\Burton\Desktop\repos\adult\Adult\bin\Adult.Core.dll
+C:\Users\Burton\Desktop\repos\adult\Adult\bin\Adult.Core.pdb

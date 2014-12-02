@@ -5,10 +5,11 @@ using System.Web;
 using AutoMapper;
 using Adult.Domain.Mongo.Domain.video;
 using Newtonsoft.Json;
+using Adult.Core.JSON;
 
 namespace Adult.Models
 {
-    public class VideoViewModel
+    public class VideoViewModel : IJsonSerializable
     {
         public String _id { get; set; }
         public String Name { get; set; }

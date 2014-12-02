@@ -1,17 +1,25 @@
-﻿
+﻿@model String
 <div ng-app="adultApp">
     
     <div ng-view></div>
 </div>
 
-
 @Scripts.Render("~/Scripts/angular.min.js")
 @Scripts.Render("~/Scripts/angular-route.min.js")
 @Scripts.Render("~/Scripts/angular-messages.min.js")
+@Scripts.Render("~/Scripts/ng-infinite-scroll.min.js")
 
 @Scripts.Render("~/assets/app/shared/services/bootstrapper.js")
 @Scripts.Render("~/assets/app/shared/directives/tooltip-init.js")
 @Scripts.Render("~/assets/app/directives/directives.js")
 @Scripts.Render("~/assets/app/controllers/controllers.js")
 @Scripts.Render("~/assets/app/adultApp.js")
+
+<script type="text/javascript">
+    bootstrap.factory('indexBootstrap', function () {
+        return {
+            video: @Html.Raw(@Model)
+            };
+    });
+</script>
 
