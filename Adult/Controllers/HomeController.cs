@@ -8,15 +8,19 @@ using Adult.Domain.Mongo.Domain.video;
 using Adult.Models;
 using Adult.Builder;
 using Adult.Core.JSON;
+using Microsoft.Web.Mvc;
 
 namespace Adult.Controllers
 {
     public class HomeController : Controller
     {
+        #region prop
         private ModelBuilder _ModelBuilder
         {
             get { return new ModelBuilder(); }
         }
+        #endregion
+
         [Route("~/")]
         [HttpGet]
         public ActionResult Index()
@@ -24,8 +28,11 @@ namespace Adult.Controllers
             var model = _ModelBuilder.videoViewModelBuilder();
             return View("Index", "", model.Serialize());
         }
+
+        [Route("videos")]
+        [AjaxOnly]
         [HttpGet]
-        public ActionResult Video(VideoViewModel model)
+        public JsonResult Video()
         {
             return Json(_ModelBuilder.videoViewModelBuilder(), JsonRequestBehavior.DenyGet);
         }

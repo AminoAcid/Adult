@@ -8,11 +8,17 @@
             };
       });
      */
-    .factory('videoBootstrap', ['$http', '$q', function ($http, $q) {
+    .config(['$provide', function ($provide) {
+        $provide.value('getVideosUrl', '@Url.Action("Video","Home")');
+    }])
+    .factory('videoBootstrap', ['$http', '$q', 'getVideosUrl', function ($http, $q, getVideosUrl) {
         return {
             getVideo: function () {
                 var deffered = $q.defer();
-                $http.get('/').success(deffered.resolve).error(deffered.reject);
+                $http({
+                    method: 'GET',
+                    url: getVideosUrl
+                }).success(deffered.resolve).error(deffered.reject);
                 return deffered.promise;
             }
         }

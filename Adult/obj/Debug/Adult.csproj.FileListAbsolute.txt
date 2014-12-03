@@ -24,12 +24,20 @@ C:\Users\Burton\Documents\Visual Studio 2013\Projects\Adult\Adult\bin\Newtonsoft
 C:\Users\Burton\Documents\Visual Studio 2013\Projects\Adult\Adult\obj\Debug\Adult.csprojResolveAssemblyReference.cache
 C:\Users\Burton\Documents\Visual Studio 2013\Projects\Adult\Adult\obj\Debug\Adult.dll
 C:\Users\Burton\Documents\Visual Studio 2013\Projects\Adult\Adult\obj\Debug\Adult.pdb
+C:\Users\Burton\Desktop\repos\adult\Adult\bin\AutoMapper.Net4.dll
 C:\Users\Burton\Desktop\repos\adult\Adult\bin\Adult.dll.config
 C:\Users\Burton\Desktop\repos\adult\Adult\bin\Adult.dll
 C:\Users\Burton\Desktop\repos\adult\Adult\bin\Adult.pdb
+C:\Users\Burton\Desktop\repos\adult\Adult\bin\Adult.Core.dll
+C:\Users\Burton\Desktop\repos\adult\Adult\bin\Adult.Domain.dll
 C:\Users\Burton\Desktop\repos\adult\Adult\bin\Antlr3.Runtime.dll
+C:\Users\Burton\Desktop\repos\adult\Adult\bin\AutoMapper.dll
 C:\Users\Burton\Desktop\repos\adult\Adult\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\Burton\Desktop\repos\adult\Adult\bin\Microsoft.Web.Mvc.dll
+C:\Users\Burton\Desktop\repos\adult\Adult\bin\MongoDB.Bson.dll
+C:\Users\Burton\Desktop\repos\adult\Adult\bin\MongoDB.Driver.dll
 C:\Users\Burton\Desktop\repos\adult\Adult\bin\Newtonsoft.Json.dll
+C:\Users\Burton\Desktop\repos\adult\Adult\bin\Server.dll
 C:\Users\Burton\Desktop\repos\adult\Adult\bin\System.Web.Helpers.dll
 C:\Users\Burton\Desktop\repos\adult\Adult\bin\System.Web.Mvc.dll
 C:\Users\Burton\Desktop\repos\adult\Adult\bin\System.Web.Optimization.dll
@@ -38,6 +46,13 @@ C:\Users\Burton\Desktop\repos\adult\Adult\bin\System.Web.WebPages.Deployment.dll
 C:\Users\Burton\Desktop\repos\adult\Adult\bin\System.Web.WebPages.dll
 C:\Users\Burton\Desktop\repos\adult\Adult\bin\System.Web.WebPages.Razor.dll
 C:\Users\Burton\Desktop\repos\adult\Adult\bin\WebGrease.dll
+C:\Users\Burton\Desktop\repos\adult\Adult\bin\Adult.Core.pdb
+C:\Users\Burton\Desktop\repos\adult\Adult\bin\Adult.Domain.pdb
+C:\Users\Burton\Desktop\repos\adult\Adult\bin\Server.pdb
+C:\Users\Burton\Desktop\repos\adult\Adult\bin\AutoMapper.xml
+C:\Users\Burton\Desktop\repos\adult\Adult\bin\MongoDB.Bson.xml
+C:\Users\Burton\Desktop\repos\adult\Adult\bin\MongoDB.Driver.xml
+C:\Users\Burton\Desktop\repos\adult\Adult\bin\Newtonsoft.Json.xml
 C:\Users\Burton\Desktop\repos\adult\Adult\bin\System.Web.Helpers.xml
 C:\Users\Burton\Desktop\repos\adult\Adult\bin\System.Web.Mvc.xml
 C:\Users\Burton\Desktop\repos\adult\Adult\bin\System.Web.Optimization.xml
@@ -46,20 +61,6 @@ C:\Users\Burton\Desktop\repos\adult\Adult\bin\System.Web.WebPages.xml
 C:\Users\Burton\Desktop\repos\adult\Adult\bin\System.Web.WebPages.Deployment.xml
 C:\Users\Burton\Desktop\repos\adult\Adult\bin\System.Web.WebPages.Razor.xml
 C:\Users\Burton\Desktop\repos\adult\Adult\bin\Antlr3.Runtime.pdb
-C:\Users\Burton\Desktop\repos\adult\Adult\bin\Newtonsoft.Json.xml
 C:\Users\Burton\Desktop\repos\adult\Adult\obj\Debug\Adult.csprojResolveAssemblyReference.cache
 C:\Users\Burton\Desktop\repos\adult\Adult\obj\Debug\Adult.dll
 C:\Users\Burton\Desktop\repos\adult\Adult\obj\Debug\Adult.pdb
-C:\Users\Burton\Desktop\repos\adult\Adult\bin\AutoMapper.Net4.dll
-C:\Users\Burton\Desktop\repos\adult\Adult\bin\Adult.Domain.dll
-C:\Users\Burton\Desktop\repos\adult\Adult\bin\AutoMapper.dll
-C:\Users\Burton\Desktop\repos\adult\Adult\bin\MongoDB.Bson.dll
-C:\Users\Burton\Desktop\repos\adult\Adult\bin\Adult.Domain.pdb
-C:\Users\Burton\Desktop\repos\adult\Adult\bin\AutoMapper.xml
-C:\Users\Burton\Desktop\repos\adult\Adult\bin\MongoDB.Bson.xml
-C:\Users\Burton\Desktop\repos\adult\Adult\bin\Server.dll
-C:\Users\Burton\Desktop\repos\adult\Adult\bin\MongoDB.Driver.dll
-C:\Users\Burton\Desktop\repos\adult\Adult\bin\Server.pdb
-C:\Users\Burton\Desktop\repos\adult\Adult\bin\MongoDB.Driver.xml
-C:\Users\Burton\Desktop\repos\adult\Adult\bin\Adult.Core.dll
-C:\Users\Burton\Desktop\repos\adult\Adult\bin\Adult.Core.pdb
