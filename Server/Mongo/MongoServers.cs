@@ -22,8 +22,8 @@ namespace Adult.Server.Mongo
              * settings.Server = new MongoServerAddress("localhost, 27017);
              * MongoClient client = new MongoClient(settings);
              */
-            this.mongoDB = new MongoClient().GetServer().GetDatabase("Adult");
-            this.videoCollection = mongoDB.GetCollection<Video>("videos");
+            this.mongoDB = new MongoClient().GetServer().GetDatabase("videoDB");
+            this.videoCollection = mongoDB.GetCollection<Video>("allVideos");
             this.counterCollection = mongoDB.GetCollection("counter");
         }
     

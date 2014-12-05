@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using Adult.Server.Mongo;
 using Adult.Domain.Mongo.Video;
 using Adult.Models;
 using Adult.Builder;
 using Adult.Core.JSON;
 using Microsoft.Web.Mvc;
+using Adult.Server.Mongo;
+using Adult.Server.Mongo.MongoPopulate;
 
 namespace Adult.Controllers
 {
@@ -29,10 +30,9 @@ namespace Adult.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            Extractor ex = new Extractor();
-            Response.Write(ex.giveData());
-         //   var model = _ModelBuilder.videoViewModelBuilder();
-        //    return View(model.Serialize());
+            //var model = _ModelBuilder.videoViewModelBuilder();
+            //return View(model.Serialize());
+            new PopulateMongo();
             return View();
         }
 

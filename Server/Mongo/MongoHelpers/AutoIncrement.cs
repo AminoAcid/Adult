@@ -24,8 +24,16 @@ namespace Server.Mongo.MongoHelpers
             var query = Query.EQ("ID", name);
             var sort = SortBy.Null;
             var update = Update.Inc("seq", 1);
-            return collection.FindAndModify(query, sort, update, true, true).ToString();    
-            
+            var result = collection.FindAndModify(
+                new FindAndModifyArgs()
+                {
+                    Query = Query.EQ("ID", name),
+                    SortBy = SortBy.Null,
+                    Update = Update.Inc("seq", 1),
+                    Upsert = true
+                }).ToString();
+
+            return result;
         }
 
        
