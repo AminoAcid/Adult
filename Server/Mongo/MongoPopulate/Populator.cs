@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Adult.Server.Mongo;
 using MongoDB.Driver;
 using MongoDB.Bson;
+using Adult.Server.Mongo.MongoHelpers;
 
 namespace Adult.Server.Mongo.MongoPopulate
 {
@@ -20,6 +21,7 @@ namespace Adult.Server.Mongo.MongoPopulate
                 _MongoServer.videoCollection.Save(
                     new BsonDocument()
                     {
+                        {"Id", AutoIncrement.getNextSequence(_MongoServer.counterCollection)},
                         {"Title", allVideoData[i,0]},
                         {"Embed", allVideoData[i,1]}
                     }

@@ -14,7 +14,7 @@ namespace Adult.Server.Mongo
     {
         private MongoDatabase mongoDB { get; set; }
         public MongoCollection videoCollection { get; set; }
-        protected MongoCollection counterCollection { get; set; }
+        public MongoCollection counterCollection { get; set; }
         public MongoServers()
         {
             /*If you wanted to set the server address

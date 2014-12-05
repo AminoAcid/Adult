@@ -9,7 +9,7 @@ using MongoDB.Driver.Builders;
 using Adult.Server.Mongo;
 using MongoDB.Bson;
 
-namespace Server.Mongo.MongoHelpers
+namespace Adult.Server.Mongo.MongoHelpers
 {
     public static class AutoIncrement
     {
@@ -24,16 +24,21 @@ namespace Server.Mongo.MongoHelpers
             var query = Query.EQ("ID", name);
             var sort = SortBy.Null;
             var update = Update.Inc("seq", 1);
+            //need to delete the tail...save the head.
+            collection.Insert(new BsonDocument(){
+                {"ID", name},
+                {"seq", 1}
+            });
             var result = collection.FindAndModify(
                 new FindAndModifyArgs()
                 {
                     Query = Query.EQ("ID", name),
                     SortBy = SortBy.Null,
                     Update = Update.Inc("seq", 1),
-                    Upsert = true
-                }).ToString();
-
-            return result;
+                    Upsert = true,
+                });
+            //gets seq from the response
+            return result.Response[0][2].ToString();
         }
 
        

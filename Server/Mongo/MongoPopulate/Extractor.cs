@@ -15,6 +15,10 @@ namespace Adult.Server.Mongo.MongoPopulate
     public class Extractor
     {
         private DataTable _videoDataTable { get; set; }
+        /*
+         * This requires 'Microsoft Access Database Engine 2010 Redistributable' to be installed on the machine,
+         * then Project->Add New Data Source to this project
+         */
         public Extractor()
         {
             OleDbConnection connection = new OleDbConnection();
