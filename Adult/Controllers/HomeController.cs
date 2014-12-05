@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using Server.Mongo;
-using Adult.Domain.Mongo.Domain.video;
+using Adult.Server.Mongo;
+using Adult.Domain.Mongo.Video;
 using Adult.Models;
 using Adult.Builder;
 using Adult.Core.JSON;
@@ -19,14 +19,21 @@ namespace Adult.Controllers
         {
             get { return new ModelBuilder(); }
         }
+        private MongoServers _MongoService
+        {
+            get { return new MongoServers(); }
+        }
         #endregion
 
         [Route("~/")]
         [HttpGet]
         public ActionResult Index()
         {
-            var model = _ModelBuilder.videoViewModelBuilder();
-            return View("Index", "", model.Serialize());
+            Extractor ex = new Extractor();
+            Response.Write(ex.giveData());
+         //   var model = _ModelBuilder.videoViewModelBuilder();
+        //    return View(model.Serialize());
+            return View();
         }
 
         [Route("videos")]

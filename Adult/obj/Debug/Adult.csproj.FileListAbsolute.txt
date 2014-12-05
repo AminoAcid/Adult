@@ -24,6 +24,7 @@ C:\Users\Burton\Documents\Visual Studio 2013\Projects\Adult\Adult\bin\Newtonsoft
 C:\Users\Burton\Documents\Visual Studio 2013\Projects\Adult\Adult\obj\Debug\Adult.csprojResolveAssemblyReference.cache
 C:\Users\Burton\Documents\Visual Studio 2013\Projects\Adult\Adult\obj\Debug\Adult.dll
 C:\Users\Burton\Documents\Visual Studio 2013\Projects\Adult\Adult\obj\Debug\Adult.pdb
+C:\Users\Burton\Desktop\repos\adult\Adult\obj\Debug\Adult.csprojResolveAssemblyReference.cache
 C:\Users\Burton\Desktop\repos\adult\Adult\bin\AutoMapper.Net4.dll
 C:\Users\Burton\Desktop\repos\adult\Adult\bin\Adult.dll.config
 C:\Users\Burton\Desktop\repos\adult\Adult\bin\Adult.dll
@@ -61,6 +62,5 @@ C:\Users\Burton\Desktop\repos\adult\Adult\bin\System.Web.WebPages.xml
 C:\Users\Burton\Desktop\repos\adult\Adult\bin\System.Web.WebPages.Deployment.xml
 C:\Users\Burton\Desktop\repos\adult\Adult\bin\System.Web.WebPages.Razor.xml
 C:\Users\Burton\Desktop\repos\adult\Adult\bin\Antlr3.Runtime.pdb
-C:\Users\Burton\Desktop\repos\adult\Adult\obj\Debug\Adult.csprojResolveAssemblyReference.cache
 C:\Users\Burton\Desktop\repos\adult\Adult\obj\Debug\Adult.dll
 C:\Users\Burton\Desktop\repos\adult\Adult\obj\Debug\Adult.pdb

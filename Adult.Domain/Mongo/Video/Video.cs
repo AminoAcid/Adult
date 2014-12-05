@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Adult.Domain.Mongo.Domain.video
+namespace Adult.Domain.Mongo.Video
 {
     public class Video
     {

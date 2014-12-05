@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using Adult.Domain.Mongo.Domain.video;
+using Adult.Domain.Mongo.Video;
 using Adult.Models;
 using AutoMapper;
 

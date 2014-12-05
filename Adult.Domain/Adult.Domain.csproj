@@ -46,7 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Mongo.Domain\video\Video.cs" />
+    <Compile Include="Mongo\Video\Video.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
