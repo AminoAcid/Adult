@@ -8,9 +8,9 @@ using Adult.Domain.Mongo.Video;
 using Adult.Server.Mongo;
 using MongoDB.Driver.Linq;
 
-namespace Server.Mongo
+namespace Adult.Server.Mongo
 {
-    class MongoService
+    public class MongoService
     {
         private MongoServers _MongoServer { get { return new MongoServers(); } }
         private Int64 totalVideoCount { get; set; }
@@ -20,15 +20,18 @@ namespace Server.Mongo
         }
         public Video getVideo(String BsonId)
         {
-            return _MongoServer.videoCollection.AsQueryable<Video>().Single(x => x._id.Equals(BsonId, StringComparison.Ordinal));
+            return _MongoServer.videoCollection.AsQueryable<Video>().Single(x => x._id == BsonId);
+
         }
       
-        //public List<Video> getVideos(Int32 startIndex = 0, Int32 amount)
-        //{
-        //    if(amount - startIndex > totalVideoCount) 
-        //        throw new IndexOutOfRangeException();
-         
-        //    return _MongoService.videoCollection
-        //}
+        public Video[] getVideos(Int32 amount, Int32 startIndex = 0)
+        {
+            if(amount - startIndex > totalVideoCount) 
+                throw new IndexOutOfRangeException();
+           
+            //var me = _MongoServer.videoCollection.AsQueryable<Video>().Where(x => x.Id >= startIndex && x.Id <= amount).ToArray();
+            var me = _MongoServer.videoCollection.AsQueryable<Video>().Take(amount).ToArray();
+            return me;
+        }
     }
 }

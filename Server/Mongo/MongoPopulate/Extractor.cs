@@ -18,6 +18,7 @@ namespace Adult.Server.Mongo.MongoPopulate
         /*
          * This requires 'Microsoft Access Database Engine 2010 Redistributable' to be installed on the machine,
          * then Project->Add New Data Source to this project
+         * HardCoded extractor for 2xN excel tables
          */
         public Extractor()
         {

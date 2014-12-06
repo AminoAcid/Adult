@@ -19,8 +19,8 @@ namespace Adult.Models
         }
         public void createMaps()
         {
-            Mapper.CreateMap<List<Video>, VideoViewModel>()
-                .ForMember(dest => dest.Videos, opt => opt.MapFrom(src => src.ToArray())
+            Mapper.CreateMap<Video[], VideoViewModel>()
+                .ForMember(dest => dest.Videos, opt => opt.MapFrom(src => src)
                 );
             
         }

@@ -8,16 +8,16 @@
             };
       });
      */
-    .config(['$provide', function ($provide) {
-        $provide.value('getVideosUrl', '@Url.Action("Video","Home")');
-    }])
-    .factory('videoBootstrap', ['$http', '$q', 'getVideosUrl', function ($http, $q, getVideosUrl) {
+    //.config(['$provide', function ($provide) {
+    //    $provide.value('getVideosUrl', '/video');
+    //}])
+    .factory('videoBootstrap', ['$http', '$q', function ($http, $q) {
         return {
             getVideo: function () {
                 var deffered = $q.defer();
                 $http({
                     method: 'GET',
-                    url: getVideosUrl
+                    url: '/api/Video'
                 }).success(deffered.resolve).error(deffered.reject);
                 return deffered.promise;
             }

@@ -26,23 +26,23 @@ namespace Adult.Controllers
         }
         #endregion
 
-        [Route("~/")]
+        //[Route("~/")]
         [HttpGet]
         public ActionResult Index()
         {
             //var model = _ModelBuilder.videoViewModelBuilder();
-            //return View(model.Serialize());
-            new PopulateMongo();
-            return View();
+            return View();//model.Serialize()
+            //new PopulateMongo();
+            //return View();
         }
 
-        [Route("videos")]
-        [AjaxOnly]
-        [HttpGet]
-        public JsonResult Video()
-        {
-            return Json(_ModelBuilder.videoViewModelBuilder(), JsonRequestBehavior.DenyGet);
-        }
+        //[Route("video")]
+        //[AjaxOnly]
+        //[HttpPost]
+        //public JsonResult Video()
+        //{
+        //    return Json(_ModelBuilder.videoViewModelBuilder(), JsonRequestBehavior.AllowGet);
+        //}
         //add the model stuff to the database here then return sucess or failure as json to angular
         //[HttpPost]
         //public JsonResult Index()
