@@ -9,20 +9,22 @@ using Adult.Domain.Mongo.Video;
 
 namespace Adult.ApiControllers
 {
+    [RoutePrefix("api/Video")]
     public class VideoController : ApiController
     {
+        private const Int32 AMOUNT_PER_LOAD = 1;
         private MongoService _MongoService { get { return new MongoService(); } }
-        // GET api/<controller>
-        public Video Get()
+        
+        [HttpGet]
+        [Route("get/{startIndex:int}")]
+        public Video[] Get(Int32 startIndex)
         {
-            return _MongoService.getVideo("548141037f807d35c41c95b2");
-           // return _MongoService.getVideos(3);
+            return _MongoService.getVideos(AMOUNT_PER_LOAD, startIndex);
         }
 
-        // GET api/<controller>/5
-        public string Get(int id)
+        public Video Get(String BsonId)
         {
-            return "value";
+            return _MongoService.getVideo(BsonId);
         }
 
         // POST api/<controller>

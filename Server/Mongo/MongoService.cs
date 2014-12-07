@@ -29,9 +29,8 @@ namespace Adult.Server.Mongo
             if(amount - startIndex > totalVideoCount) 
                 throw new IndexOutOfRangeException();
            
-            //var me = _MongoServer.videoCollection.AsQueryable<Video>().Where(x => x.Id >= startIndex && x.Id <= amount).ToArray();
-            var me = _MongoServer.videoCollection.AsQueryable<Video>().Take(amount).ToArray();
-            return me;
+            return _MongoServer.videoCollection.AsQueryable<Video>().Skip(startIndex).Take(amount).ToArray();
+          
         }
     }
 }

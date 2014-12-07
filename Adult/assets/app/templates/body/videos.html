@@ -1,2 +1,12 @@
-﻿<div ng-init="moreVideos()"></div> 
-<div ng-bind-html="embed | trustHtml"></div>
+﻿<!--<div ng-init="getVideos(0)"></div> 
+<div ng-repeat="vid in videos">
+    <div ng-bind-html="vid.title | trustHtml"></div>
+    <div ng-bind-html="vid.embed | trustHtml"></div>
+</div>-->
+
+<div infinite-scroll="getVideos(startIndex)" infinite-scroll-distance="2">
+    <div ng-repeat="vid in videos">
+        <div ng-bind-html="vid.title | trustHtml"></div>
+        <div ng-bind-html="vid.embed | trustHtml"></div>
+    </div>
+</div>

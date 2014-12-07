@@ -1,4 +1,5 @@
-﻿angular.module('adultApp', ['directives', 'controllers', 'tooltip.init', 'bootstrap', 'ngRoute', 'ngMessages', 'trust.html'])
+﻿
+angular.module('adultApp', ['directives', 'controllers', 'tooltip.init', 'bootstrap', 'ngRoute', 'ngMessages', 'infinite-scroll', 'trust.html', 'constants'])
     .config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
         $locationProvider.html5Mode({enabled:true, requireBase:false});
         $routeProvider
@@ -8,3 +9,6 @@
             });
             
     }]);
+
+//slow down to prevent lag/jerk
+angular.module('infinite-scroll').value('THROTTLE_MILLISECONDS', 250)

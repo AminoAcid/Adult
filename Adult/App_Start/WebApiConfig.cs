@@ -11,13 +11,23 @@ namespace Adult.App_Start
         {
             // Web API configuration and services
             config.Formatters.OfType<JsonMediaTypeFormatter>().First().SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
-            // Web API routes
             config.MapHttpAttributeRoutes();
+            // Web API routes
+
+            /*
+                    ATLERNATIVE for [Route] Attribute
+                   
+                    config.Routes.MapHttpRoute(
+                    name: "ApiByName",
+                    routeTemplate: "api/{controller}/{action}/{startIndex}",
+                    defaults: new { startIndex = RouteParameter.Optional }
+                    );
+             */
 
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
-                routeTemplate: "api/{controller}/{id}",
-                defaults: new { id = RouteParameter.Optional }
+                routeTemplate: "api/{controller}/{action}",
+                defaults: new { action = "Get" }
             );
         }
     }

@@ -153,6 +153,7 @@
     <Content Include="assets\app\adultApp.js" />
     <Content Include="assets\app\controllers\controllers.js" />
     <Content Include="assets\app\directives\directives.js" />
+    <Content Include="assets\app\shared\constants\constants.js" />
     <Content Include="assets\app\shared\filters\trust-html.js" />
     <Content Include="assets\app\shared\services\bootstrapper.js" />
     <Content Include="assets\app\shared\directives\tooltip-init.js" />

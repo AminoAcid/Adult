@@ -7,14 +7,17 @@
             console.log("form is submitted");
         }
     }])
-    .controller('VideoCtrl', ['$scope', '$location', 'videoBootstrap', function ($scope, $location, videoBootstrap) {
+    .controller('VideoCtrl', ['$scope', '$location', 'videoBootstrap','videoConstants', function ($scope, $location, videoBootstrap, videoConstants) {
+        $scope.startIndex = 0;
+        $scope.videos = [];
         $scope.initVideo = function (videos) {
-            $scope.videos = videos;
-            $scope.embed = $scope.videos.embed;
+            $scope.videos = $scope.videos.concat(videos);
+            //increment startIndex for database after each load
+            $scope.startIndex += videoConstants.AMOUNT_PER_LOAD;
         }
 
-        $scope.moreVideos = function () {
-            videoBootstrap.getVideo().then(
+        $scope.getVideos = function (startIndex) {
+            videoBootstrap.getVideos(startIndex).then(
                 //success
                 function (videoArray) {
                     $scope.initVideo(videoArray);
