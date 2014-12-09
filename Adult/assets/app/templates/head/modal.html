@@ -12,7 +12,12 @@
                 This is modal.
             </div>
             <div class="modal-body">
-                this is the modal body.
+                <div infinite-scroll="getPinnedVideos()" infinite-scroll-distance="2">
+                    <div ng-repeat="vid in pinnedVideos">
+                        <div ng-bind="vid.title"></div>
+                        <div ng-bind-html="vid.embed | trustHtml"></div>
+                    </div>
+                </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>

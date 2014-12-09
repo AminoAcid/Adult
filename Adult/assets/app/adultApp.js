@@ -1,5 +1,16 @@
 ﻿
-angular.module('adultApp', ['directives', 'controllers', 'tooltip.init', 'bootstrap', 'ngRoute', 'ngMessages', 'infinite-scroll', 'trust.html', 'constants'])
+angular.module('adultApp', [
+    'pinVideo',
+    'directives',
+    'controllers',
+    'tooltip.init',
+    'bootstrap',
+    'ngRoute',
+    'ngMessages',
+    'infinite-scroll',
+    'trust.html',
+    'constants'])
+
     .config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
         $locationProvider.html5Mode({enabled:true, requireBase:false});
         $routeProvider

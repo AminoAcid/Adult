@@ -19,10 +19,11 @@
             controller: 'LoginCtrl'
         }
     })
-    .directive('mainButton', function () {
+    .directive('modal', function () {
         return {
             restrict: 'E',
-            templateUrl: '/assets/app/templates/head/main-button.html'
+            templateUrl: '/assets/app/templates/head/modal.html',
+            controller: 'ModalCtrl'
         }
     })
     .directive('logo', function () {

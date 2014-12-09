@@ -8,5 +8,6 @@
     <div ng-repeat="vid in videos">
         <div ng-bind-html="vid.title | trustHtml"></div>
         <div ng-bind-html="vid.embed | trustHtml"></div>
+        <button class="=btn btn-default" ng-click="pinVideo(vid.title, vid.embed)">Pin-It</button>
     </div>
 </div>

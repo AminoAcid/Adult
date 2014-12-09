@@ -7,6 +7,8 @@ using MongoDB.Driver;
 using Adult.Domain.Mongo.Video;
 using Adult.Server.Mongo;
 using MongoDB.Driver.Linq;
+using MongoDB.Driver.Builders;
+using MongoDB.Bson;
 
 namespace Adult.Server.Mongo
 {
@@ -31,6 +33,29 @@ namespace Adult.Server.Mongo
            
             return _MongoServer.videoCollection.AsQueryable<Video>().Skip(startIndex).Take(amount).ToArray();
           
+        }
+
+        public String[] getEmbeds(String[] BsonIdStrings)
+        {
+            var total = BsonIdStrings.Length;
+            String[] embeds = new String[total];
+
+            //convert String to Bson for Query
+            BsonObjectId[] BsonIds = new BsonObjectId[total];
+            for(Int32 i = 0; i < total; i++)
+            {
+                BsonIds[i] = ObjectId.Parse(BsonIdStrings[i]);
+            }
+
+            var cursorResult = _MongoServer.videoCollection.FindAs<Video>(Query.All("_id", BsonIds));
+            var index = 0;
+            foreach(var vid in cursorResult)
+            {
+                embeds[index] = vid.Embed;
+                index++;
+            }
+
+            return embeds;
         }
     }
 }
