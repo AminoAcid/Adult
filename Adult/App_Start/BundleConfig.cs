@@ -24,8 +24,9 @@ namespace Adult
                       "~/Scripts/respond.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.css"));
-
+                      "~/Content/bootstrap.css",
+                      "~/assets/sass/Adult.min.css"));
+   
             // Set EnableOptimizations to false for debugging. For more information,
             // visit http://go.microsoft.com/fwlink/?LinkId=301862
             BundleTable.EnableOptimizations = true;

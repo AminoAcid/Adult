@@ -1,27 +1,38 @@
 ﻿<div class="panel panel-default">
     <div class="panel-body" data-toggle="modal" data-target=".videoModal">
         <div class="col-xs-10">Pinned Videos</div>
-        <span id="hi"class="badge col-xs-1" data-toggle="tooltip" data-placement="top" title="0 videos pinned" toolinit>34</span>
+        <span id="hi" class="badge col-xs-1" data-toggle="tooltip" data-placement="top" title="0 videos pinned" toolinit>34</span>
     </div>
 </div>
 
-<div class="modal fade videoModal" role="dialog">
+<div id="modeler"class="modal fade videoModal" role="dialog">
     <div class="modal-dialog" modal-lg>
         <div class="modal-content">
             <div class="modal-header">
-                This is modal.
+                <div>This is modal heaawefder</div>
             </div>
             <div class="modal-body">
-                <div infinite-scroll="getPinnedVideos()" infinite-scroll-distance="2">
-                    <div ng-repeat="vid in pinnedVideos">
-                        <div ng-bind="vid.title"></div>
-                        <div ng-bind-html="vid.embed | trustHtml"></div>
-                    </div>
+                <button id="init" ng-click="getPinnedVideos()"></button>
+                <div id="pinVid" class="modal-scroll">
+                    <div infinite-scroll-parent infinite-scroll-container="'#pinVid'" infinite-scroll="getPinnedVideos()" infinite-scroll-distance="1">
+
+                <div ng-repeat="vid in pinnedVideos">
+                    <div ng-bind="vid.title"></div>W
+                    <div ng-bind-html="vid.embed | trustHtml"></div>
                 </div>
+            </div>
+            </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
             </div>
+
         </div>
     </div>
 </div>
+
+<script type="text/javascript">
+    $('#modeler').on('shown.bs.modal', function () {
+        $("#init").click();
+    })
+</script>

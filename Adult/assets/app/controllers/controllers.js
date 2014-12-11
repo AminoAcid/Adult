@@ -43,8 +43,14 @@
     }])
     .controller('ModalCtrl', ['$scope', 'pinVidModal', function ($scope, pinVidModal) {
         $scope.pinnedVideos = [];
+        $scope.updatePinnedVideos = function () {
+            $scope.updatePinnedVideos = pinVidModal.getAllVid();
+        }
         $scope.getPinnedVideos = function () {
             $scope.pinnedVideos = $scope.pinnedVideos.concat(pinVidModal.getVid());
+           
+                
+            
         }
     }]);
     //.controller('ModalCtrl', ['$scope', 'pinVidModal', 'videoConstants', function ($scope, pinVidModal, videoConstants) {

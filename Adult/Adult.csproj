@@ -165,6 +165,12 @@
     <Content Include="assets\app\templates\head\logo.html" />
     <Content Include="assets\app\templates\head\modal.html" />
     <Content Include="assets\img\homer.svg" />
+    <Content Include="assets\sass\Adult.css">
+      <DependentUpon>Adult.scss</DependentUpon>
+    </Content>
+    <Content Include="assets\sass\Adult.min.css">
+      <DependentUpon>Adult.css</DependentUpon>
+    </Content>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="favicon.ico" />
@@ -181,6 +187,11 @@
     <Content Include="Scripts\angular-route.min.js.map" />
     <Content Include="Scripts\angular.min.js.map" />
     <Content Include="Scripts\angular-messages.min.js.map" />
+    <Content Include="assets\sass\_adult-modal.scss" />
+    <Content Include="assets\sass\Adult.scss" />
+    <Content Include="assets\sass\Adult.css.map">
+      <DependentUpon>Adult.css</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -190,6 +201,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\ng-infinite-scroll.js" />
     <Content Include="Scripts\ng-infinite-scroll.min.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />

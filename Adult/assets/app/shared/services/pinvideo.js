@@ -13,6 +13,9 @@
             }
             return videos;
         }
+        var getAllVid = function () {
+            return pinnedVids;
+        }
         return {
             pinVid: pinVid,
             getVid: getVid
