@@ -9,6 +9,7 @@ using Adult.Server.Mongo;
 using MongoDB.Driver.Linq;
 using MongoDB.Driver.Builders;
 using MongoDB.Bson;
+using Adult.Core.Constants;
 
 namespace Adult.Server.Mongo
 {
@@ -35,27 +36,67 @@ namespace Adult.Server.Mongo
           
         }
 
-        public String[] getEmbeds(String[] BsonIdStrings)
+        public Video[] getQueryVideos(String[] keywords)
         {
-            var total = BsonIdStrings.Length;
-            String[] embeds = new String[total];
+            if(keywords.Length == 0)
+                return new Video[0];
 
-            //convert String to Bson for Query
-            BsonObjectId[] BsonIds = new BsonObjectId[total];
-            for(Int32 i = 0; i < total; i++)
+            var cursorEnumerator = _MongoServer.videoCollection.FindAllAs<Video>().GetEnumerator();
+            var scoreBoard = new Dictionary<String, Int32>();
+
+            while(cursorEnumerator.MoveNext())
             {
-                BsonIds[i] = ObjectId.Parse(BsonIdStrings[i]);
+                var totalPoints = 0;
+                var title = cursorEnumerator.Current.Title.Split(' ');
+                var mainTags = cursorEnumerator.Current.Maintags;
+                var subTags = cursorEnumerator.Current.Subtags;
+                for(int i = 0; i < keywords.Length; i++)
+                {
+                    if (title.Contains(keywords[i], StringComparer.OrdinalIgnoreCase))
+                        totalPoints += 3;
+                    if (mainTags.Contains(keywords[i], StringComparer.OrdinalIgnoreCase))
+                        totalPoints += 2;
+                    if (subTags.Contains(keywords[i], StringComparer.OrdinalIgnoreCase))
+                        totalPoints += 1;
+                }
+                scoreBoard.Add(cursorEnumerator.Current._id, totalPoints);
             }
-
-            var cursorResult = _MongoServer.videoCollection.FindAs<Video>(Query.All("_id", BsonIds));
-            var index = 0;
-            foreach(var vid in cursorResult)
+            var keysToRemove = scoreBoard.Where(x => x.Value == 0).Select(x => x.Key).ToArray();
+            foreach (var key in keysToRemove)
             {
-                embeds[index] = vid.Embed;
-                index++;
+                scoreBoard.Remove(key);
             }
-
-            return embeds;
+            var searchResults = scoreBoard.OrderByDescending(x => x.Value).Select(x => x.Key).ToArray();
+            var videos = new Video[searchResults.Length];
+            for(int i = 0; i < searchResults.Length; i++)
+            {
+                videos[i] = _MongoServer.videoCollection.AsQueryable<Video>().Single(x => x._id == searchResults[i]);
+            }
+            return videos;
         }
+
+        
+        //public String[] getEmbeds(String[] BsonIdStrings)
+        //{
+        //    var total = BsonIdStrings.Length;
+        //    String[] embeds = new String[total];
+
+        //    //convert String to Bson for Query
+        //    BsonObjectId[] BsonIds = new BsonObjectId[total];
+        //    for(Int32 i = 0; i < total; i++)
+        //    {
+        //        BsonIds[i] = ObjectId.Parse(BsonIdStrings[i]);
+        //    }
+
+        //    var cursorResult = _MongoServer.videoCollection.FindAs<Video>(Query.All("_id", BsonIds));
+        //    var index = 0;
+        //    foreach(var vid in cursorResult)
+        //    {
+        //        embeds[index] = vid.Embed;
+        //        index++;
+        //    }
+
+        //    return embeds;
+        //}
     }
 }

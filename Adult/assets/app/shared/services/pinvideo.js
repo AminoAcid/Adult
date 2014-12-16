@@ -13,12 +13,13 @@
             }
             return videos;
         }
-        var getAllVid = function () {
-            return pinnedVids;
+        var getSize = function () {
+            return pinnedVids.length;
         }
         return {
             pinVid: pinVid,
-            getVid: getVid
+            getVid: getVid,
+            getSize: getSize
         };
     }]);
     //.factory('pinVidModal', ['videoModalBootstrap', function (videoModalBootstrap) {

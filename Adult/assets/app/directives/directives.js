@@ -12,6 +12,13 @@
             templateUrl: '/assets/app/templates/body/category.html'
         };
     })
+    .directive('filter', function () {
+        return {
+            restrict: 'E',
+            templateUrl: '/assets/app/templates/body/filter.html',
+            controller: 'filterCtrl'
+        };
+    })
     .directive('login', function () {
         return {
             restrict: 'E',

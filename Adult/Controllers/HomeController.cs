@@ -33,8 +33,7 @@ namespace Adult.Controllers
             //new PopulateMongo();
             //var model = _ModelBuilder.videoViewModelBuilder();
             return View();//model.Serialize()
-            //new PopulateMongo();
-            //return View();
+
         }
 
         //[Route("video")]

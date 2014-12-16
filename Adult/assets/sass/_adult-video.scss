@@ -1,0 +1,56 @@
+﻿$sprite-index-count: 3;
+$sprite-total-duration: 4;
+$video-container-width: 270px;
+$video-container-height: 270px;
+$video-image-width: 250px;
+$video-image-height: 250px;
+
+@mixin animationSetting($browser){
+    #{$browser}animation-name: preview;
+    #{$browser}timing-function: ease-in-out;
+    #{$browser}animation-duration: #{$sprite-total-duration}s;
+}
+@mixin animationDelayMacro($seconds){
+    -moz-animation-delay: #{$seconds}s;
+    -o-animation-delay: #{$seconds}s;
+    -webkit-animation-delay: #{$seconds}s;
+    animation-delay: #{$seconds}s
+}
+
+.video-slide {
+        position: static;
+        height: $video-container-width;
+        width: $video-container-height;
+    &:hover img {
+        @include animationSetting("");
+        @include animationSetting(-moz-);
+        @include animationSetting(-o-);
+        @include animationSetting(-webkit-);
+    }
+
+    img {
+        position: absolute;
+        height: $video-image-height;
+        width: $video-image-width;
+        @for $i from 0 through $sprite-index-count{
+            &:nth-child(#{$i + 1}) {@include animationDelayMacro(#{$sprite-total-duration - $i * $sprite-total-duration/$sprite-index-count})}
+        }
+    }
+}
+
+@-o-keyframes preview {
+    0%{opacity:1;} 20%{opacity:0} 80%{opacity:0;} 100%{opacity:1;}
+}
+
+@-moz-keyframes preview {
+    0%{opacity:1;} 20%{opacity:0} 80%{opacity:0;} 100%{opacity:1;}
+}
+
+@-webkit-keyframes preview {
+    0%{opacity:1;} 20%{opacity:0} 80%{opacity:0;} 100%{opacity:1;}
+}
+
+@keyframes preview {
+    0%{opacity:1;} 20%{opacity:0} 80%{opacity:0;} 100%{opacity:1;}
+}
+

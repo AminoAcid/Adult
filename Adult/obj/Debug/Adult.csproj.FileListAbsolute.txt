@@ -38,7 +38,10 @@ C:\Users\Burton\Desktop\repos\adult\Adult\bin\MongoDB.Bson.dll
 C:\Users\Burton\Desktop\repos\adult\Adult\bin\MongoDB.Driver.dll
 C:\Users\Burton\Desktop\repos\adult\Adult\bin\Newtonsoft.Json.dll
 C:\Users\Burton\Desktop\repos\adult\Adult\bin\Server.dll
+C:\Users\Burton\Desktop\repos\adult\Adult\bin\System.Net.Http.Formatting.dll
 C:\Users\Burton\Desktop\repos\adult\Adult\bin\System.Web.Helpers.dll
+C:\Users\Burton\Desktop\repos\adult\Adult\bin\System.Web.Http.dll
+C:\Users\Burton\Desktop\repos\adult\Adult\bin\System.Web.Http.WebHost.dll
 C:\Users\Burton\Desktop\repos\adult\Adult\bin\System.Web.Mvc.dll
 C:\Users\Burton\Desktop\repos\adult\Adult\bin\System.Web.Optimization.dll
 C:\Users\Burton\Desktop\repos\adult\Adult\bin\System.Web.Razor.dll
@@ -53,6 +56,9 @@ C:\Users\Burton\Desktop\repos\adult\Adult\bin\AutoMapper.xml
 C:\Users\Burton\Desktop\repos\adult\Adult\bin\MongoDB.Bson.xml
 C:\Users\Burton\Desktop\repos\adult\Adult\bin\MongoDB.Driver.xml
 C:\Users\Burton\Desktop\repos\adult\Adult\bin\Newtonsoft.Json.xml
+C:\Users\Burton\Desktop\repos\adult\Adult\bin\System.Net.Http.Formatting.xml
+C:\Users\Burton\Desktop\repos\adult\Adult\bin\System.Web.Http.xml
+C:\Users\Burton\Desktop\repos\adult\Adult\bin\System.Web.Http.WebHost.xml
 C:\Users\Burton\Desktop\repos\adult\Adult\bin\System.Web.Helpers.xml
 C:\Users\Burton\Desktop\repos\adult\Adult\bin\System.Web.Mvc.xml
 C:\Users\Burton\Desktop\repos\adult\Adult\bin\System.Web.Optimization.xml
@@ -64,9 +70,3 @@ C:\Users\Burton\Desktop\repos\adult\Adult\bin\Antlr3.Runtime.pdb
 C:\Users\Burton\Desktop\repos\adult\Adult\obj\Debug\Adult.csprojResolveAssemblyReference.cache
 C:\Users\Burton\Desktop\repos\adult\Adult\obj\Debug\Adult.dll
 C:\Users\Burton\Desktop\repos\adult\Adult\obj\Debug\Adult.pdb
-C:\Users\Burton\Desktop\repos\adult\Adult\bin\System.Net.Http.Formatting.dll
-C:\Users\Burton\Desktop\repos\adult\Adult\bin\System.Web.Http.dll
-C:\Users\Burton\Desktop\repos\adult\Adult\bin\System.Web.Http.WebHost.dll
-C:\Users\Burton\Desktop\repos\adult\Adult\bin\System.Net.Http.Formatting.xml
-C:\Users\Burton\Desktop\repos\adult\Adult\bin\System.Web.Http.xml
-C:\Users\Burton\Desktop\repos\adult\Adult\bin\System.Web.Http.WebHost.xml

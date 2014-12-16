@@ -10,7 +10,8 @@ namespace Adult.Server.Mongo.MongoPopulate
     {
         public PopulateMongo()
         {
-            new Populator().populateMongo(new Extractor().getVideoData());
+            //new Populator().populateMongo(new Extractor().getVideoData());
+            new Extractor().extractAndPopulate();
         }
     }
 }

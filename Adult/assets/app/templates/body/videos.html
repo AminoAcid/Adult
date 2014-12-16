@@ -3,11 +3,18 @@
     <div ng-bind-html="vid.title | trustHtml"></div>
     <div ng-bind-html="vid.embed | trustHtml"></div>
 </div>-->
-
-<div infinite-scroll="getVideos(startIndex)" infinite-scroll-distance="1">
-    <div ng-repeat="vid in videos">
-        <div ng-bind-html="vid.title | trustHtml"></div>
-        <div ng-bind-html="vid.embed | trustHtml"></div>
-        <button class="=btn btn-default" ng-click="pinVideo(vid.title, vid.embed)">Pin-It</button>
+<div>{{queryFlag}}</div>
+    <div infinite-scroll="getVideos()" infinite-scroll-distance="1">
+      
+        <div ng-repeat="vid in videos">
+                <div ng-bind="vid.title"></div>
+                <div class="video-slide">
+                    <img ng-src={{vid.sprites[0]}} />
+                    <img ng-src={{vid.sprites[1]}} />
+                    <img ng-src={{vid.sprites[2]}} />
+                    <img ng-src="{{vid.profileimg}}" />
+                </div>
+                <button class="=btn btn-default" ng-click="pinVideo(vid.title, vid.embed)">Pin-It</button>
+            </div>
+        
     </div>
-</div>

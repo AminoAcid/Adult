@@ -4,7 +4,7 @@ angular.module('adultApp', [
     'directives',
     'controllers',
     'tooltip.init',
-    'bootstrap',
+    'videoServices',
     'ngRoute',
     'ngMessages',
     'infinite-scroll',
