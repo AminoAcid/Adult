@@ -7,7 +7,7 @@
     <ProjectGuid>{CC34E153-BE8B-4BB1-9D96-5D4F838C4CFD}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Server</RootNamespace>
+    <RootNamespace>Adult</RootNamespace>
     <AssemblyName>Server</AssemblyName>
     <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -47,6 +47,7 @@
   <ItemGroup>
     <Compile Include="Mongo\MongoPopulate\Extractor.cs" />
     <Compile Include="Mongo\MongoHelpers\AutoIncrement.cs" />
+    <Compile Include="Mongo\MongoPopulate\ExtractorTag.cs" />
     <Compile Include="Mongo\MongoPopulate\PopulateMongo.cs" />
     <Compile Include="Mongo\MongoServers.cs" />
     <Compile Include="Mongo\MongoService.cs" />

@@ -1,13 +1,5 @@
-﻿var bootstrap = angular.module('videoServices', [])
-    /*
-     This is in the view of the Home Index View
-     =======================================
-     .factory('indexBootstrap', function () {
-        return {
-            video: @Html.Raw(@Model)
-            };
-      });
-     */ 
+﻿angular.module('videoServices', [])
+    //categoryService in View/index
     .factory('keywordVideoService', ['$http', '$q', function ($http, $q) {
         return {
             getQueryVideos: function (keywordArray) {

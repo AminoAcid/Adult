@@ -1,4 +1,4 @@
-﻿angular.module('pinVideo', [])
+﻿angular.module('pinServices', [])
     .service('pinVidModal', ['videoConstants', function (videoConstants) {
         var pinnedVids = [];
         var pinVid = function (title, embedHtml) {

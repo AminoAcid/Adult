@@ -26,7 +26,6 @@ namespace Adult.Server.Mongo.MongoPopulate
         {
             _MongoServer = new MongoServers();
 
-
             OleDbConnection connection = new OleDbConnection();
             connection.ConnectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Burton\Desktop\testdata.xlsx;" + @"Extended Properties=""Excel 12.0 Xml; HDR=YES""";
             OleDbCommand command = new OleDbCommand
@@ -40,14 +39,18 @@ namespace Adult.Server.Mongo.MongoPopulate
         }
         public void extractAndPopulate()
         {
-            var postDataTable = new DataTable();
             String[] items, imgs, subtags, maintags;
             for (int i = 0; i < Raw_videoDataTable.Rows.Count; i++)
             {
+                //there is only one element in each row, so ItemArray[0]
                 items = Raw_videoDataTable.Rows[i].ItemArray[0].ToString().Split('|');
                 imgs = items[2].ToString().Split(';');
                 subtags = items[4].ToString().Split(';');
                 maintags = items[5].ToString().Split(';');
+                for (int j = 0; j < maintags.Length; j++)
+                {
+                    maintags[j] = maintags[j].ToLower();
+                }
                 items[2] = null; //imgs
                 items[4] = null; //subtags
                 items[5] = null; //maintags

@@ -17,7 +17,7 @@ namespace Adult.Builder
             //use structuremap to solve initalization of createmaps();
             new VideoViewModel();
 
-            var videoModel = Mapper.Map<Video[], VideoViewModel>(_MongoService.getVideos(15));
+            var videoModel = Mapper.Map<Tags, VideoViewModel>(_MongoService.getTags());
             
             return videoModel;
         }

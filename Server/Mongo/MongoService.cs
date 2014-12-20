@@ -75,28 +75,10 @@ namespace Adult.Server.Mongo
             return videos;
         }
 
-        
-        //public String[] getEmbeds(String[] BsonIdStrings)
-        //{
-        //    var total = BsonIdStrings.Length;
-        //    String[] embeds = new String[total];
-
-        //    //convert String to Bson for Query
-        //    BsonObjectId[] BsonIds = new BsonObjectId[total];
-        //    for(Int32 i = 0; i < total; i++)
-        //    {
-        //        BsonIds[i] = ObjectId.Parse(BsonIdStrings[i]);
-        //    }
-
-        //    var cursorResult = _MongoServer.videoCollection.FindAs<Video>(Query.All("_id", BsonIds));
-        //    var index = 0;
-        //    foreach(var vid in cursorResult)
-        //    {
-        //        embeds[index] = vid.Embed;
-        //        index++;
-        //    }
-
-        //    return embeds;
-        //}
+        public Tags getTags()
+        {
+            return _MongoServer.tagCollection.AsQueryable<Tags>().FirstOrDefault();
+        }
+      
     }
 }

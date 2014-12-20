@@ -12,8 +12,9 @@ namespace Adult.Server.Mongo
 {
     public class MongoServers
     {
-        private MongoDatabase mongoDB { get; set; }
+        private MongoDatabase MDB { get; set; }
         public MongoCollection videoCollection { get; set; }
+        public MongoCollection tagCollection { get; set; }
         public MongoCollection counterCollection { get; set; }
         public MongoServers()
         {
@@ -22,9 +23,10 @@ namespace Adult.Server.Mongo
              * settings.Server = new MongoServerAddress("localhost, 27017);
              * MongoClient client = new MongoClient(settings);
              */
-            this.mongoDB = new MongoClient().GetServer().GetDatabase("videoDB");
-            this.videoCollection = mongoDB.GetCollection<Video>("allVideos");
-            this.counterCollection = mongoDB.GetCollection("counter");
+            this.MDB = new MongoClient().GetServer().GetDatabase("videoDB");
+            this.videoCollection = MDB.GetCollection<Video>("allVideos");
+            this.tagCollection = MDB.GetCollection("tags");
+            this.counterCollection = MDB.GetCollection("counter");
         }
     
         

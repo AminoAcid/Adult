@@ -9,14 +9,15 @@
     .directive('category', function () {
         return {
             restrict: 'E',
-            templateUrl: '/assets/app/templates/body/category.html'
+            templateUrl: '/assets/app/templates/body/category.html',
+            controller: 'CategoryCtrl'
         };
     })
-    .directive('filter', function () {
+    .directive('search', function () {
         return {
             restrict: 'E',
-            templateUrl: '/assets/app/templates/body/filter.html',
-            controller: 'filterCtrl'
+            templateUrl: '/assets/app/templates/body/search.html',
+            controller: 'SearchCtrl'
         };
     })
     .directive('login', function () {

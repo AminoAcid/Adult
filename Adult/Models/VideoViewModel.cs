@@ -11,7 +11,7 @@ namespace Adult.Models
 {
     public class VideoViewModel : IJsonSerializable
     {
-        public Video[] Videos { get; set; }
+        public String[] Tags { get; set; }
 
         public VideoViewModel()
         {
@@ -19,8 +19,8 @@ namespace Adult.Models
         }
         public void createMaps()
         {
-            Mapper.CreateMap<Video[], VideoViewModel>()
-                .ForMember(dest => dest.Videos, opt => opt.MapFrom(src => src)
+            Mapper.CreateMap<Tags, VideoViewModel>()
+                .ForMember(dest => dest.Tags, opt => opt.MapFrom(src => src.PopularTags)
                 );
             
         }

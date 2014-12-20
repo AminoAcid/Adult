@@ -1,14 +1,16 @@
 ﻿
 angular.module('adultApp', [
-    'pinVideo',
+    'pinServices',
     'directives',
     'controllers',
     'tooltip.init',
     'videoServices',
+    'categoryServices',
     'ngRoute',
     'ngMessages',
     'infinite-scroll',
     'trust.html',
+    'category.filter',
     'constants'])
 
     .config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {

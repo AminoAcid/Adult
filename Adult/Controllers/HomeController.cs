@@ -31,8 +31,7 @@ namespace Adult.Controllers
         public ActionResult Index()
         {
             //new PopulateMongo();
-            //var model = _ModelBuilder.videoViewModelBuilder();
-            return View();//model.Serialize()
+            return View();
 
         }
 
