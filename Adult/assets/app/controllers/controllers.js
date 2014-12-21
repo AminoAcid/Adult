@@ -3,9 +3,6 @@
         //for tooltip purposes
         $rootScope.totalPinnedVideos = 0;
     }])
-    //.controller('dashboard', ['$scope', 'indexBootstrap', function ($scope, indexBootstrap) {
-    //    $scope.name = indexBootstrap.video.name;
-    //}])
     .controller('LoginCtrl', ['$scope', function ($scope) {
         $scope.disableInput = new function () {
             //console.log("form is submitted");
@@ -30,6 +27,7 @@
 
                 });
         }
+
         $scope.bindTagForFilter = function (tag) {
             pinTagService.addTag(tag);
             $rootScope.$broadcast('tagFilterUpdate');
