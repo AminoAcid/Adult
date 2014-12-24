@@ -3,7 +3,7 @@ angular.module('adultApp', [
     'pinServices',
     'directives',
     'controllers',
-    'tooltip.init',
+    'shared.directives',
     'videoServices',
     'categoryServices',
     'ngRoute',

@@ -1,14 +1,11 @@
-﻿<!--<div ng-init="getVideos(0)"></div> 
-<div ng-repeat="vid in videos">
-    <div ng-bind-html="vid.title | trustHtml"></div>
-    <div ng-bind-html="vid.embed | trustHtml"></div>
-</div>-->
-<div>{{queryFlag}}</div>
-<input type="text" ng-model="search.title" />
+﻿<!--PreLoad Videos to prevent ng-infinite parsing through empty data, throwing exception-->
+<span ng-init="getVideos()"></span>
+
+<span>LocalSearch: </span><input type="text" ng-model="search.title" placeholder="Search loaded..."/>
+<div ng-if="videosLoaded">
     <div infinite-scroll="getVideos()" infinite-scroll-distance="1">
         <div ng-repeat="vid in videos | tagFilter:tagsForQuery | filter:search.title">
             <div ng-bind="vid.title"></div>
-            <div ng-bind="vid.maintags"></div>
             <div class="video-slide">
                 <img ng-src={{vid.sprites[0]}} />
                 <img ng-src={{vid.sprites[1]}} />
@@ -17,5 +14,5 @@
             </div>
             <button class="=btn btn-default" ng-click="pinVideo(vid.title, vid.embed)">Pin-It</button>
         </div>
-        
     </div>
+</div>

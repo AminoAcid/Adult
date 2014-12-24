@@ -1,7 +1,56 @@
-﻿.modal-scroll {
+﻿.banner {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  height: 70px;
+  width: 100%;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center; }
+  .banner .pre-modal-settings {
+    height: 5px;
+    width: 550px; }
+  .banner button {
+    height: 65px; }
+  .banner .logo-settings {
+    height: 75px;
+    width: 100px; }
+
+.padder {
+  margin-top: 40px; }
+
+.panel-settings {
+  align-items: stretch;
+  bottom: 0;
+  position: fixed;
+  width: 100%; }
+
+.navbar-btn {
+  width: 500px;
+  height: 100%; }
+  .navbar-btn .text {
+    text-align: center; }
+
+.category {
+  height: 450px;
+  overflow-y: scroll; }
+  .category .btn-tag {
+    height: 40px;
+    width: 100px;
+    border-color: black; }
+
+.modal-scroll {
   height: 300px;
   position: static;
   overflow: scroll; }
+
+.modal-root {
+  margin-top: 20%;
+  height: 100%;
+  width: 100%; }
 
 .video-slide {
   position: static;

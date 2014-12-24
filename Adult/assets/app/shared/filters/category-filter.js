@@ -2,7 +2,6 @@
     .filter('tagFilter', function () {
         return function (videos, tags) {
             if (!tags || tags.length == 0) {
-                console.log("bad tag");
                 return videos;
             }
             else {

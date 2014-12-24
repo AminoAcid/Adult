@@ -52,12 +52,13 @@
         
       
     }])
-    .controller('VideoCtrl', ['$scope', '$rootScope', 'generalVideoService', 'videoConstants', 'pinVidModal','pinTagService', function ($scope, $rootScope, generalVideoService, videoConstants, pinVidModal, pinTagService) {
+    .controller('VideoCtrl', ['$scope', '$rootScope','$interval', 'generalVideoService', 'videoConstants', 'pinVidModal','pinTagService', function ($scope, $rootScope, $interval, generalVideoService, videoConstants, pinVidModal, pinTagService) {
         $scope.queryFlag = false;
         $scope.queriedVideos = [];
         $scope.startIndex = 0;
         $scope.videos = [];
         $scope.tagsForQuery = [];
+        $scope.videosLoaded = false;
 
         $scope.$on('queryResult', function (event, data) {
             $scope.queriedVideos = [];
@@ -74,21 +75,20 @@
         });
 
         //Generally, we continuously retrieve videos from the database and update locally
-        $scope.updateGeneralVideo = function (videoArray) {
-            $scope.videos = $scope.videos.concat(videoArray);
-            //increment startIndex for database after each load
-            $scope.startIndex += videoConstants.AMOUNT_PER_LOAD;
-        }
-
+        //increment startIndex for database after each load
         $scope.getGeneralVideo = function (startIndex) {
             generalVideoService.getVideos(startIndex).then(
                 function (videoArray) {
-                    $scope.updateGeneralVideo(videoArray);
+                    //$scope.updateGeneralVideo(videoArray);
+                    $scope.videos = $scope.videos.concat(videoArray);
+                    $scope.startIndex += videoConstants.AMOUNT_PER_LOAD;
+                    $scope.videosLoaded = true;
                 },
                 function () {
 
                 });
         }
+
         //Upon Query, we recieve a broadcast, and recieve the entire array of videos, and we update accordingly
         $scope.getQueryVideo = function () {
             $scope.videos = $scope.videos.concat($scope.queriedVideos.splice(0, videoConstants.AMOUNT_PER_LOAD));

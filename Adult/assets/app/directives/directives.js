@@ -25,14 +25,14 @@
             restrict: 'E',
             templateUrl: '/assets/app/templates/head/login.html',
             controller: 'LoginCtrl'
-        }
+        };
     })
     .directive('modal', function () {
         return {
             restrict: 'E',
             templateUrl: '/assets/app/templates/head/modal.html',
             controller: 'ModalCtrl'
-        }
+        };
     })
     .directive('logo', function () {
         return {

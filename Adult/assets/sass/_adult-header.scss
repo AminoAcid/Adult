@@ -1,0 +1,50 @@
+﻿@mixin flexbox() {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+}
+
+.banner {
+    @include flexbox();
+    height: 70px;
+    width: 100%;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    .pre-modal-settings {
+        height: 5px;
+        width: 550px;
+    }
+    
+    button{
+        height: 65px;
+    }
+    .logo-settings {
+        height: 75px;
+        width: 100px;
+    }
+}
+
+.padder{
+    margin-top: 40px;
+}
+
+.panel-settings{
+    align-items: stretch;
+    bottom: 0;
+    position: fixed;
+    width: 100%;
+
+}
+.navbar-btn {
+
+        width: 500px;
+        height: 100%;
+        .text{
+            text-align:center;
+        }   
+}

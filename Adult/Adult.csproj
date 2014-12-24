@@ -160,7 +160,7 @@
     <Content Include="assets\app\shared\filters\trust-html.js" />
     <Content Include="assets\app\shared\services\categoryServices.js" />
     <Content Include="assets\app\shared\services\videoServices.js" />
-    <Content Include="assets\app\shared\directives\tooltip-init.js" />
+    <Content Include="assets\app\shared\directives\shared-directives.js" />
     <Content Include="assets\app\shared\services\pinServices.js" />
     <Content Include="assets\app\templates\body\search.html" />
     <Content Include="assets\app\templates\body\videos.html" />
@@ -169,7 +169,7 @@
     <Content Include="assets\app\templates\head\login.html" />
     <Content Include="assets\app\templates\head\logo.html" />
     <Content Include="assets\app\templates\head\modal.html" />
-    <Content Include="assets\img\homer.svg" />
+    <Content Include="assets\img\notabzlogo.png" />
     <Content Include="assets\sass\Adult.css">
       <DependentUpon>Adult.scss</DependentUpon>
     </Content>
@@ -198,6 +198,8 @@
     </Content>
     <Content Include="assets\sass\_adult-video.scss" />
     <Content Include="Scripts\angular.min.js.map" />
+    <Content Include="assets\sass\_adult-header.scss" />
+    <Content Include="assets\sass\_adult-category.scss" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

@@ -1,15 +1,14 @@
-﻿<div style="padding-top: 2em" class="panel panel-default">
-    <div class="panel-body" data-toggle="modal" data-target=".videoModal">
-        <div class="col-xs-10">Pinned Videos</div>
-        <span id="hi" class="badge col-xs-1" data-toggle="tooltip" data-placement="top" title="Clips Pinned" toolinit>{{$root.totalPinnedVideos}}</span>
+﻿<button class="btn btn-default navbar-btn pre-modal-settings">
+    <div data-toggle="modal" data-target=".videoModal">
+        <div class="text">Pinned Videos  <span class="badge" data-toggle="tooltip" data-placement="top" title="Clips Pinned" toolinit>{{$root.totalPinnedVideos}}</span></div>
     </div>
-</div>
+</button>
 
 <div id="modeler"class="modal fade videoModal" role="dialog">
     <div class="modal-dialog" modal-lg>
         <div class="modal-content">
             <div class="modal-header">
-                <div>This is modal heaawefder</div>
+                <div>Pinned Videos</div>
             </div>
             <div class="modal-body">
                 <button id="init" ng-hide="true" ng-click="getPinnedVideos()"></button>
@@ -17,7 +16,7 @@
                     <div infinite-scroll-parent infinite-scroll-container="'#pinVid'" infinite-scroll="getPinnedVideos()" infinite-scroll-distance="1">
 
                 <div ng-repeat="vid in pinnedVideos">
-                    <div ng-bind="vid.title"></div>W
+                    <div ng-bind="vid.title"></div>
                     <div ng-bind-html="vid.embed | trustHtml"></div>
                 </div>
             </div>
