@@ -1,9 +1,10 @@
 ﻿angular.module('controllers', [])
-    .run(['$rootScope', function ($rootScope) {
-        //for tooltip purposes
-        $rootScope.totalPinnedVideos = 0;
+    .run(['$rootScope', '$cookies', function ($rootScope, $cookies) {
+        //for tooltip purposes, saved here for testing purposes, resets counter to 0
+        //$cookies.totalPinnedVideo = 0;
         $rootScope.subMain = false;
     }])
+
     .controller('LoginCtrl', ['$scope', function ($scope) {
         $scope.disableInput = new function () {
             //console.log("form is submitted");
@@ -51,8 +52,8 @@
         
       
     }])
-    .controller('VideoCtrl', ['$scope', '$rootScope', '$cookies', '$cookieStore', 'generalVideoService', 'videoConstants', 'pinVidModal', 'pinTagService',
-        function ($scope, $rootScope, $cookies, $cookieStore, generalVideoService, videoConstants, pinVidModal, pinTagService) {
+    .controller('VideoCtrl', ['$scope', '$rootScope', '$cookies', 'generalVideoService', 'videoConstants', 'pinVidModal', 'pinTagService',
+        function ($scope, $rootScope, $cookies, generalVideoService, videoConstants, pinVidModal, pinTagService) {
 
         var queryFlag = false;
         $scope.queriedVideos = [];
@@ -60,7 +61,7 @@
         $scope.videos = [];
         $scope.tagsForQuery = [];
         $scope.videosLoaded = false;
-
+       
         $scope.$on('queryResult', function (event, data) {
             $scope.queriedVideos = [];
             $scope.queriedVideos = $scope.queriedVideos.concat(data[1]);
@@ -109,14 +110,21 @@
         $scope.pinVideo = function (title, embedHtml) {
             pinVidModal.pinVid(title, embedHtml);
             //update count, used for Tooltip in modal.html
-            $rootScope.totalPinnedVideos = pinVidModal.getSize();
+            $cookies.totalPinnedVideo++;
         }
 
     }])
     .controller('SubvideoCtrl', ['$scope', '$rootScope', function ($scope, $rootScope) {
 
     }])
-    .controller('ModalCtrl', ['$scope', 'pinVidModal', function ($scope, pinVidModal) {
+    .controller('ModalCtrl', ['$scope', 'pinVidModal', '$cookies', function ($scope, pinVidModal, $cookies) {
+        $scope.$watch(function () {
+            return $cookies.totalPinnedVideo;
+        }, function (value) {
+            $scope.numberOfPinnedVideos = value;
+        });
+
+       
         $scope.pinnedVideos = [];
         $scope.getPinnedVideos = function () {
             $scope.pinnedVideos = $scope.pinnedVideos.concat(pinVidModal.getVid());

@@ -13,13 +13,9 @@
             }
             return videos;
         }
-        var getSize = function () {
-            return pinnedVids.length;
-        }
         return {
             pinVid: pinVid,
             getVid: getVid,
-            getSize: getSize
         };
     }]);
     //.factory('pinVidModal', ['videoModalBootstrap', function (videoModalBootstrap) {
