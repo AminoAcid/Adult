@@ -7,6 +7,7 @@ angular.module('adultApp', [
     'videoServices',
     'categoryServices',
     'ngRoute',
+    'ngCookies',
     'ngMessages',
     'infinite-scroll',
     'trust.html',
@@ -17,9 +18,13 @@ angular.module('adultApp', [
         $locationProvider.html5Mode({enabled:true, requireBase:false});
         $routeProvider
             .when('/', {
-                templateUrl: '/assets/app/templates/dashboard.html'
+                templateUrl: '/assets/app/templates/dashboard/main.html'
                 //controller: 'dashboard'
-            });
+            })
+            .when('/watch', {
+                templateUrl: '/assets/app/templates/dashboard/submain.html'
+            })
+            ;
             
     }]);
 

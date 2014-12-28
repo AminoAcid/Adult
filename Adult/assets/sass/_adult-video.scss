@@ -1,9 +1,9 @@
 ﻿$sprite-index-count: 3;
 $sprite-total-duration: 4;
-$video-container-width: 270px;
-$video-container-height: 270px;
-$video-image-width: 250px;
-$video-image-height: 250px;
+$video-container-width: 210px;
+$video-container-height: 210px;
+$video-image-width: 200px;
+$video-image-height: 200px;
 
 @mixin animationSetting($browser){
     #{$browser}animation-name: preview;
@@ -16,28 +16,38 @@ $video-image-height: 250px;
     -webkit-animation-delay: #{$seconds}s;
     animation-delay: #{$seconds}s
 }
-
-.video-slide {
-        position: static;
-        height: $video-container-width;
-        width: $video-container-height;
-    &:hover img {
-        @include animationSetting("");
-        @include animationSetting(-moz-);
-        @include animationSetting(-o-);
-        @include animationSetting(-webkit-);
+.video-container{
+    display: flex;
+    flex-wrap: wrap;
+    .title{
+        text-align: justify;
     }
+    .panel-default{
+        
+        width: 230px;
+        position: static;
+    }
+    .video-slide {
+            position: static;
+            min-height: $video-container-width;
+            min-width: $video-container-height;
+        &:hover img {
+            @include animationSetting("");
+            @include animationSetting(-moz-);
+            @include animationSetting(-o-);
+            @include animationSetting(-webkit-);
+        }
 
-    img {
-        position: absolute;
-        height: $video-image-height;
-        width: $video-image-width;
-        @for $i from 0 through $sprite-index-count{
-            &:nth-child(#{$i + 1}) {@include animationDelayMacro(#{$sprite-total-duration - $i * $sprite-total-duration/$sprite-index-count})}
+        img {
+            position: absolute;
+            height: $video-image-height;
+            width: $video-image-width;
+            @for $i from 0 through $sprite-index-count{
+                &:nth-child(#{$i + 1}) {@include animationDelayMacro(#{$sprite-total-duration - $i * $sprite-total-duration/$sprite-index-count})}
+            }
         }
     }
 }
-
 @-o-keyframes preview {
     0%{opacity:1;} 20%{opacity:0} 80%{opacity:0;} 100%{opacity:1;}
 }

@@ -2,6 +2,7 @@
     .run(['$rootScope', function ($rootScope) {
         //for tooltip purposes
         $rootScope.totalPinnedVideos = 0;
+        $rootScope.subMain = false;
     }])
     .controller('LoginCtrl', ['$scope', function ($scope) {
         $scope.disableInput = new function () {
@@ -34,8 +35,6 @@
         }
     }])
     .controller('SearchCtrl', ['$scope', '$rootScope', 'keywordVideoService', function ($scope, $rootScope, keywordVideoService) {
-        $scope.queryString = "";
-        $scope.keywords = "";
         $scope.queriedVideos = [];
 
         $scope.keywordQuery = function (keywords) {
@@ -52,10 +51,12 @@
         
       
     }])
-    .controller('VideoCtrl', ['$scope', '$rootScope','$interval', 'generalVideoService', 'videoConstants', 'pinVidModal','pinTagService', function ($scope, $rootScope, $interval, generalVideoService, videoConstants, pinVidModal, pinTagService) {
-        $scope.queryFlag = false;
+    .controller('VideoCtrl', ['$scope', '$rootScope', '$cookies', '$cookieStore', 'generalVideoService', 'videoConstants', 'pinVidModal', 'pinTagService',
+        function ($scope, $rootScope, $cookies, $cookieStore, generalVideoService, videoConstants, pinVidModal, pinTagService) {
+
+        var queryFlag = false;
         $scope.queriedVideos = [];
-        $scope.startIndex = 0;
+        var currentIndex = 0;
         $scope.videos = [];
         $scope.tagsForQuery = [];
         $scope.videosLoaded = false;
@@ -63,10 +64,10 @@
         $scope.$on('queryResult', function (event, data) {
             $scope.queriedVideos = [];
             $scope.queriedVideos = $scope.queriedVideos.concat(data[1]);
-            $scope.queryFlag = data[0];
+            queryFlag = data[0];
             //clear the videos whenever we get a new query
             $scope.videos = [];
-            $scope.startIndex = 0;
+            currentIndex = 0;
         });
         
         $scope.$on('tagFilterUpdate', function () {
@@ -81,7 +82,7 @@
                 function (videoArray) {
                     //$scope.updateGeneralVideo(videoArray);
                     $scope.videos = $scope.videos.concat(videoArray);
-                    $scope.startIndex += videoConstants.AMOUNT_PER_LOAD;
+                    currentIndex += videoConstants.AMOUNT_PER_LOAD;
                     $scope.videosLoaded = true;
                 },
                 function () {
@@ -97,11 +98,11 @@
         $scope.getVideos = function () {
             console.log('gen vid: ' + $scope.videos.length);
             console.log('query vid: ' + $scope.queriedVideos.length);
-            if ($scope.queryFlag) {
+            if (queryFlag) {
                 $scope.getQueryVideo();
             }
             else {
-                $scope.getGeneralVideo($scope.startIndex);
+                $scope.getGeneralVideo(currentIndex);
             }
         }
 
@@ -110,6 +111,9 @@
             //update count, used for Tooltip in modal.html
             $rootScope.totalPinnedVideos = pinVidModal.getSize();
         }
+
+    }])
+    .controller('SubvideoCtrl', ['$scope', '$rootScope', function ($scope, $rootScope) {
 
     }])
     .controller('ModalCtrl', ['$scope', 'pinVidModal', function ($scope, pinVidModal) {
