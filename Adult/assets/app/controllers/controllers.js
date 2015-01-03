@@ -1,11 +1,8 @@
 ﻿angular.module('controllers', [])
     .run(['$rootScope', 'localStorageService', function ($rootScope, localStorageService) {
-        //for tooltip purposes, saved here for testing purposes, resets counter to 0
-        //$cookies.totalPinnedVideo = 0;
-        localStorageService.clearAll();
-        $rootScope.subMain = false;
+        //localStorageService.clearAll();  
+        //for testing, uncomment this to clear storage
     }])
-
     .controller('LoginCtrl', ['$scope', function ($scope) {
         $scope.disableInput = new function () {
             //console.log("form is submitted");
