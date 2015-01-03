@@ -10,6 +10,21 @@
             }
         };
     })
+    .directive('modalinit', function () {
+        return {
+            restrict: 'A',
+            link: function (scope, element) {
+                $(element).on('shown.bs.modal', function () {
+                    scope.$apply('getPinnedVideos()');
+                });
+
+                //$('#modeler').on('shown.bs.modal', function () {
+                //    $("#init").click();
+                //})
+
+            }
+        }
+    })
     .directive('toolinit', function () {
         return {
             restrict: 'A',

@@ -1,7 +1,8 @@
 ﻿angular.module('controllers', [])
-    .run(['$rootScope', '$cookies', function ($rootScope, $cookies) {
+    .run(['$rootScope', 'localStorageService', function ($rootScope, localStorageService) {
         //for tooltip purposes, saved here for testing purposes, resets counter to 0
         //$cookies.totalPinnedVideo = 0;
+        localStorageService.clearAll();
         $rootScope.subMain = false;
     }])
 
@@ -52,8 +53,8 @@
         
       
     }])
-    .controller('VideoCtrl', ['$scope', '$rootScope', '$cookies', 'generalVideoService', 'videoConstants', 'pinVidModal', 'pinTagService',
-        function ($scope, $rootScope, $cookies, generalVideoService, videoConstants, pinVidModal, pinTagService) {
+    .controller('VideoCtrl', ['$scope', '$rootScope', 'localStorageService', 'generalVideoService', 'videoConstants', 'pinVidModal', 'pinTagService',
+        function ($scope, $rootScope, localStorageService, generalVideoService, videoConstants, pinVidModal, pinTagService) {
 
         var queryFlag = false;
         $scope.queriedVideos = [];
@@ -110,24 +111,29 @@
         $scope.pinVideo = function (title, embedHtml) {
             pinVidModal.pinVid(title, embedHtml);
             //update count, used for Tooltip in modal.html
-            $cookies.totalPinnedVideo++;
+            var count = localStorageService.get('totalPinnedVideo') || 0;
+            count++;
+            localStorageService.set('totalPinnedVideo', count);
         }
 
     }])
     .controller('SubvideoCtrl', ['$scope', '$rootScope', function ($scope, $rootScope) {
 
     }])
-    .controller('ModalCtrl', ['$scope', 'pinVidModal', '$cookies', function ($scope, pinVidModal, $cookies) {
-        $scope.$watch(function () {
-            return $cookies.totalPinnedVideo;
-        }, function (value) {
-            $scope.numberOfPinnedVideos = value;
+    .controller('ModalCtrl', ['$scope', 'pinVidModal', 'localStorageService', function ($scope, pinVidModal, localStorageService) {
+        $scope.$watch(
+            function () {
+                return localStorageService.get('totalPinnedVideo') || 0;
+            },
+            function (value) {
+                $scope.numberOfPinnedVideos = value;
         });
 
-       
         $scope.pinnedVideos = [];
         $scope.getPinnedVideos = function () {
             $scope.pinnedVideos = $scope.pinnedVideos.concat(pinVidModal.getVid());
+            console.log("getpinnedvideos hit " + $scope.pinnedVideos.length);
+            console.log($scope.pinnedVideos);
         }
         
     }]);
