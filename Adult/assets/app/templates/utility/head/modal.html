@@ -21,7 +21,9 @@
                                 <div ng-repeat="vid in pinnedVideos">
 
                                     <div class="col-xs-6">
-                                        <div ng-bind="vid.title"></div>
+                                        <div class="modal-title">
+                                            <div class="text-format truncate-fade" ng-bind="vid.title"></div>
+                                        </div>
                                         <div class="embed-responsive embed-responsive-16by9">
                                             <div ng-bind-html="vid.embed | trustHtml"></div>
                                         </div>

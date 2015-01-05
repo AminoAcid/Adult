@@ -205,6 +205,7 @@
     <Content Include="assets\sass\_adult-header.scss" />
     <Content Include="assets\sass\_adult-category.scss" />
     <Content Include="Scripts\angular-cookies.min.js.map" />
+    <Content Include="assets\sass\_adult-common.scss" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

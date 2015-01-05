@@ -1,14 +1,16 @@
-﻿.modal-scroll{
+﻿.modal-scroll {
     height: 350px;
     width: auto;
-    position:static;
+    position: static;
     overflow-y: scroll;
-}
 
+    .modal-content {
+        height: 500px;
+        width: 800px;
+        margin-left: -100px;
 
-
-.modal-content{
-    height: 500px;
-    width:  800px;
-    margin-left: -100px;
+        .modal-title {
+            
+        }
+    }
 }
