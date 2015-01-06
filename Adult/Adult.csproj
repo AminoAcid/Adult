@@ -162,15 +162,14 @@
     <Content Include="assets\app\shared\services\videoServices.js" />
     <Content Include="assets\app\shared\directives\shared-directives.js" />
     <Content Include="assets\app\shared\services\pinServices.js" />
-    <Content Include="assets\app\templates\dashboard\submain.html" />
     <Content Include="assets\app\templates\utility\body\search.html" />
     <Content Include="assets\app\templates\main\videos.html" />
-    <Content Include="assets\app\templates\dashboard\main.html" />
+    <Content Include="assets\app\templates\dashboard\dashboard.html" />
     <Content Include="assets\app\templates\utility\body\category.html" />
     <Content Include="assets\app\templates\utility\head\login.html" />
     <Content Include="assets\app\templates\utility\head\logo.html" />
     <Content Include="assets\app\templates\utility\head\modal.html" />
-    <Content Include="assets\app\templates\submain\subvideos.html" />
+    <Content Include="assets\app\templates\submain\subvideo.html" />
     <Content Include="assets\img\notabzlogo.png" />
     <Content Include="assets\sass\Adult.css">
       <DependentUpon>Adult.scss</DependentUpon>

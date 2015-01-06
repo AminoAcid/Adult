@@ -12,7 +12,7 @@
                 <span class="icon-bar"></span>
             </button>
             <div class="navbar-form navbar-left" role="search">
-                <div class="form-group">
+                <div class="form-group" >
                     <search></search>
                 </div>
             </div>
@@ -46,7 +46,7 @@
                 <li><a href="#" scrolltop>Top</a></li>
             </ul>
         </div>
-
+        
     </div>
 </nav>
 
@@ -58,8 +58,12 @@
         </div>
         <div class="col-xs-8">
             <!--videos on show-->
-            <subvideos></subvideos>
-
+            <div ng-show="subVideoViews">
+                <sub-video></sub-video>
+            </div>
+            <div ng-hide="subVideoViews">
+                <videos></videos>
+            </div>
         </div>
         <div class="col-xs-2">
             <!--Advertisement banner, first one will be PPC

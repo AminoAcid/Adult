@@ -1,0 +1,13 @@
+﻿<div class="panel panel-default">
+    <div class="panel-heading">
+        <div class="" ng-bind="videoData.title"></div>
+    </div>
+    <div class="panel-body">
+        <div class="embed-responsive embed-responsive-16by9">
+            <div ng-bind-html="videoData.embed | trustHtml"></div>
+        </div>
+    </div>
+    <div class="panel-footer">
+        <button class="=btn btn-default" ng-click="pinVideo(videoData.title, videoData.embed)">Pin-It</button>
+    </div>
+</div>

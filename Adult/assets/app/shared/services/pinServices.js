@@ -6,6 +6,8 @@
             var array = localStorageService.get('pinnedVids') || [];
             array.push({ "title": title, "embed": embedHtml });
             localStorageService.set('pinnedVids', array);
+            //update count, used for Tooltip in modal.html
+            localStorageService.set('totalPinnedVideo', (localStorageService.get('totalPinnedVideo') || 0) + 1);
         }
 
         var getVid = function () {

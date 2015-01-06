@@ -6,6 +6,13 @@
             controller: 'VideoCtrl'
         };
     })
+    .directive('subVideo', function () {
+        return {
+            restrict: 'E',
+            templateUrl: '/assets/app/templates/submain/subvideo.html',
+            controller: 'SubvideoCtrl'
+        }
+    })
     .directive('category', function () {
         return {
             restrict: 'E',

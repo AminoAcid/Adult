@@ -16,6 +16,26 @@
                 it uses the constant AMOUNT_PER_LOAD as does VideoCtrl
                 
      */
+    .controller('DashboardCtrl', ['$scope', '$rootScope', function ($scope, $rootScope) {
+        $scope.subVideoViews = false;
+        $scope.$on('subVideoSignal', function (event, data) {
+            $scope.subVideoViews = true;
+            $rootScope.$broadcast('subVideoDataSignal', data);
+        });
+    }])
+    .controller('SubvideoCtrl', ['$scope', '$rootScope', function ($scope, $rootScope) {
+        $scope.videoData = {};
+
+        $scope.$on('subVideoDataSignal', function (event, data) {
+            console.log('data recieved');
+            $scope.videoData = data;
+        });
+
+        $scope.pinVideo = function (title, embedHtml) {
+            pinVidModal.pinVid(title, embedHtml);
+        }
+
+    }])
     .controller('CategoryCtrl', ['$scope', '$rootScope', 'getCategoryService', 'pinTagService', function ($scope, $rootScope, getCategoryService, pinTagService) {
         $scope.popularTags = [];
         $scope.getPopularTags = function () {
@@ -63,6 +83,7 @@
         $scope.$on('queryResult', function (event, data) {
             $scope.queriedVideos = [];
             $scope.queriedVideos = $scope.queriedVideos.concat(data[1]);
+            //when we have a query, show queried videos, not main videos
             queryFlag = data[0];
             //clear the videos whenever we get a new query
             $scope.videos = [];
@@ -107,14 +128,11 @@
 
         $scope.pinVideo = function (title, embedHtml) {
             pinVidModal.pinVid(title, embedHtml);
-            //update count, used for Tooltip in modal.html
-            var count = localStorageService.get('totalPinnedVideo') || 0;
-            count++;
-            localStorageService.set('totalPinnedVideo', count);
         }
 
-    }])
-    .controller('SubvideoCtrl', ['$scope', '$rootScope', function ($scope, $rootScope) {
+        $scope.signalSubVideo = function (vid) {
+            $scope.$emit('subVideoSignal', vid);
+        }
 
     }])
     .controller('ModalCtrl', ['$scope', 'pinVidModal', 'localStorageService', function ($scope, pinVidModal, localStorageService) {

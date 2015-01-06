@@ -18,11 +18,8 @@ angular.module('adultApp', [
         $locationProvider.html5Mode({enabled:true, requireBase:false});
         $routeProvider
             .when('/', {
-                templateUrl: '/assets/app/templates/dashboard/main.html'
-                //controller: 'dashboard'
-            })
-            .when('/watch', {
-                templateUrl: '/assets/app/templates/dashboard/submain.html'
+                templateUrl: '/assets/app/templates/dashboard/dashboard.html',
+                controller: 'DashboardCtrl'
             })
             ;
             
