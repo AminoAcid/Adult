@@ -1,5 +1,5 @@
 ﻿angular.module('shared.directives', [])
-    .directive('scrolltop', function(){
+    .directive('scrolltop', function () {
         return {
             restrict: 'A',
             link: function (scope, element, attrs) {
@@ -24,7 +24,45 @@
         return {
             restrict: 'A',
             link: function (scope, element, attrs) {
-                 $(element).tooltip();
+                $(element).tooltip();
             }
         };
-    });
+    })
+     .directive('navButton', ['historyService', function (historyService) {
+         return {
+             restrict: 'E',
+             templateUrl: '/assets/app/templates/submain/navbutton.html',
+             scope:{},
+             controller: function ($scope) {
+                 $scope.isFoward = undefined;
+                 $scope.direction = undefined;
+
+                 $scope.navigate = function () {
+                     console.log($scope.isFoward);
+                     if ($scope.isFoward) {
+                        historyService.forward();
+                     } else if($scope.isFoward === false){
+                        historyService.backward();
+                     } else {
+                         console.log('uninitalized attributes');
+                     }
+                 }
+             },
+             link: function (scope, ele, attrs) {
+                 console.log('attrs.direction ' + attrs.direction);
+                 if (attrs.direction == undefined) {
+                     console.log('Please Indicate attribute: "direction" to values "backward" or "forward"');
+                 } else if (attrs.direction.localeCompare('backward') == 0) {
+                     console.log("backward hit " + attrs.direction.localeCompare('backward'));
+                     scope.isFoward = false;
+                     scope.direction = 'backward';
+                 } else if (attrs.direction.localeCompare('forward') == 0) {
+                     console.log('foward hit ' + attrs.direction.localeCompare('forward'));
+                     scope.isFoward = true;
+                     scope.direction = 'forward';
+                 } else {
+                     console.log('Please Indicate attribute: "direction" to values "backward" or "forward"');
+                 }
+             }
+         };
+     }]);

@@ -1,6 +1,6 @@
 ﻿angular.module('directives', [])
-    .directive('videos', function(){
-        return{
+    .directive('videos', function () {
+        return {
             restrict: 'E',
             templateUrl: '/assets/app/templates/main/videos.html',
             controller: 'VideoCtrl'

@@ -23,4 +23,23 @@
                 return deferred.promise;
             }
         };
+    }])
+    .service('historyService', ['$cookieStore', function ($cookieStore) {
+        
+        var forward = function () {
+            $cookieStore.put('index', ($cookieStore.get('index') || 0) + 1);
+            console.log($cookieStore.get('index'));
+            //var historyArray = $cookies.get('history') || [];
+            //historyArray.push({ title: title, html: html });
+            //$cookies.put('history', historyArray);
+        }
+        var backward = function()
+        {
+            $cookieStore.put('index', ($cookieStore.get('index') || 1) - 1);
+            console.log($cookieStore.get('index'));
+        }
+        return {
+            forward: forward,
+            backward: backward
+        };
     }]);

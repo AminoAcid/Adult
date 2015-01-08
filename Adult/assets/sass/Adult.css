@@ -1,4 +1,10 @@
-﻿.text-format.truncate-fade {
+﻿.adult-button .navbutton {
+  height: 500px;
+  width: 40px;
+  border: 1px;
+  border-color: ActiveBorder; }
+
+.text-format.truncate-fade {
   height: 3em;
   position: relative;
   overflow: hidden;

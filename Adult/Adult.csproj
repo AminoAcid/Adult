@@ -162,6 +162,7 @@
     <Content Include="assets\app\shared\services\videoServices.js" />
     <Content Include="assets\app\shared\directives\shared-directives.js" />
     <Content Include="assets\app\shared\services\pinServices.js" />
+    <Content Include="assets\app\templates\submain\navbutton.html" />
     <Content Include="assets\app\templates\utility\body\search.html" />
     <Content Include="assets\app\templates\main\videos.html" />
     <Content Include="assets\app\templates\dashboard\dashboard.html" />
@@ -205,6 +206,7 @@
     <Content Include="assets\sass\_adult-category.scss" />
     <Content Include="Scripts\angular-cookies.min.js.map" />
     <Content Include="assets\sass\_adult-common.scss" />
+    <Content Include="assets\sass\_adult-button.scss" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

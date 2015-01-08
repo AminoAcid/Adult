@@ -1,7 +1,8 @@
 ﻿angular.module('controllers', [])
-    .run(['$rootScope', 'localStorageService', function ($rootScope, localStorageService) {
+    .run(['$cookieStore', 'localStorageService', function ($cookieStore, localStorageService) {
         //localStorageService.clearAll();  
-        //for testing, uncomment this to clear storage
+        $cookieStore.remove('index');
+        //for testing, uncomment this to clear storage/cookies
     }])
     .controller('LoginCtrl', ['$scope', function ($scope) {
         $scope.disableInput = new function () {
