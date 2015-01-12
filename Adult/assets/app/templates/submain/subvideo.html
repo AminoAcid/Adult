@@ -1,13 +1,37 @@
-﻿<div class="panel panel-default">
-    <div class="panel-heading">
-        <div class="" ng-bind="videoData.title"></div>
-    </div>
-    <div class="panel-body">
-        <div class="embed-responsive embed-responsive-16by9">
-            <div ng-bind-html="videoData.embed | trustHtml"></div>
+﻿<div class="subvideo">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <div class="" ng-bind="videoData.title"></div>
+        </div>
+        <div class="panel-body">
+            <div class="embed-responsive embed-responsive-16by9">
+                <div ng-bind-html="videoData.embed | trustHtml"></div>
+            </div>
+        </div>
+        <div class="panel-footer">
+            <button class="=btn btn-default" ng-click="pinVideo(videoData.title, videoData.embed)">Pin-It</button>
         </div>
     </div>
-    <div class="panel-footer">
-        <button class="=btn btn-default" ng-click="pinVideo(videoData.title, videoData.embed)">Pin-It</button>
-    </div>
 </div>
+    <nav-button direction="forward"></nav-button>
+    <nav-button direction="backward"></nav-button>
+
+    <div class="video-container" ng-repeat="vid in relatedVideos | limitTo: 4">
+        <div class=" panel panel-default">
+            <div class="panel-heading">
+                <a href="#" ng-click="navVideoView(vid)">
+                    <div class="text-format truncate-fade" ng-bind="vid.title"></div>
+                </a>
+            </div>
+            <div class="panel-body">
+                <div class="video-slide">
+                    <a href="#" ng-click="newVideoView(vid)">
+                        <img ng-src="{{vid.sprites[0]}}" />
+                        <img ng-src="{{vid.sprites[1]}}" />
+                        <img ng-src="{{vid.sprites[2]}}" />
+                        <img ng-src="{{vid.profileimg}}" />
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>

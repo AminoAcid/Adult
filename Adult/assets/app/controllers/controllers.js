@@ -2,6 +2,7 @@
     .run(['$cookieStore', 'localStorageService', function ($cookieStore, localStorageService) {
         //localStorageService.clearAll();  
         $cookieStore.remove('index');
+        $cookieStore.remove('browseHistory');
         //for testing, uncomment this to clear storage/cookies
     }])
     .controller('LoginCtrl', ['$scope', function ($scope) {
@@ -19,23 +20,76 @@
      */
     .controller('DashboardCtrl', ['$scope', '$rootScope', function ($scope, $rootScope) {
         $scope.subVideoViews = false;
-        $scope.$on('subVideoSignal', function (event, data) {
+        $scope.$on('subVideoSignal', function (event, vidObj) {
             $scope.subVideoViews = true;
-            $rootScope.$broadcast('subVideoDataSignal', data);
+            $rootScope.$broadcast('newNavSubVidSignal', vidObj);
         });
     }])
-    .controller('SubvideoCtrl', ['$scope', '$rootScope', function ($scope, $rootScope) {
+    .controller('SubvideoCtrl', ['$scope', '$rootScope','keywordVideoService', 'historyService', function ($scope, $rootScope, keywordVideoService, historyService) {
         $scope.videoData = {};
+        $scope.relatedVideos = [];
 
-        $scope.$on('subVideoDataSignal', function (event, data) {
-            console.log('data recieved');
-            $scope.videoData = data;
+        $scope.relatedQuery = function () {
+            var keywordString = $scope.videoData.maintags.concat($scope.videoData.subtags).join(' ');
+            keywordVideoService.getRelatedVideos(keywordString).then(
+                function (relatedVideos) {
+                    $scope.relatedVideos = $scope.relatedVideos.concat(relatedVideos);
+                },
+                function () {
+
+                });
+        }
+        
+        $scope.navVideoView = function (vid, newNav) {
+            console.log('newnav is ' + newNav);
+            if (newNav == false) {
+                console.log(vid);
+            }
+            $scope.videoData = vid;
+            $scope.relatedVideos = [];
+            $scope.relatedQuery();
+            //OR operator for the view that consists of new video links
+            if (newNav === undefined) {
+                historyService.newForward(vid);
+            }
+        }
+        //when you use navButtons
+        $scope.$on('navSubVidSignal', function (event, vidObj) {
+            console.log('navSub');
+            $scope.navVideoView(vidObj, false);
         });
+
+        //when you click on a new video
+        $scope.$on('newNavSubVidSignal', function (event, vidObj) {
+            console.log('new-navsub');
+            $scope.navVideoView(vidObj, undefined);
+        });
+
 
         $scope.pinVideo = function (title, embedHtml) {
             pinVidModal.pinVid(title, embedHtml);
         }
 
+    }])
+    .controller('NavCtrl', ['$scope', 'historyService', function ($scope, historyService) {
+        $scope.isFoward = undefined;
+        $scope.direction = undefined;
+
+        $scope.navSubVideoSignal = function (vidObj) {
+            $scope.$emit('navSubVidSignal', vidObj);
+        }
+
+        $scope.navigate = function () {
+            console.log('isfoward boolean ' + $scope.isFoward);
+            if ($scope.isFoward) {
+                $scope.navSubVideoSignal(historyService.forward());
+            } else if ($scope.isFoward === false) {     
+                $scope.navSubVideoSignal(historyService.backward());
+            } else {
+                console.log('uninitalized attributes');
+            }
+        }
+        
     }])
     .controller('CategoryCtrl', ['$scope', '$rootScope', 'getCategoryService', 'pinTagService', function ($scope, $rootScope, getCategoryService, pinTagService) {
         $scope.popularTags = [];
@@ -65,9 +119,11 @@
                 },
                 function () {
                 });
-            console.log($scope.queriedVideos.length);
+            //console.log($scope.queriedVideos.length);
             $rootScope.$broadcast('queryResult', [true, $scope.queriedVideos]);
         }
+
+        
         
       
     }])
@@ -117,8 +173,8 @@
         }
 
         $scope.getVideos = function () {
-            console.log('gen vid: ' + $scope.videos.length);
-            console.log('query vid: ' + $scope.queriedVideos.length);
+            //console.log('gen vid: ' + $scope.videos.length);
+            //console.log('query vid: ' + $scope.queriedVideos.length);
             if (queryFlag) {
                 $scope.getQueryVideo();
             }

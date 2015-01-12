@@ -36,7 +36,7 @@ namespace Adult.Server.Mongo
           
         }
 
-        public Video[] getQueryVideos(String[] keywords)
+        public Video[] getQueryVideos(String[] keywords, Int32 limitTo = -1)
         {
             if(keywords.Length == 0)
                 return new Video[0];
@@ -72,7 +72,10 @@ namespace Adult.Server.Mongo
             {
                 videos[i] = _MongoServer.videoCollection.AsQueryable<Video>().Single(x => x._id == searchResults[i]);
             }
-            return videos;
+            if (limitTo == -1)
+                return videos;
+            else
+                return videos.Take(limitTo).ToArray();
         }
 
         public Tags getTags()

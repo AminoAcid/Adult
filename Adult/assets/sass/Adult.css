@@ -1,4 +1,7 @@
-﻿.adult-button .navbutton {
+﻿.subvideo {
+  padding-bottom: 20px; }
+
+.adult-button .navbutton {
   height: 500px;
   width: 40px;
   border: 1px;

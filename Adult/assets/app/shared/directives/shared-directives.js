@@ -32,22 +32,8 @@
          return {
              restrict: 'E',
              templateUrl: '/assets/app/templates/submain/navbutton.html',
-             scope:{},
-             controller: function ($scope) {
-                 $scope.isFoward = undefined;
-                 $scope.direction = undefined;
-
-                 $scope.navigate = function () {
-                     console.log($scope.isFoward);
-                     if ($scope.isFoward) {
-                        historyService.forward();
-                     } else if($scope.isFoward === false){
-                        historyService.backward();
-                     } else {
-                         console.log('uninitalized attributes');
-                     }
-                 }
-             },
+             scope: {},
+             controller: 'NavCtrl',
              link: function (scope, ele, attrs) {
                  console.log('attrs.direction ' + attrs.direction);
                  if (attrs.direction == undefined) {

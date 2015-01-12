@@ -9,6 +9,7 @@ namespace Adult.Core.Constants
     public static class AdultConstants
     {
         public const Int32 AMOUNT_PER_LOAD = 3;
+        public const Int32 AMOUNT_RELATED_VID = 20;
         public const Int32 TITLEPOINT = 3;
         public const Int32 MAINTAGPOINT = 2;
         public const Int32 SUBTAGPOINT = 1;

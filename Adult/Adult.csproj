@@ -207,6 +207,7 @@
     <Content Include="Scripts\angular-cookies.min.js.map" />
     <Content Include="assets\sass\_adult-common.scss" />
     <Content Include="assets\sass\_adult-button.scss" />
+    <Content Include="assets\sass\_adult-subvideo.scss" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
