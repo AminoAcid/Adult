@@ -34,7 +34,9 @@
         };
     }])
     .service('historyService', ['$cookieStore', function ($cookieStore) {
+        //0 is main page, 1 - n is submain pages
         var newForward = function (vid) {
+            $cookieStore.put('atMainPage', false);
             $cookieStore.put('index', ($cookieStore.get('index') || 0) + 1);
             console.log('index is: '+ $cookieStore.get('index'));
 
@@ -43,25 +45,40 @@
             
             if (browseHistory.length >= pageNumber) {
                 browseHistory.splice(pageNumber, browseHistory.length - pageNumber, vid);
-                console.log('special new foward');
+                //console.log('special new foward');
             } else {
                 browseHistory.push(vid);
-                console.log('regular newfoward');
+                //console.log('regular newfoward');
             }
-            
-            console.log(browseHistory);
+            $cookieStore.put('frontNavLimited', true);
+            $cookieStore.put('backNavLimited', false);
+            //console.log(browseHistory);
             $cookieStore.put('browseHistory', browseHistory);
         }
         var forward = function () {
-            console.log('new foward');
+            //console.log('foward');
+            
             $cookieStore.put('index', ($cookieStore.get('index') || 0) + 1);
             console.log('index is ' + $cookieStore.get('index'));
-            var pageNumber = $cookieStore.get('index') || 0;
+            var pageNumber = ($cookieStore.get('index'));
             var browseHistory = $cookieStore.get('browseHistory') || [];
-            if (pageNumber < browseHistory.length) {
-                return browseHistory[pageNumber];
+            if (pageNumber <= browseHistory.length) {
+
+                if (pageNumber === browseHistory.length) {
+                    $cookieStore.put('frontNavLimited', true);
+                } else {
+                    $cookieStore.put('frontNavLimited', false);
+                }
+                $cookieStore.put('atMainPage', false);
+                $cookieStore.put('backNavLimited', false);
+                $cookieStore.put('index', pageNumber);
+                return browseHistory[pageNumber-1];
             } else {
-                return {};
+                $cookieStore.put('frontNavLimited', true);
+
+                if(pageNumber === 0){
+                    $cookieStore.put('atMainPage', true);
+                }
             }
         }
         var backward = function()
@@ -71,12 +88,15 @@
             console.log('index is ' + pageNumber);
             if (pageNumber > 0) {
                 var browseHistory = $cookieStore.get('browseHistory');
-                console.log('backwards object');
-                console.log(browseHistory[pageNumber]);
+                //console.log('backwards object');
+                //console.log(browseHistory[pageNumber]);
+                $cookieStore.put('frontNavLimited', false);
+                $cookieStore.put('backNavLimited', false);
                 return browseHistory[pageNumber - 1];
             } else {
-                console.log('we are returning nothing back');
-                return {};
+                //console.log('we are returning nothing back');
+                $cookieStore.put('backNavLimited', true);
+                $cookieStore.put('atMainPage', true);
             }
         }
         return {

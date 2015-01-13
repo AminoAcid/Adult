@@ -3,6 +3,9 @@
         //localStorageService.clearAll();  
         $cookieStore.remove('index');
         $cookieStore.remove('browseHistory');
+        $cookieStore.remove('frontNavLimited');
+        $cookieStore.remove('atMainPage');
+        $cookieStore.remove('backNavLimited');
         //for testing, uncomment this to clear storage/cookies
     }])
     .controller('LoginCtrl', ['$scope', function ($scope) {
@@ -18,16 +21,48 @@
                 it uses the constant AMOUNT_PER_LOAD as does VideoCtrl
                 
      */
-    .controller('DashboardCtrl', ['$scope', '$rootScope', function ($scope, $rootScope) {
-        $scope.subVideoViews = false;
+    .controller('DashboardCtrl', ['$scope', '$rootScope', '$cookieStore', function ($scope, $rootScope, $cookieStore) {
+        $cookieStore.put('atMainPage', true);
+        $scope.atMainPage = true;
+            $scope.$watch(
+            function () {
+                return $cookieStore.get('atMainPage');
+            },
+            function (value) {
+                console.log('this is dashbaord' + value);
+                $scope.atMainPage = value;
+            });
+
+
         $scope.$on('subVideoSignal', function (event, vidObj) {
-            $scope.subVideoViews = true;
+            $scope.atMainPage = false;
             $rootScope.$broadcast('newNavSubVidSignal', vidObj);
         });
     }])
-    .controller('SubvideoCtrl', ['$scope', '$rootScope','keywordVideoService', 'historyService', function ($scope, $rootScope, keywordVideoService, historyService) {
+    .controller('SubvideoCtrl', ['$scope', '$rootScope', '$cookieStore', 'keywordVideoService', 'historyService', function ($scope, $rootScope, $cookieStore, keywordVideoService, historyService) {
         $scope.videoData = {};
         $scope.relatedVideos = [];
+
+        $scope.backNavLimited = true;
+        $scope.frontNavLimited = true;
+
+            $scope.$watch(
+            function () {
+                return $cookieStore.get('frontNavLimited');
+            },
+            function (value) {
+                $scope.frontNavLimited = value;
+                console.log('frontNavLimited ' + $scope.frontNavLimited)
+            });
+            $scope.$watch(
+                function () {
+                    return $cookieStore.get('backNavLimited');
+                },
+                function (value) {
+                    $scope.backNavLimited = value;
+                    console.log('backNavLimited ' + $scope.backNavLimited);
+                });
+        
 
         $scope.relatedQuery = function () {
             var keywordString = $scope.videoData.maintags.concat($scope.videoData.subtags).join(' ');
@@ -40,29 +75,35 @@
                 });
         }
         
-        $scope.navVideoView = function (vid, newNav) {
-            console.log('newnav is ' + newNav);
+        $scope.navVideoView = function (vidObj, newNav) {
+            //console.log('foward button disabled?');
+            //console.log($scope.frontNavLimited);
+            //console.log('newnav is ' + newNav);
             if (newNav == false) {
-                console.log(vid);
+                //console.log(vidObj);
             }
-            $scope.videoData = vid;
-            $scope.relatedVideos = [];
-            $scope.relatedQuery();
-            //OR operator for the view that consists of new video links
-            if (newNav === undefined) {
-                historyService.newForward(vid);
+            
+            if (vidObj !== undefined) {
+                $scope.videoData = vidObj;
+                $scope.relatedVideos = [];
+                $scope.relatedQuery();
+                //From the View, or from this controller.
+                if (newNav === undefined || newNav === true) {
+                    historyService.newForward(vidObj);
+                }
             }
+            
         }
         //when you use navButtons
         $scope.$on('navSubVidSignal', function (event, vidObj) {
-            console.log('navSub');
+            //console.log('navSub');
             $scope.navVideoView(vidObj, false);
         });
 
         //when you click on a new video
         $scope.$on('newNavSubVidSignal', function (event, vidObj) {
-            console.log('new-navsub');
-            $scope.navVideoView(vidObj, undefined);
+            //console.log('new-navsub');
+            $scope.navVideoView(vidObj, true);
         });
 
 
@@ -73,14 +114,13 @@
     }])
     .controller('NavCtrl', ['$scope', 'historyService', function ($scope, historyService) {
         $scope.isFoward = undefined;
-        $scope.direction = undefined;
 
         $scope.navSubVideoSignal = function (vidObj) {
             $scope.$emit('navSubVidSignal', vidObj);
         }
 
         $scope.navigate = function () {
-            console.log('isfoward boolean ' + $scope.isFoward);
+            //console.log('isfoward boolean ' + $scope.isFoward);
             if ($scope.isFoward) {
                 $scope.navSubVideoSignal(historyService.forward());
             } else if ($scope.isFoward === false) {     

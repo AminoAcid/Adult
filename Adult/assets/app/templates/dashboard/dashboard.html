@@ -58,10 +58,10 @@
         </div>
         <div class="col-xs-8">
             <!--videos on show-->
-            <div ng-show="subVideoViews">
+            <div ng-hide="atMainPage">
                 <sub-video></sub-video>
             </div>
-            <div ng-hide="subVideoViews">
+            <div ng-show="atMainPage">
                 <videos></videos>
             </div>
         </div>

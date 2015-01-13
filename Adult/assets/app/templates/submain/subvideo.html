@@ -13,8 +13,10 @@
         </div>
     </div>
 </div>
-    <nav-button direction="forward"></nav-button>
-    <nav-button direction="backward"></nav-button>
+
+    <nav-button ng-hide="frontNavLimited" direction="forward"></nav-button>
+
+    <nav-button ng-hide="backNavLimited" direction="backward"></nav-button>
 
     <div class="video-container" ng-repeat="vid in relatedVideos | limitTo: 4">
         <div class=" panel panel-default">
