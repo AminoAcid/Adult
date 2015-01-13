@@ -1,11 +1,12 @@
 ﻿angular.module('controllers', [])
     .run(['$cookieStore', 'localStorageService', function ($cookieStore, localStorageService) {
         //localStorageService.clearAll();  
-        $cookieStore.remove('index');
-        $cookieStore.remove('browseHistory');
-        $cookieStore.remove('frontNavLimited');
-        $cookieStore.remove('atMainPage');
-        $cookieStore.remove('backNavLimited');
+        //$cookieStore.remove('pageNumber');
+        //$cookieStore.remove('browseHistory');
+        //$cookieStore.remove('frontNavLimited');
+        //$cookieStore.remove('atMainPage');
+        //$cookieStore.remove('backNavLimited');
+        //$cookieStore.get('currentVideo');
         //for testing, uncomment this to clear storage/cookies
     }])
     .controller('LoginCtrl', ['$scope', function ($scope) {

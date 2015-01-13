@@ -21,82 +21,82 @@
             getRelatedVideos: getRelatedVideos
         };
     }])
-    .factory('generalVideoService', ['$http', '$q', function ($http, $q) {
-        return {
-            getVideos: function (startIndex) {
-                var deferred = $q.defer();
-                $http({
-                    method: 'GET',
-                    url: '/api/Video/get/' + startIndex
-                }).success(deferred.resolve).error(deferred.reject);
-                return deferred.promise;
-            }
-        };
+    .service('generalVideoService', ['$http', '$q', function ($http, $q) {
+        var getVideos = function (startIndex) {
+            var deferred = $q.defer();
+            $http({
+                method: 'GET',
+                url: '/api/Video/get/' + startIndex
+            }).success(deferred.resolve).error(deferred.reject);
+            return deferred.promise;
+        }
+        var getUniqueVideo = function (bsonId) {
+            console.log(bsonId);
+            console.log(typeof bsonId);
+            var deferred = $q.defer();
+            $http({
+                method: 'GET',
+                url: 'api/Video/getunique/' + bsonId
+            }).success(deferred.resolve).error(deferred.reject);
+            return deferred.promise;
+        }
+        return{
+            getVideos: getVideos,
+            getUniqueVideo: getUniqueVideo
+        }
     }])
-    .service('historyService', ['$cookieStore', function ($cookieStore) {
-        //0 is main page, 1 - n is submain pages
+    .service('historyService', ['$cookieStore', 'pageState', 'generalVideoService', function ($cookieStore, pageState, generalVideoService) {
         var newForward = function (vid) {
-            $cookieStore.put('atMainPage', false);
-            $cookieStore.put('index', ($cookieStore.get('index') || 0) + 1);
-            console.log('index is: '+ $cookieStore.get('index'));
+            pageState.newForwardState();
 
             var browseHistory = $cookieStore.get('browseHistory') || [];
-            var pageNumber = $cookieStore.get('index') || 0;
+            var pageNumber = $cookieStore.get('pageNumber');
             
             if (browseHistory.length >= pageNumber) {
-                browseHistory.splice(pageNumber, browseHistory.length - pageNumber, vid);
-                //console.log('special new foward');
+                //BrowseHistoryIndex = pageNumber-1     
+                //pageNumber 1 - 1 ratio with browseHistory.length, therefore, add ensure atleast 1 subtraction
+                browseHistory.splice(pageNumber-1, browseHistory.length+1 - pageNumber, vid._id);
             } else {
-                browseHistory.push(vid);
-                //console.log('regular newfoward');
+                browseHistory.push(vid._id);
             }
-            $cookieStore.put('frontNavLimited', true);
-            $cookieStore.put('backNavLimited', false);
-            //console.log(browseHistory);
+            console.log(browseHistory);
+            console.log(pageNumber);
             $cookieStore.put('browseHistory', browseHistory);
         }
         var forward = function () {
-            //console.log('foward');
-            
-            $cookieStore.put('index', ($cookieStore.get('index') || 0) + 1);
-            console.log('index is ' + $cookieStore.get('index'));
-            var pageNumber = ($cookieStore.get('index'));
+            pageState.forwardState();
+
+            var pageNumber = ($cookieStore.get('pageNumber'));
             var browseHistory = $cookieStore.get('browseHistory') || [];
+
             if (pageNumber <= browseHistory.length) {
-
-                if (pageNumber === browseHistory.length) {
-                    $cookieStore.put('frontNavLimited', true);
-                } else {
-                    $cookieStore.put('frontNavLimited', false);
-                }
-                $cookieStore.put('atMainPage', false);
-                $cookieStore.put('backNavLimited', false);
-                $cookieStore.put('index', pageNumber);
-                return browseHistory[pageNumber-1];
-            } else {
-                $cookieStore.put('frontNavLimited', true);
-
-                if(pageNumber === 0){
-                    $cookieStore.put('atMainPage', true);
-                }
+                generalVideoService.getUniqueVideo(browseHistory[pageNumber - 1]).then(
+                    function (vidObj) {
+                        $cookieStore.put('currentVideo', vidObj);
+                    },
+                    function () {
+                        console.log("failed ajax call of getUniqueVideo");
+                    });
+                console.log(pageNumber);
+                return $cookieStore.get('currentVideo');
             }
         }
-        var backward = function()
-        {
-            $cookieStore.put('index', ($cookieStore.get('index') || 1) - 1);
-            var pageNumber = $cookieStore.get('index');
-            console.log('index is ' + pageNumber);
+        var backward = function() {
+            pageState.backwardState();
+
+            var pageNumber = $cookieStore.get('pageNumber');
+
             if (pageNumber > 0) {
                 var browseHistory = $cookieStore.get('browseHistory');
-                //console.log('backwards object');
-                //console.log(browseHistory[pageNumber]);
-                $cookieStore.put('frontNavLimited', false);
-                $cookieStore.put('backNavLimited', false);
-                return browseHistory[pageNumber - 1];
-            } else {
-                //console.log('we are returning nothing back');
-                $cookieStore.put('backNavLimited', true);
-                $cookieStore.put('atMainPage', true);
+                generalVideoService.getUniqueVideo(browseHistory[pageNumber - 1]).then(
+                    function (vidObj) {
+                        $cookieStore.put('currentVideo', vidObj);
+                    },
+                    function () {
+                        console.log("failed ajax call of getUniqueVideo");
+                    });
+                console.log(pageNumber);
+                return $cookieStore.get('currentVideo');
             }
         }
         return {

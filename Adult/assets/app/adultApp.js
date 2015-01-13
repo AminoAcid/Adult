@@ -4,6 +4,7 @@ angular.module('adultApp', [
     'directives',
     'controllers',
     'shared.directives',
+    'pagingServices',
     'videoServices',
     'categoryServices',
     'ngRoute',

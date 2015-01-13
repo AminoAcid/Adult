@@ -17,6 +17,13 @@ namespace Adult.ApiControllers
         private MongoService _MongoService { get { return new MongoService(); } }
         
         [HttpGet]
+        [Route("getunique/{bsonId}")]
+        public Video GetUnique(String bsonId)
+        {
+            return _MongoService.getVideo(bsonId);
+        }
+
+        [HttpGet]
         [Route("get/{startIndex:int}")]
         public Video[] Get(Int32 startIndex)
         {
