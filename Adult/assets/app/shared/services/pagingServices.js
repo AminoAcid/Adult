@@ -10,39 +10,45 @@
         }
 
         var forwardState = function () {
-            $cookieStore.put('pageNumber', ($cookieStore.get('pageNumber') || 0) + 1);
+            $cookieStore.put('pageNumber', $cookieStore.get('pageNumber') + 1);
             var pageNumber = ($cookieStore.get('pageNumber'));
-            var browseHistory = $cookieStore.get('browseHistory') || [];
+            var browseHistory = $cookieStore.get('browseHistory');
  
             $cookieStore.put('backNavLimited', false);
             $cookieStore.put('atMainPage', false);
             $cookieStore.put('pageNumber', pageNumber);
-            if (pageNumber < browseHistory.length && pageNumber != 0) {
+            if (pageNumber < browseHistory.length) {
                 //$cookieStore.put('backNavLimited', false);
                 //$cookieStore.put('atMainPage', false);
                 //$cookieStore.put('pageNumber', pageNumber);
                 $cookieStore.put('frontNavLimited', false);
             } else if (pageNumber === browseHistory.length) {
                 $cookieStore.put('frontNavLimited', true);
-            } else if (pageNumber === 0) {
-                $cookieStore.put('backNavLimited', true);
-                $cookieStore.put('atMainPage', true);
+            } 
+            //else if (pageNumber === 0) {
+            //    $cookieStore.put('backNavLimited', true);
+            //    $cookieStore.put('atMainPage', true);
 
-            } else {
-                console.log("error, negative page number");
+                //} 
+            else {
+                console.log("error, bad page number");
             }
         }
         var backwardState = function () {
-            $cookieStore.put('pageNumber', ($cookieStore.get('pageNumber') || 1) - 1);
+            $cookieStore.put('pageNumber', $cookieStore.get('pageNumber') - 1);
             var pageNumber = $cookieStore.get('pageNumber');
-    
+            var browseHistory = $cookieStore.get('browseHistory');
             if (pageNumber > 0) {
                 $cookieStore.put('frontNavLimited', false);
                 $cookieStore.put('backNavLimited', false);
             } else {
                 $cookieStore.put('backNavLimited', true);
                 $cookieStore.put('atMainPage', true);
+                if (browseHistory.length > 0) {
+                    $cookieStore.put('frontNavLimited', false);
+                }
             }
+            console.log(pageNumber);
         }
         return {
             newForwardState: newForwardState,

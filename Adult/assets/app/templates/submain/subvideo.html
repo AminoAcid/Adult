@@ -14,20 +14,20 @@
     </div>
 </div>
 
-    <nav-button ng-hide="frontNavLimited" direction="forward"></nav-button>
+    <!--<nav-button ng-hide="frontNavLimited" direction="forward"></nav-button>
 
-    <nav-button ng-hide="backNavLimited" direction="backward"></nav-button>
+    <nav-button ng-hide="backNavLimited" direction="backward"></nav-button>-->
 
     <div class="video-container" ng-repeat="vid in relatedVideos | limitTo: 4">
         <div class=" panel panel-default">
             <div class="panel-heading">
-                <a href="#" ng-click="navVideoView(vid)">
+                <a href="#" ng-click="navVideoView(vid, true)">
                     <div class="text-format truncate-fade" ng-bind="vid.title"></div>
                 </a>
             </div>
             <div class="panel-body">
                 <div class="video-slide">
-                    <a href="#" ng-click="newVideoView(vid)">
+                    <a href="#" ng-click="navVideoView(vid, true)">
                         <img ng-src="{{vid.sprites[0]}}" />
                         <img ng-src="{{vid.sprites[1]}}" />
                         <img ng-src="{{vid.sprites[2]}}" />
