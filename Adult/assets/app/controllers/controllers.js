@@ -68,7 +68,8 @@
             var keywordString = $scope.videoData.maintags.concat($scope.videoData.subtags).join(' ');
             keywordVideoService.getRelatedVideos(keywordString).then(
                 function (relatedVideos) {
-                    $scope.relatedVideos = $scope.relatedVideos.concat(relatedVideos);
+                    var index = relatedVideos.indexOf($scope.videoData);
+                    $scope.relatedVideos = $scope.relatedVideos.concat(relatedVideos.splice(index , 1));
                 },
                 function () {
 
@@ -109,7 +110,7 @@
             else if ($scope.isFoward === false) {
                 var promise = historyService.backward();
                 if (promise !== null) {
-                    historyService.backward().then(function (obj) {
+                    promise.then(function (obj) {
                         $scope.$emit('navSubVidSignal', { vidObj: obj, isNewNav: false });
                     });
                 }
