@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Mongo\MongoHelpers\Incrementor.cs" />
     <Compile Include="Mongo\MongoPopulate\Extractor.cs" />
     <Compile Include="Mongo\MongoHelpers\AutoIncrement.cs" />
     <Compile Include="Mongo\MongoPopulate\ExtractorTag.cs" />

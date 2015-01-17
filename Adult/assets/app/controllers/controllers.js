@@ -60,7 +60,8 @@
             $rootScope.$broadcast('navSubVidSignal', subVidData);
         });
     }])
-    .controller('SubvideoCtrl', ['$scope', '$rootScope', '$cookieStore', 'keywordVideoService', 'historyService', function ($scope, $rootScope, $cookieStore, keywordVideoService, historyService) {
+    .controller('SubvideoCtrl', ['$scope', '$rootScope', '$cookieStore', 'keywordVideoService', 'historyService', 'updateCount',
+        function ($scope, $rootScope, $cookieStore, keywordVideoService, historyService, updateCount) {
         $scope.videoData = {};
         $scope.relatedVideos = [];
 
@@ -78,7 +79,8 @@
         
         $scope.navVideoView = function (vidObj, isNewNav) {
             if (vidObj != null) {
-                console.log(vidObj);
+                console.log(typeof vidObj._id);
+                updateCount.updateViewCount(vidObj._id);
                 $scope.videoData = vidObj;
                 $scope.relatedVideos = [];
                 $scope.relatedQuery();

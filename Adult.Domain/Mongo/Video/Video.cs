@@ -21,5 +21,6 @@ namespace Adult.Domain.Mongo.Video
         public String[] Sprites { get; set; }
         public String[] Maintags { get; set; }
         public String[] Subtags { get; set; }
+        public Int32 Views { get; set; }
     }
 }

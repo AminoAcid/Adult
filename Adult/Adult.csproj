@@ -161,6 +161,7 @@
     <Content Include="assets\app\shared\services\categoryServices.js" />
     <Content Include="assets\app\shared\services\navigationServices.js" />
     <Content Include="assets\app\shared\services\pagingServices.js" />
+    <Content Include="assets\app\shared\services\updateInfoServices.js" />
     <Content Include="assets\app\shared\services\videoServices.js" />
     <Content Include="assets\app\shared\directives\shared-directives.js" />
     <Content Include="assets\app\shared\services\pinServices.js" />

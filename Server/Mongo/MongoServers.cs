@@ -25,7 +25,7 @@ namespace Adult.Server.Mongo
              */
             this.MDB = new MongoClient().GetServer().GetDatabase("videoDB");
             this.videoCollection = MDB.GetCollection<Video>("allVideos");
-            this.tagCollection = MDB.GetCollection("tags");
+            this.tagCollection = MDB.GetCollection<Tags>("tags");
             this.counterCollection = MDB.GetCollection("counter");
         }
     

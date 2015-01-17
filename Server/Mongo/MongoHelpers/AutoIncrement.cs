@@ -24,7 +24,7 @@ namespace Adult.Server.Mongo.MongoHelpers
             var query = Query.EQ("ID", name);
             var sort = SortBy.Null;
             var update = Update.Inc("seq", 1);
-            //need to delete the tail...save the head.
+            //need to delete the tail...save the head. Currently making new documents for each increment.
             collection.Insert(new BsonDocument(){
                 {"ID", name},
                 {"seq", 1}
@@ -37,6 +37,10 @@ namespace Adult.Server.Mongo.MongoHelpers
                     Update = Update.Inc("seq", 1),
                     Upsert = true,
                 });
+
+            if (result.ErrorMessage != null || result.Ok == false)
+                throw new MongoException(result.ErrorMessage);
+
             //gets seq from the response
             return result.Response[0][2].ToString();
         }

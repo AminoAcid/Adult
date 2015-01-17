@@ -10,21 +10,29 @@ using MongoDB.Driver.Linq;
 using MongoDB.Driver.Builders;
 using MongoDB.Bson;
 using Adult.Core.Constants;
+using Adult.Mongo.MongoHelpers;
 
 namespace Adult.Server.Mongo
 {
     public class MongoService
     {
+        #region properties
         private MongoServers _MongoServer { get { return new MongoServers(); } }
         private Int64 totalVideoCount { get; set; }
+        #endregion
+
+        #region constructor
         public MongoService()
         {
+
             totalVideoCount = _MongoServer.videoCollection.Count();
         }
+        #endregion
+
+        #region HTTPGET
         public Video getVideo(String BsonId)
         {
             return _MongoServer.videoCollection.AsQueryable<Video>().Single(x => x._id == BsonId);
-
         }
       
         public Video[] getVideos(Int32 amount, Int32 startIndex = 0)
@@ -82,6 +90,12 @@ namespace Adult.Server.Mongo
         {
             return _MongoServer.tagCollection.AsQueryable<Tags>().FirstOrDefault();
         }
-      
+        #endregion
+   
+        public void incrementView(String BsonId)
+        {
+            Incrementor.incrementViewCount(BsonId, _MongoServer.videoCollection);
+        }
+
     }
 }
