@@ -1,12 +1,12 @@
 ﻿angular.module('controllers', [])
     .run(['$cookieStore', 'localStorageService', function ($cookieStore, localStorageService) {
         //localStorageService.clearAll();  
-        $cookieStore.remove('pageNumber');
-        $cookieStore.remove('browseHistory');
-        $cookieStore.remove('frontNavLimited');
-        $cookieStore.remove('atMainPage');
-        $cookieStore.remove('backNavLimited');
-        $cookieStore.get('currentVideo');
+        //$cookieStore.remove('pageNumber');
+        //$cookieStore.remove('browseHistory');
+        //$cookieStore.remove('frontNavLimited');
+        //$cookieStore.remove('atMainPage');
+        //$cookieStore.remove('backNavLimited');
+        //$cookieStore.get('currentVideo');
         //for testing, uncomment this to clear storage/cookies
     }])
     .controller('LoginCtrl', ['$scope', function ($scope) {
@@ -228,8 +228,22 @@
         $scope.pinnedVideos = [];
         $scope.getPinnedVideos = function () {
             $scope.pinnedVideos = $scope.pinnedVideos.concat(pinVidModal.getVid());
-            console.log("getpinnedvideos hit " + $scope.pinnedVideos.length);
-            console.log($scope.pinnedVideos);
+            //console.log("getpinnedvideos hit " + $scope.pinnedVideos.length);
+            //console.log($scope.pinnedVideos);
         }
         
+        $scope.removePinVideo = function (vid) {
+            //local
+            var indexToRemove = $scope.pinnedVideos.indexOf(vid);
+            $scope.pinnedVideos.splice(indexToRemove, 1);
+            //global
+            pinVidModal.removeInternalPinVideo();
+        }
+
+        $scope.removeAllPinVideo = function () {
+            //local
+            $scope.pinnedVideos = [];
+            //global
+            pinVidModal.removeInternalPinData();
+        }
     }]);

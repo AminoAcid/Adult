@@ -27,6 +27,7 @@
                                         <div class="embed-responsive embed-responsive-16by9">
                                             <div ng-bind-html="vid.embed | trustHtml"></div>
                                         </div>
+                                        <div class="btn btn-default" ng-click="removePinVideo(vid)">remove</div>
                                     </div>
                                 </div>
                             </div>
@@ -36,6 +37,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                <div class="btn btn-primary" ng-click="removeAllPinVideo()">remove all</div>
             </div>
 
         </div>

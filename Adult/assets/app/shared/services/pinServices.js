@@ -23,9 +23,24 @@
             }
             return videos;
         }
+        var removeInternalPinVideo = function (vid) {
+            localStorageService.set('totalPinnedVideo', (localStorageService.get('totalPinnedVideo') || 1) - 1);
+            var array = localStorageService.get('pinnedVids') || [];
+            if (array.length > 0) {
+                var indexToRemove = array.indexOf(vid);
+                array.splice(indexToRemove, 1);
+            }
+            localStorageService.set('pinnedVids', array);
+        }
+        var removeInternalPinData = function () {
+            localStorageService.set('totalPinnedVideo', 0);
+            localStorageService.set('pinnedVids', []);
+        }
         return {
             pinVid: pinVid,
-            getVid: getVid
+            getVid: getVid,
+            removeInternalPinVideo: removeInternalPinVideo,
+            removeInternalPinData: removeInternalPinData
         };
     }]);
   
