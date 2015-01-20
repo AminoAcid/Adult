@@ -2,10 +2,11 @@
     .service('pinVidModal', ['videoConstants', 'localStorageService', function (videoConstants, localStorageService) {
         var startIndex = 0;
 
-        var pinVid = function (title, embedHtml) {
+        var pinVid = function (BsonId, title, embedHtml) {
             var array = localStorageService.get('pinnedVids') || [];
-            array.push({ "title": title, "embed": embedHtml });
+            array.push({"_id": BsonId, "title": title, "embed": embedHtml });
             localStorageService.set('pinnedVids', array);
+            console.log(array);
             //update count, used for Tooltip in modal.html
             localStorageService.set('totalPinnedVideo', (localStorageService.get('totalPinnedVideo') || 0) + 1);
         }
@@ -23,14 +24,33 @@
             }
             return videos;
         }
+        var containsPinVideo = function (BsonId) {
+            if (BsonId == undefined)
+                return "false";
+            var array = localStorageService.get('pinnedVids') || [];
+            var i;
+
+            for (i = 0; i < array.length; i++) {
+                if (array[i]._id.localeCompare(BsonId) == 0)
+                    return "true";
+            }
+            return "false"
+        }
         var removeInternalPinVideo = function (vid) {
             localStorageService.set('totalPinnedVideo', (localStorageService.get('totalPinnedVideo') || 1) - 1);
             var array = localStorageService.get('pinnedVids') || [];
             if (array.length > 0) {
-                var indexToRemove = array.indexOf(vid);
+                var indexToRemove = -1;
+                var i;
+                for (i = 0; i < array.length; i++) {
+                    if (array[i]._id.localeCompare(vid._id) == 0) {
+                        indexToRemove = i;
+                        break;
+                    }
+                }
                 array.splice(indexToRemove, 1);
-            }
-            localStorageService.set('pinnedVids', array);
+                localStorageService.set('pinnedVids', array);
+            } 
         }
         var removeInternalPinData = function () {
             localStorageService.set('totalPinnedVideo', 0);
@@ -39,6 +59,7 @@
         return {
             pinVid: pinVid,
             getVid: getVid,
+            containsPinVideo: containsPinVideo,
             removeInternalPinVideo: removeInternalPinVideo,
             removeInternalPinData: removeInternalPinData
         };

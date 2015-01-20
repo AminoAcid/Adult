@@ -23,7 +23,15 @@
                         </div>
                     </div>
                     <div class="panel-footer">
-                        <button class="=btn btn-default" ng-click="pinVideo(vid.title, vid.embed)">Pin-It</button>
+                        <pin-button title="{{vid.title}}" embed="{{vid.embed}}" videobsonid="{{vid._id}}"></pin-button>
+                        <!--<ng-switch on="vidIsPinned()">
+                            <div ng-switch-when="false">
+                                <button class="btn btn-default" ng-click="pinVideo(vid.title, vid.embed)">Pin-It</button>
+                            </div>
+                            <div ng-switch-when="true">
+                                <button class"=btn btn-default">unPin-It</button>
+                            </div>
+                        </ng-switch>-->
                         <div class="well" ng-bind="vid.views"></div>
                     </div>
                 </div>

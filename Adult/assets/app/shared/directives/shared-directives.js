@@ -28,6 +28,18 @@
             }
         };
     })
+    .directive('pinButton', function () {
+        return {
+            restrict: 'E',
+            templateUrl: '/assets/app/templates/submain/pinbutton.html',
+            scope: {
+                videobsonid: '@',
+                title: '@',
+                embed: '@'
+            },
+            controller: 'PinCtrl'
+        }
+    })
      .directive('navButton', ['historyService', function (historyService) {
          return {
              restrict: 'E',

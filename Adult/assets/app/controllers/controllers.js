@@ -1,6 +1,6 @@
 ﻿angular.module('controllers', [])
     .run(['$cookieStore', 'localStorageService', function ($cookieStore, localStorageService) {
-        //localStorageService.clearAll();  
+        localStorageService.clearAll();
         //$cookieStore.remove('pageNumber');
         //$cookieStore.remove('browseHistory');
         //$cookieStore.remove('frontNavLimited');
@@ -31,7 +31,7 @@
             },
             function (value) {
                 $scope.atMainPage = value;
-        });
+            });
 
         $scope.backNavLimited = true;
         $scope.frontNavLimited = true;
@@ -43,7 +43,7 @@
                 if (value !== undefined) {
                     $scope.frontNavLimited = value;
                 }
-        });
+            });
         $scope.$watch(
             function () {
                 return $cookieStore.get('backNavLimited');
@@ -62,44 +62,44 @@
     }])
     .controller('SubvideoCtrl', ['$scope', '$rootScope', '$cookieStore', 'keywordVideoService', 'historyService', 'updateCount',
         function ($scope, $rootScope, $cookieStore, keywordVideoService, historyService, updateCount) {
-        $scope.videoData = {};
-        $scope.relatedVideos = [];
+            $scope.videoData = {};
+            $scope.relatedVideos = [];
 
-        $scope.relatedQuery = function () {
-            var keywordString = $scope.videoData.maintags.concat($scope.videoData.subtags).join(' ');
-            keywordVideoService.getRelatedVideos(keywordString).then(
-                function (relatedVideos) {
-                    var index = relatedVideos.indexOf($scope.videoData);
-                    $scope.relatedVideos = $scope.relatedVideos.concat(relatedVideos.splice(index , 1));
-                },
-                function () {
+            $scope.relatedQuery = function () {
+                var keywordString = $scope.videoData.maintags.concat($scope.videoData.subtags).join(' ');
+                keywordVideoService.getRelatedVideos(keywordString).then(
+                    function (relatedVideos) {
+                        var index = relatedVideos.indexOf($scope.videoData);
+                        $scope.relatedVideos = $scope.relatedVideos.concat(relatedVideos.splice(index, 1));
+                    },
+                    function () {
 
-                });
-        }
-        
-        $scope.navVideoView = function (vidObj, isNewNav) {
-            if (vidObj != null) {
-                console.log(typeof vidObj._id);
-                updateCount.updateViewCount(vidObj._id);
-                $scope.videoData = vidObj;
-                $scope.relatedVideos = [];
-                $scope.relatedQuery();
-                if (isNewNav) {
-                    historyService.newForward(vidObj);
-                }
+                    });
             }
-            //else, we're going back to main page
-        }
-        //isNewNav - navigation not caused by navigation buttons
-        $scope.$on('navSubVidSignal', function (event, subVidData) {
-            $scope.navVideoView(subVidData.vidObj, subVidData.isNewNav);
-        });
 
-        $scope.pinVideo = function (title, embedHtml) {
-            pinVidModal.pinVid(title, embedHtml);
-        }
+            $scope.navVideoView = function (vidObj, isNewNav) {
+                if (vidObj != null) {
+                    console.log(typeof vidObj._id);
+                    updateCount.updateViewCount(vidObj._id);
+                    $scope.videoData = vidObj;
+                    $scope.relatedVideos = [];
+                    $scope.relatedQuery();
+                    if (isNewNav) {
+                        historyService.newForward(vidObj);
+                    }
+                }
+                //else, we're going back to main page
+            }
+            //isNewNav - navigation not caused by navigation buttons
+            $scope.$on('navSubVidSignal', function (event, subVidData) {
+                $scope.navVideoView(subVidData.vidObj, subVidData.isNewNav);
+            });
 
-    }])
+            $scope.pinVideo = function (title, embedHtml) {
+                pinVidModal.pinVid(title, embedHtml);
+            }
+
+        }])
     .controller('NavCtrl', ['$scope', '$cookieStore', 'historyService', function ($scope, $cookieStore, historyService) {
         $scope.isFoward = undefined;
 
@@ -121,7 +121,7 @@
                 console.log('uninitalized attributes');
             }
         }
-        
+
     }])
     .controller('CategoryCtrl', ['$scope', '$rootScope', 'getCategoryService', 'pinTagService', function ($scope, $rootScope, getCategoryService, pinTagService) {
         $scope.popularTags = [];
@@ -157,65 +157,69 @@
     .controller('VideoCtrl', ['$scope', '$rootScope', '$cookieStore', 'localStorageService', 'generalVideoService', 'videoConstants', 'pinVidModal', 'pinTagService',
         function ($scope, $rootScope, $cookieStore, localStorageService, generalVideoService, videoConstants, pinVidModal, pinTagService) {
 
-        var queryFlag = false;
-        $scope.queriedVideos = [];
-        var currentIndex = 0;
-        $scope.videos = [];
-        $scope.tagsForQuery = [];
-        $scope.videosLoaded = false;
-       
-        $scope.$on('queryResult', function (event, data) {
+            var queryFlag = false;
             $scope.queriedVideos = [];
-            $scope.queriedVideos = $scope.queriedVideos.concat(data[1]);
-            //when we have a query, show queried videos, not main videos
-            queryFlag = data[0];
-            //clear the videos whenever we get a new query
+            var currentIndex = 0;
             $scope.videos = [];
-            currentIndex = 0;
-        });
-        
-        $scope.$on('tagFilterUpdate', function () {
-            $scope.tagsForQuery = pinTagService.getTags();
-            console.log("tags so far" + $scope.tagsForQuery);
-        });
+            $scope.tagsForQuery = [];
+            $scope.videosLoaded = false;
 
-        //Generally, we continuously retrieve videos from the database and update locally
-        //increment startIndex for database after each load
-        $scope.getGeneralVideo = function (startIndex) {
-            generalVideoService.getVideos(startIndex).then(
-                function (videoArray) {
-                    //$scope.updateGeneralVideo(videoArray);
-                    $scope.videos = $scope.videos.concat(videoArray);
-                    currentIndex += videoConstants.AMOUNT_PER_LOAD;
-                    $scope.videosLoaded = true;
-                },
-                function () {
+            $scope.$on('queryResult', function (event, data) {
+                $scope.queriedVideos = [];
+                $scope.queriedVideos = $scope.queriedVideos.concat(data[1]);
+                //when we have a query, show queried videos, not main videos
+                queryFlag = data[0];
+                //clear the videos whenever we get a new query
+                $scope.videos = [];
+                currentIndex = 0;
+            });
 
-                });
-        }
-        //Upon Query, we recieve a broadcast, and recieve the entire array of videos, and we update accordingly
-        $scope.getQueryVideo = function () {
-            $scope.videos = $scope.videos.concat($scope.queriedVideos.splice(0, videoConstants.AMOUNT_PER_LOAD));
-        }
+            $scope.$on('tagFilterUpdate', function () {
+                $scope.tagsForQuery = pinTagService.getTags();
+                console.log("tags so far" + $scope.tagsForQuery);
+            });
 
-        $scope.getVideos = function () {
-            if (queryFlag) {
-                $scope.getQueryVideo();
+            //Generally, we continuously retrieve videos from the database and update locally
+            //increment startIndex for database after each load
+            $scope.getGeneralVideo = function (startIndex) {
+                generalVideoService.getVideos(startIndex).then(
+                    function (videoArray) {
+                        //$scope.updateGeneralVideo(videoArray);
+                        $scope.videos = $scope.videos.concat(videoArray);
+                        currentIndex += videoConstants.AMOUNT_PER_LOAD;
+                        $scope.videosLoaded = true;
+                    },
+                    function () {
+
+                    });
             }
-            else {
-                $scope.getGeneralVideo(currentIndex);
+            //Upon Query, we recieve a broadcast, and recieve the entire array of videos, and we update accordingly
+            $scope.getQueryVideo = function () {
+                $scope.videos = $scope.videos.concat($scope.queriedVideos.splice(0, videoConstants.AMOUNT_PER_LOAD));
             }
-        }
 
-        $scope.pinVideo = function (title, embedHtml) {
-            pinVidModal.pinVid(title, embedHtml);
-        }
-        //if a video was clicked on the main page
-        $scope.signalSubVideo = function (vidObject) {
-            $scope.$emit('subVideoSignal', {vidObj: vidObject, isNewNav: true});
-        }
+            $scope.getVideos = function () {
+                if (queryFlag) {
+                    $scope.getQueryVideo();
+                }
+                else {
+                    $scope.getGeneralVideo(currentIndex);
+                }
+            }
+            //not automatic recall this all the time every hit
+            //make it into its own directive, own isolate controller scope?
+            //whenever someone pins the video, the controller watches the array.length
 
-    }])
+            //$scope.pinVideo = function (title, embedHtml) {
+            //    pinVidModal.pinVid(title, embedHtml);
+            //}
+
+            //if a video was clicked on the main page
+            $scope.signalSubVideo = function (vidObject) {
+                $scope.$emit('subVideoSignal', { vidObj: vidObject, isNewNav: true });
+            }
+
+        }])
     .controller('ModalCtrl', ['$scope', 'pinVidModal', 'localStorageService', function ($scope, pinVidModal, localStorageService) {
         $scope.$watch(
             function () {
@@ -223,21 +227,19 @@
             },
             function (value) {
                 $scope.numberOfPinnedVideos = value;
-        });
+            });
 
         $scope.pinnedVideos = [];
         $scope.getPinnedVideos = function () {
             $scope.pinnedVideos = $scope.pinnedVideos.concat(pinVidModal.getVid());
-            //console.log("getpinnedvideos hit " + $scope.pinnedVideos.length);
-            //console.log($scope.pinnedVideos);
         }
-        
+
         $scope.removePinVideo = function (vid) {
             //local
             var indexToRemove = $scope.pinnedVideos.indexOf(vid);
             $scope.pinnedVideos.splice(indexToRemove, 1);
             //global
-            pinVidModal.removeInternalPinVideo();
+            pinVidModal.removeInternalPinVideo(vid);
         }
 
         $scope.removeAllPinVideo = function () {
@@ -245,5 +247,27 @@
             $scope.pinnedVideos = [];
             //global
             pinVidModal.removeInternalPinData();
+        }
+
+        $scope.$on('unpin', function (event, vid) {
+            $scope.removePinVideo(vid);
+        });
+    }])
+    .controller('PinCtrl', ['$scope', 'localStorageService', 'generalVideoService', 'pinVidModal',
+        function ($scope, localStorageService, generalVideoService, pinVidModal) {
+        $scope.$watch(
+            function () {
+                return (localStorageService.get('pinnedVids') || []).length;
+            },
+            function () {
+                $scope.containPinVid = pinVidModal.containsPinVideo($scope.videobsonid);
+        });
+        $scope.pinVideo = function () {
+            console.log('pin ' + $scope.title + ' with embed ' + $scope.embed);
+            pinVidModal.pinVid($scope.videobsonid, $scope.title, $scope.embed);
+        }
+        $scope.unPinVideo = function() {
+            var vid = { "_id": $scope.videobsonid };
+            $scope.$emit('unpin',vid);
         }
     }]);
