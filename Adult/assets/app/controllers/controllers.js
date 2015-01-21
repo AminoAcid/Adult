@@ -1,6 +1,6 @@
 ﻿angular.module('controllers', [])
     .run(['$cookieStore', 'localStorageService', function ($cookieStore, localStorageService) {
-        localStorageService.clearAll();
+        //localStorageService.clearAll();
         //$cookieStore.remove('pageNumber');
         //$cookieStore.remove('browseHistory');
         //$cookieStore.remove('frontNavLimited');
@@ -51,7 +51,6 @@
             function (value) {
                 if (value !== undefined) {
                     $scope.backNavLimited = value;
-                    //console.log('backNavLimited ' + $scope.backNavLimited);
                 }
             });
 
@@ -69,8 +68,10 @@
                 var keywordString = $scope.videoData.maintags.concat($scope.videoData.subtags).join(' ');
                 keywordVideoService.getRelatedVideos(keywordString).then(
                     function (relatedVideos) {
+                        //make the general happen....
                         var index = relatedVideos.indexOf($scope.videoData);
-                        $scope.relatedVideos = $scope.relatedVideos.concat(relatedVideos.splice(index, 1));
+                        relatedVideos.splice(index, 1);
+                        $scope.relatedVideos = $scope.relatedVideos.concat(relatedVideos);
                     },
                     function () {
 
@@ -79,7 +80,6 @@
 
             $scope.navVideoView = function (vidObj, isNewNav) {
                 if (vidObj != null) {
-                    console.log(typeof vidObj._id);
                     updateCount.updateViewCount(vidObj._id);
                     $scope.videoData = vidObj;
                     $scope.relatedVideos = [];
@@ -140,86 +140,96 @@
             $rootScope.$broadcast('tagFilterUpdate');
         }
     }])
-    .controller('SearchCtrl', ['$scope', '$rootScope', 'keywordVideoService', function ($scope, $rootScope, keywordVideoService) {
+    .controller('SearchCtrl', ['$scope', '$rootScope', '$cookieStore', 'keywordVideoService', 'historyService',
+        function ($scope, $rootScope, $cookieStore, keywordVideoService, historyService) {
         $scope.queriedVideos = [];
 
         $scope.keywordQuery = function (keywords) {
-            keywordVideoService.getQueryVideos(keywords).then(
-                function (searchResults) {
-                    $scope.queriedVideos = [];
-                    $scope.queriedVideos = $scope.queriedVideos.concat(searchResults);
-                },
-                function () {
-                });
-            $rootScope.$broadcast('queryResult', [true, $scope.queriedVideos]);
+            if (keywords === undefined || keywords.localeCompare('') == 0) {
+                $rootScope.$broadcast('reloadGeneralVideos');
+            }
+            else {
+                keywordVideoService.getQueryVideos(keywords)
+                    .then(
+                    function (searchResults) {
+                        return searchResults;
+                    },
+                    function () {
+                    })
+                    .then(
+                        function (searchResults) {
+                            $scope.queriedVideos = [];
+                            $scope.queriedVideos = $scope.queriedVideos.concat(searchResults);
+                            $rootScope.$broadcast('queryResult', { queriedVideos: $scope.queriedVideos });
+                            historyService.navToMainPage();
+                   });
+            }
         }
     }])
     .controller('VideoCtrl', ['$scope', '$rootScope', '$cookieStore', 'localStorageService', 'generalVideoService', 'videoConstants', 'pinVidModal', 'pinTagService',
         function ($scope, $rootScope, $cookieStore, localStorageService, generalVideoService, videoConstants, pinVidModal, pinTagService) {
 
-            var queryFlag = false;
-            $scope.queriedVideos = [];
+        var queryFlag = false;
+        $scope.queriedVideos = [];
+        var currentIndex = 0;
+        $scope.videos = [];
+        $scope.tagsForQuery = [];
+
+        //Generally, we continuously retrieve videos from the database and update locally
+        //increment startIndex for database after each load
+        $scope.getGeneralVideo = function (startIndex) {
+            generalVideoService.getVideos(startIndex).then(
+                function (videoArray) {
+                    $scope.videos = $scope.videos.concat(videoArray);
+                    currentIndex += videoConstants.AMOUNT_PER_LOAD;
+                },
+                function () {
+                });
+        }
+
+        //Upon Query, we recieve a broadcast, and recieve the entire array of videos, and we update accordingly
+        $scope.getQueryVideos = function () {
+            $scope.videos = $scope.videos.concat($scope.queriedVideos.splice(0, videoConstants.AMOUNT_PER_LOAD));
+        }
+
+        $scope.getVideos = function () {
+            if (queryFlag) {
+                $scope.getQueryVideos();
+            }
+            else {
+                $scope.getGeneralVideo(currentIndex);
+            }
+        }
+
+        //if a video was clicked on the main page
+        $scope.signalSubVideo = function (vidObject) {
+            $scope.$emit('subVideoSignal', { vidObj: vidObject, isNewNav: true });
+        }
+
+        $scope.$on('reloadGeneralVideos', function (event) {
             var currentIndex = 0;
             $scope.videos = [];
-            $scope.tagsForQuery = [];
-            $scope.videosLoaded = false;
+            queryFlag = false;
+            $scope.getGeneralVideo(currentIndex);
+        });
+        $scope.$on('queryResult', function (event, queryData) {
+            $scope.queriedVideos = [];
+            $scope.queriedVideos = $scope.queriedVideos.concat(queryData.queriedVideos);
+            //when we have a query, show queried videos, not main videos
+            queryFlag = true;
+            //clear the videos whenever we get a new query
+            $scope.videos = [];
+            currentIndex = 0;
+            //initalize inital show of query videos
+            $scope.getQueryVideos();
+        });
 
-            $scope.$on('queryResult', function (event, data) {
-                $scope.queriedVideos = [];
-                $scope.queriedVideos = $scope.queriedVideos.concat(data[1]);
-                //when we have a query, show queried videos, not main videos
-                queryFlag = data[0];
-                //clear the videos whenever we get a new query
-                $scope.videos = [];
-                currentIndex = 0;
-            });
-
-            $scope.$on('tagFilterUpdate', function () {
-                $scope.tagsForQuery = pinTagService.getTags();
-                console.log("tags so far" + $scope.tagsForQuery);
-            });
-
-            //Generally, we continuously retrieve videos from the database and update locally
-            //increment startIndex for database after each load
-            $scope.getGeneralVideo = function (startIndex) {
-                generalVideoService.getVideos(startIndex).then(
-                    function (videoArray) {
-                        //$scope.updateGeneralVideo(videoArray);
-                        $scope.videos = $scope.videos.concat(videoArray);
-                        currentIndex += videoConstants.AMOUNT_PER_LOAD;
-                        $scope.videosLoaded = true;
-                    },
-                    function () {
-
-                    });
-            }
-            //Upon Query, we recieve a broadcast, and recieve the entire array of videos, and we update accordingly
-            $scope.getQueryVideo = function () {
-                $scope.videos = $scope.videos.concat($scope.queriedVideos.splice(0, videoConstants.AMOUNT_PER_LOAD));
-            }
-
-            $scope.getVideos = function () {
-                if (queryFlag) {
-                    $scope.getQueryVideo();
-                }
-                else {
-                    $scope.getGeneralVideo(currentIndex);
-                }
-            }
-            //not automatic recall this all the time every hit
-            //make it into its own directive, own isolate controller scope?
-            //whenever someone pins the video, the controller watches the array.length
-
-            //$scope.pinVideo = function (title, embedHtml) {
-            //    pinVidModal.pinVid(title, embedHtml);
-            //}
-
-            //if a video was clicked on the main page
-            $scope.signalSubVideo = function (vidObject) {
-                $scope.$emit('subVideoSignal', { vidObj: vidObject, isNewNav: true });
-            }
-
-        }])
+        //used for a filter
+        $scope.$on('tagFilterUpdate', function () {
+            $scope.tagsForQuery = pinTagService.getTags();
+            console.log("tags so far" + $scope.tagsForQuery);
+        });
+    }])
     .controller('ModalCtrl', ['$scope', 'pinVidModal', 'localStorageService', function ($scope, pinVidModal, localStorageService) {
         $scope.$watch(
             function () {
@@ -263,7 +273,6 @@
                 $scope.containPinVid = pinVidModal.containsPinVideo($scope.videobsonid);
         });
         $scope.pinVideo = function () {
-            console.log('pin ' + $scope.title + ' with embed ' + $scope.embed);
             pinVidModal.pinVid($scope.videobsonid, $scope.title, $scope.embed);
         }
         $scope.unPinVideo = function() {

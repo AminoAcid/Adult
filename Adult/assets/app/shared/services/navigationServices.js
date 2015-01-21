@@ -60,9 +60,13 @@
                 return null;
             }
         }
+        var navToMainPage = function () {
+            pageState.mainPageState();
+        }
         return {
             newForward: newForward,
             forward: forward,
-            backward: backward
+            backward: backward,
+            navToMainPage: navToMainPage
         };
     }]);

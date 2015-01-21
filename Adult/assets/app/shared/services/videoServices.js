@@ -6,7 +6,12 @@
                 method: 'GET',
                 url: '/api/Video/queryget/' + keywordString
             }).success(deferred.resolve).error(deferred.reject);
-            return deferred.promise;
+            return deferred.promise.then(
+                function (searchResults) {
+                    return searchResults;
+                },
+                function () {
+                });
         }
         var getRelatedVideos = function (keywordString) {
             var deferred = $q.defer();

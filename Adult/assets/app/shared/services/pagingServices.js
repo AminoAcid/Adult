@@ -50,9 +50,16 @@
             }
             console.log(pageNumber);
         }
+        var mainPageState = function () {
+            $cookieStore.put('frontNavLimited', false);
+            $cookieStore.put('backNavLimited', true);
+            $cookieStore.put('pageNumber', 0);
+            $cookieStore.put('atMainPage', true);
+        }
         return {
             newForwardState: newForwardState,
             forwardState: forwardState,
-            backwardState: backwardState
+            backwardState: backwardState,
+            mainPageState: mainPageState
         }
     }])

@@ -1,7 +1,6 @@
-﻿
-    <div class="btn btn-default" data-toggle="modal" data-target=".videoModal">
-        <div class="text  navbar-btn">Pinned Videos  <span class="badge" data-toggle="tooltip" data-placement="top" title="Clips Pinned" toolinit>{{numberOfPinnedVideos}}</span></div>
-    </div>
+﻿<div class="btn btn-default" data-toggle="modal" data-target=".videoModal">
+    <div class="text  navbar-btn">Pinned Videos  <span class="badge" data-toggle="tooltip" data-placement="top" title="Clips Pinned" toolinit>{{numberOfPinnedVideos}}</span></div>
+</div>
 
 
 <div id="modeler"class="modal fade videoModal" role="dialog" modalinit>
@@ -11,9 +10,6 @@
                 <div>Pinned Videos</div>
             </div>
             <div class="modal-body">
-                <button id="init" ng-hide="true" ng-click="getPinnedVideos()"></button>
-
-
                 <div id="pinVid" class="modal-scroll">
                     <div infinite-scroll-parent infinite-scroll-container="'#pinVid'" infinite-scroll="getPinnedVideos()" infinite-scroll-distance="1">
                         <div class="container-fluid">
@@ -33,7 +29,7 @@
                             </div>
                         </div>
                     </div>
-            </div>
+                </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
