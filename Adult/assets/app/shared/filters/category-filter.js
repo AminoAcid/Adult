@@ -11,6 +11,7 @@
                     for (var j = 0; j < tags.length; j++) {
                         if (videos[i].maintags.indexOf(tags[j]) != -1 || videos[i].subtags.indexOf(tags[j]) != -1) {
                             filtered.push(videos[i]);
+                            break;
                         }
                     }
                 }

@@ -1,4 +1,5 @@
-﻿angular.module('controllers', [])
+﻿"use strict";
+angular.module('controllers', [])
     .run(['$cookieStore', 'localStorageService', function ($cookieStore, localStorageService) {
         //localStorageService.clearAll();
         //$cookieStore.remove('pageNumber');
@@ -146,8 +147,6 @@
                 $scope.pressed = "false";
             }
                 pinTagService.addTag(tag);
-
-            $rootScope.$broadcast('tagFilterUpdate');
         }
     }])
     .controller('SearchCtrl', ['$scope', '$rootScope', '$cookieStore', 'keywordVideoService', 'historyService',
@@ -234,10 +233,11 @@
             $scope.getQueryVideos();
         });
 
-        //used for a filter
-        $scope.$on('tagFilterUpdate', function () {
-            $scope.tagsForQuery = pinTagService.getTags();
-            console.log("tags so far" + $scope.tagsForQuery);
+        $scope.$watchCollection(function () {
+            return pinTagService.getTags();
+        },
+        function (newVal, oldVal) {
+            $scope.tagsForQuery = newVal;
         });
     }])
     .controller('ModalCtrl', ['$scope', 'pinVidModal', 'localStorageService', function ($scope, pinVidModal, localStorageService) {
