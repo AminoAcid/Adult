@@ -165,6 +165,7 @@
     <Content Include="assets\app\shared\services\videoServices.js" />
     <Content Include="assets\app\shared\directives\shared-directives.js" />
     <Content Include="assets\app\shared\services\pinServices.js" />
+    <Content Include="assets\app\templates\main\categorybutton.html" />
     <Content Include="assets\app\templates\submain\navbutton.html" />
     <Content Include="assets\app\templates\submain\pinbutton.html" />
     <Content Include="assets\app\templates\utility\body\search.html" />

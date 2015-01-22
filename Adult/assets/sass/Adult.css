@@ -52,12 +52,17 @@
     text-align: center; }
 
 .category {
-  height: 450px;
+  height: 400px;
   overflow-y: scroll; }
   .category .btn-tag {
     height: 40px;
-    width: 100px;
-    border-color: black; }
+    width: 100px; }
+    .category .btn-tag.unpressed {
+      border-color: black;
+      color: blue; }
+    .category .btn-tag.pressed {
+      border-color: ActiveBorder;
+      color: aqua; }
 
 .modal-scroll {
   height: 350px;

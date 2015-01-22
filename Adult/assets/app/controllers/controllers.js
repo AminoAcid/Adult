@@ -123,7 +123,7 @@
         }
 
     }])
-    .controller('CategoryCtrl', ['$scope', '$rootScope', 'getCategoryService', 'pinTagService', function ($scope, $rootScope, getCategoryService, pinTagService) {
+    .controller('CategoryCtrl', ['$scope', 'getCategoryService', function ($scope, getCategoryService) {
         $scope.popularTags = [];
         $scope.getPopularTags = function () {
             getCategoryService.tags().then(
@@ -134,9 +134,19 @@
 
                 });
         }
+    }])
+    .controller('CategoryBtnCtrl', ['$scope', 'pinTagService', '$rootScope', function ($scope, pinTagService, $rootScope) {
+        $scope.pressed = "false";
 
         $scope.bindTagForFilter = function (tag) {
-            pinTagService.addTag(tag);
+            if ($scope.pressed.localeCompare("false") == 0) {
+                $scope.pressed = "true";
+            }
+            else {
+                $scope.pressed = "false";
+            }
+                pinTagService.addTag(tag);
+
             $rootScope.$broadcast('tagFilterUpdate');
         }
     }])

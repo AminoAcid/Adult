@@ -1,10 +1,19 @@
 ﻿.category{
-    height: 450px;
+    height: 400px;
     overflow-y: scroll;
     .btn-tag{
         height: 40px;
         width: 100px;
-        border-color: black;
-
+        &.unpressed{
+            border-color: black;
+            color: blue;
+        }
+        &.pressed{
+            border-color: ActiveBorder;
+            color:aqua;
+        }
     }
+
+    
+
 }

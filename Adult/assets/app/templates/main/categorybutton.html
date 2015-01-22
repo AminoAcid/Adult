@@ -1,0 +1,8 @@
+﻿<ng-switch on="pressed">
+    <div ng-switch-when="false">
+        <div class="btn btn-tag unpressed" ng-click="bindTagForFilter(tag)" ng-bind="tag"></div>
+    </div>
+    <div ng-switch-when="true">
+        <div class="btn btn-tag pressed" ng-click="bindTagForFilter(tag)" ng-bind="tag"></div>
+    </div>
+</ng-switch>

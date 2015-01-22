@@ -40,27 +40,37 @@
             controller: 'PinCtrl'
         }
     })
-     .directive('navButton', ['historyService', function (historyService) {
-         return {
-             restrict: 'E',
-             templateUrl: '/assets/app/templates/submain/navbutton.html',
-             scope: {},
-             controller: 'NavCtrl',
-             link: function (scope, ele, attrs) {
-                 console.log('attrs.direction ' + attrs.direction);
-                 if (attrs.direction == undefined) {
-                     console.log('Please Indicate attribute: "direction" to values "backward" or "forward"');
-                 } else if (attrs.direction.localeCompare('backward') == 0) {
-                     console.log("backward hit " + attrs.direction.localeCompare('backward'));
-                     scope.isFoward = false;
-                     scope.direction = 'backward';
-                 } else if (attrs.direction.localeCompare('forward') == 0) {
-                     console.log('foward hit ' + attrs.direction.localeCompare('forward'));
-                     scope.isFoward = true;
-                     scope.direction = 'forward';
-                 } else {
-                     console.log('Please Indicate attribute: "direction" to values "backward" or "forward"');
-                 }
-             }
-         };
-     }]);
+    .directive('categoryButton', function ($compile) {
+        return {
+            restrict: 'E',
+            templateUrl: '/assets/app/templates/main/categorybutton.html',
+            scope: {
+                tag: '@'
+            },
+            controller: 'CategoryBtnCtrl',
+        };
+    })
+    .directive('navButton', function () {
+        return {
+            restrict: 'E',
+            templateUrl: '/assets/app/templates/submain/navbutton.html',
+            scope: {},
+            controller: 'NavCtrl',
+            link: function (scope, ele, attrs) {
+                console.log('attrs.direction ' + attrs.direction);
+                if (attrs.direction == undefined) {
+                    console.log('Please Indicate attribute: "direction" to values "backward" or "forward"');
+                } else if (attrs.direction.localeCompare('backward') == 0) {
+                    console.log("backward hit " + attrs.direction.localeCompare('backward'));
+                    scope.isFoward = false;
+                    scope.direction = 'backward';
+                } else if (attrs.direction.localeCompare('forward') == 0) {
+                    console.log('foward hit ' + attrs.direction.localeCompare('forward'));
+                    scope.isFoward = true;
+                    scope.direction = 'forward';
+                } else {
+                    console.log('Please Indicate attribute: "direction" to values "backward" or "forward"');
+                }
+            }
+        };
+    });
