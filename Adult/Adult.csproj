@@ -136,7 +136,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ApiControllers\ApiConstants\VideoConstants.cs" />
     <Compile Include="ApiControllers\CategoryController.cs" />
     <Compile Include="ApiControllers\VideoController.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />

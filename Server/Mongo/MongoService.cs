@@ -37,9 +37,13 @@ namespace Adult.Server.Mongo
       
         public Video[] getVideos(Int32 amount, Int32 startIndex = 0)
         {
-            if(amount - startIndex > totalVideoCount) 
-                throw new IndexOutOfRangeException();
-           
+            //if(startIndex <= totalVideoCount && startIndex + amount > totalVideoCount){
+            //     amount = (Int32)totalVideoCount - startIndex;
+            //}
+            //else if (startIndex > totalVideoCount){
+            //    return new Video[0];
+            //}
+
             return _MongoServer.videoCollection.AsQueryable<Video>().Skip(startIndex).Take(amount).ToArray();
           
         }

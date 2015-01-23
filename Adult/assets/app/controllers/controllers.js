@@ -187,12 +187,20 @@ angular.module('controllers', [])
         //Generally, we continuously retrieve videos from the database and update locally
         //increment startIndex for database after each load
         $scope.getGeneralVideo = function (startIndex) {
-            generalVideoService.getVideos(startIndex).then(
-                function (videoArray) {
+            console.log(startIndex);
+            console.log($scope.videos);
+            debugger;
+            generalVideoService.getVideos(startIndex)
+                .then(
+                    function (videoArray) {
+                        return videoArray
+                    },
+                    function () {
+                    })
+                .then(
+                    function (videoArray) {
                     $scope.videos = $scope.videos.concat(videoArray);
                     currentIndex += videoConstants.AMOUNT_PER_LOAD;
-                },
-                function () {
                 });
         }
 
@@ -216,11 +224,12 @@ angular.module('controllers', [])
         }
 
         $scope.$on('reloadGeneralVideos', function (event) {
-            var currentIndex = 0;
+            currentIndex = 0;
             $scope.videos = [];
             queryFlag = false;
             $scope.getGeneralVideo(currentIndex);
         });
+
         $scope.$on('queryResult', function (event, queryData) {
             $scope.queriedVideos = [];
             $scope.queriedVideos = $scope.queriedVideos.concat(queryData.queriedVideos);
@@ -233,7 +242,8 @@ angular.module('controllers', [])
             $scope.getQueryVideos();
         });
 
-        $scope.$watchCollection(function () {
+        $scope.$watchCollection(
+        function () {
             return pinTagService.getTags();
         },
         function (newVal, oldVal) {

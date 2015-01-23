@@ -1,7 +1,4 @@
-﻿<!--PreLoad Videos to prevent ng-infinite parsing through empty data, throwing exception-->
-<span ng-init="getVideos()"></span>
-
-<span>LocalSearch: </span><input type="text" ng-model="search.title" placeholder="Search loaded..."/>
+﻿<span>LocalSearch: </span><input type="text" ng-model="search.title" placeholder="Search loaded..."/>
 
 <div class="row video-container" infinite-scroll="getVideos()" infinite-scroll-distance="1">
     <div ng-repeat="vid in videos | tagFilter:tagsForQuery | filter:search.title">

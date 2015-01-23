@@ -6,7 +6,7 @@ using System.Net.Http;
 using System.Web.Http;
 using Adult.Server.Mongo;
 using Adult.Domain.Mongo.Video;
-using Adult.ApiControllers.ApiConstants;
+using Adult.Core.Constants;
 using Adult.Core.Constants;
 using MongoDB.Bson;
 
@@ -43,7 +43,7 @@ namespace Adult.ApiControllers
         public Video[] RelatedGet(String keywordString)
         {
 
-            return _MongoService.getQueryVideos(keywordString.Split(new char[] { ' ' }), AdultConstants.AMOUNT_RELATED_VID);
+            return _MongoService.getQueryVideos(keywordString.Split(new char[] { ' ' }), VideoConstants.AMOUNT_RELATED_VID);
         }
         
         [HttpPost]

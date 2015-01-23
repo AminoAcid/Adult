@@ -25,7 +25,6 @@
                 pinnedTags.splice(indexToRemove, 1);
         }
         var getTags = function () {
-            console.log(pinnedTags);
             return pinnedTags;
         }
         return {

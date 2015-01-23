@@ -42,7 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Constants\AdultConstants.cs" />
+    <Compile Include="Constants\VideoConstants.cs" />
     <Compile Include="JSON\IJsonSerializable.cs" />
     <Compile Include="JSON\IJsonSerializableExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
