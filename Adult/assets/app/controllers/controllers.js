@@ -81,6 +81,7 @@ angular.module('controllers', [])
 
             $scope.navVideoView = function (vidObj, isNewNav) {
                 if (vidObj != null) {
+                    //update ViewCount
                     updateCount.updateViewCount(vidObj._id);
                     $scope.videoData = vidObj;
                     $scope.relatedVideos = [];
@@ -95,11 +96,6 @@ angular.module('controllers', [])
             $scope.$on('navSubVidSignal', function (event, subVidData) {
                 $scope.navVideoView(subVidData.vidObj, subVidData.isNewNav);
             });
-
-            $scope.pinVideo = function (title, embedHtml) {
-                pinVidModal.pinVid(title, embedHtml);
-            }
-
         }])
     .controller('NavCtrl', ['$scope', '$cookieStore', 'historyService', function ($scope, $cookieStore, historyService) {
         $scope.isFoward = undefined;
@@ -223,6 +219,7 @@ angular.module('controllers', [])
             $scope.$emit('subVideoSignal', { vidObj: vidObject, isNewNav: true });
         }
 
+        //when enter an empty string on search, reload.
         $scope.$on('reloadGeneralVideos', function (event) {
             currentIndex = 0;
             $scope.videos = [];
@@ -242,6 +239,7 @@ angular.module('controllers', [])
             $scope.getQueryVideos();
         });
 
+        //updates tag filter
         $scope.$watchCollection(
         function () {
             return pinTagService.getTags();
@@ -284,6 +282,7 @@ angular.module('controllers', [])
         });
     }])
     .controller('PinCtrl', ['$scope', 'localStorageService', 'generalVideoService', 'pinVidModal',
+        //determine which pinButton to show
         function ($scope, localStorageService, generalVideoService, pinVidModal) {
         $scope.$watch(
             function () {
@@ -291,10 +290,12 @@ angular.module('controllers', [])
             },
             function () {
                 $scope.containPinVid = pinVidModal.containsPinVideo($scope.videobsonid);
-        });
+            });
+
         $scope.pinVideo = function () {
             pinVidModal.pinVid($scope.videobsonid, $scope.title, $scope.embed);
         }
+
         $scope.unPinVideo = function() {
             var vid = { "_id": $scope.videobsonid };
             $scope.$emit('unpin',vid);

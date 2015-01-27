@@ -52,6 +52,13 @@ namespace Adult.ApiControllers
         {
             _MongoService.incrementView(BsonId);
         }
+
+        [HttpPost]
+        [Route("incrementpin/{BsonId}")]
+        public void IncrementPin(String BsonId)
+        {
+            _MongoService.incrementPin(BsonId);
+        }
         // POST api/<controller>
         public void Post([FromBody]string value)
         {

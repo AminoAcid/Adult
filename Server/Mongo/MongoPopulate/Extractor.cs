@@ -67,7 +67,8 @@ namespace Adult.Server.Mongo.MongoPopulate
                         {"Sprites", new BsonArray(imgs)},
                         {"Maintags", new BsonArray(maintags)},
                         {"Subtags", new BsonArray(subtags)},
-                        {"Views", 0}
+                        {"Views", 0},
+                        {"Pins", 0}
                     }
                 );
             }

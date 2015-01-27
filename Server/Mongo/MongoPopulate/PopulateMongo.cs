@@ -11,7 +11,7 @@ namespace Adult.Server.Mongo.MongoPopulate
         public PopulateMongo()
         {
             new Extractor().extractAndPopulate();
-            new ExtractorTag().extractAndPopulate();
+            //new ExtractorTag().extractAndPopulate();
         }
     }
 }

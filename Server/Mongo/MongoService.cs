@@ -34,7 +34,7 @@ namespace Adult.Server.Mongo
         {
             return _MongoServer.videoCollection.AsQueryable<Video>().Single(x => x._id == BsonId);
         }
-      
+
         public Video[] getVideos(Int32 amount, Int32 startIndex = 0)
         {
             //if(startIndex <= totalVideoCount && startIndex + amount > totalVideoCount){
@@ -45,7 +45,6 @@ namespace Adult.Server.Mongo
             //}
 
             return _MongoServer.videoCollection.AsQueryable<Video>().Skip(startIndex).Take(amount).ToArray();
-          
         }
 
         public Video[] getQueryVideos(String[] keywords, Int32 limitTo = -1)
@@ -95,11 +94,19 @@ namespace Adult.Server.Mongo
             return _MongoServer.tagCollection.AsQueryable<Tags>().FirstOrDefault();
         }
         #endregion
-   
+
+        #region HTTPPOST
         public void incrementView(String BsonId)
         {
             Incrementor.incrementViewCount(BsonId, _MongoServer.videoCollection);
         }
+
+        public void incrementPin(String BsonId)
+        {
+            Incrementor.IncrementPinCount(BsonId, _MongoServer.videoCollection);
+        }
+        #endregion
+
 
     }
 }
