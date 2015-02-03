@@ -25,8 +25,22 @@ namespace Adult.ApiControllers
         }
 
         [HttpGet]
-        [Route("get/{startIndex:int}")]
-        public Video[] Get(Int32 startIndex)
+        [Route("mostpinvideos/{startIndex:int}")]
+        public Video[] MostPinVideos(Int32 startIndex)
+        {
+            return _MongoService.getMostPinVideos(VideoConstants.AMOUNT_PER_LOAD, startIndex);
+        }
+
+        [HttpGet]
+        [Route("mostviewvideos/{startIndex:int}")]
+        public Video[] MostViewVideos(Int32 startIndex)
+        {
+            return _MongoService.getMostViewVideos(VideoConstants.AMOUNT_PER_LOAD, startIndex);
+        }
+
+        [HttpGet]
+        [Route("getvideos/{startIndex:int}")]
+        public Video[] GetVideos(Int32 startIndex)
         {
             return _MongoService.getVideos(VideoConstants.AMOUNT_PER_LOAD, startIndex);
         }

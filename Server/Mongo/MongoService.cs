@@ -24,7 +24,6 @@ namespace Adult.Server.Mongo
         #region constructor
         public MongoService()
         {
-
             totalVideoCount = _MongoServer.videoCollection.Count();
         }
         #endregion
@@ -47,11 +46,21 @@ namespace Adult.Server.Mongo
             return _MongoServer.videoCollection.AsQueryable<Video>().Skip(startIndex).Take(amount).ToArray();
         }
 
+        public Video[] getMostPinVideos(Int32 amount, Int32 startIndex = 0)
+        {
+            return _MongoServer.pinCollection.AsQueryable<Video>().Skip(startIndex).Take(amount).ToArray();
+        }
+
+        public Video[] getMostViewVideos(Int32 amount, Int32 startIndex = 0)
+        {
+            return _MongoServer.viewCollection.AsQueryable<Video>().Skip(startIndex).Take(amount).ToArray();
+        }
+
         public Video[] getQueryVideos(String[] keywords, Int32 limitTo = -1)
         {
             if(keywords.Length == 0)
                 return new Video[0];
-
+           
             var cursorEnumerator = _MongoServer.videoCollection.FindAllAs<Video>().GetEnumerator();
             var scoreBoard = new Dictionary<String, Int32>();
 

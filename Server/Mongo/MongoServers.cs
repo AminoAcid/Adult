@@ -16,6 +16,8 @@ namespace Adult.Server.Mongo
         public MongoCollection videoCollection { get; set; }
         public MongoCollection tagCollection { get; set; }
         public MongoCollection counterCollection { get; set; }
+        public MongoCollection pinCollection { get; set; }
+        public MongoCollection viewCollection { get; set; }
         public MongoServers()
         {
             /*If you wanted to set the server address
@@ -27,6 +29,8 @@ namespace Adult.Server.Mongo
             this.videoCollection = MDB.GetCollection<Video>("allVideos");
             this.tagCollection = MDB.GetCollection<Tags>("tags");
             this.counterCollection = MDB.GetCollection("counter");
+            this.pinCollection = MDB.GetCollection<Video>("pinFirst");
+            this.viewCollection = MDB.GetCollection<Video>("viewFirst");
         }
     
         

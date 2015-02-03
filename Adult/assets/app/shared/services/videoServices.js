@@ -27,13 +27,44 @@
         };
     }])
     .service('generalVideoService', ['$http', '$q', function ($http, $q) {
+        var getMostPinVideos = function (startIndex) {
+            var deferred = $q.defer();
+            $http({
+                method: 'GET',
+                url: 'api/Video/mostpinvideos/' + startIndex
+            }).success(deferred.resolve).error(deferred.reject);
+            return deferred.promise.then(
+                function (videoArray) {
+                    return videoArray;
+                },
+                function () {
+                });
+        }
+        var getMostViewVideos = function (startIndex) {
+            var deferred = $q.defer();
+            $http({
+                method: 'GET',
+                url: '/api/Video/mostviewvideos/' + startIndex
+            }).success(deferred.resolve).error(deferred.reject);
+            return deferred.promise.then(
+                function (videoArray) {
+                    return videoArray;
+                },
+                function () {
+                });
+        }
         var getVideos = function (startIndex) {
             var deferred = $q.defer();
             $http({
                 method: 'GET',
-                url: '/api/Video/get/' + startIndex
+                url: '/api/Video/getvideos/' + startIndex
             }).success(deferred.resolve).error(deferred.reject);
-            return deferred.promise;
+            return deferred.promise.then(
+                function (videoArray) {
+                    return videoArray;
+                },
+                function () {
+                });
         }
         var getUniqueVideo = function (bsonId) {
             var deferred = $q.defer();
@@ -45,6 +76,8 @@
         }
         return {
             getVideos: getVideos,
+            getMostPinVideos: getMostPinVideos,
+            getMostViewVideos: getMostViewVideos,
             getUniqueVideo: getUniqueVideo
         }
     }]);

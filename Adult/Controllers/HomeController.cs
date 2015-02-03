@@ -30,7 +30,7 @@ namespace Adult.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            //new PopulateMongo();
+            new PopulateMongo();
             return View();
 
         }
