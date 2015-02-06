@@ -1,15 +1,10 @@
-C:\Users\Burton\Desktop\repos\adult\Adult.Domain\bin\Debug\AutoMapper.Net4.dll
 C:\Users\Burton\Desktop\repos\adult\Adult.Domain\bin\Debug\Adult.Domain.dll.config
 C:\Users\Burton\Desktop\repos\adult\Adult.Domain\bin\Debug\Adult.Domain.dll
 C:\Users\Burton\Desktop\repos\adult\Adult.Domain\bin\Debug\Adult.Domain.pdb
-C:\Users\Burton\Desktop\repos\adult\Adult.Domain\bin\Debug\AutoMapper.dll
 C:\Users\Burton\Desktop\repos\adult\Adult.Domain\bin\Debug\EntityFramework.dll
 C:\Users\Burton\Desktop\repos\adult\Adult.Domain\bin\Debug\EntityFramework.SqlServer.dll
 C:\Users\Burton\Desktop\repos\adult\Adult.Domain\bin\Debug\MongoDB.Bson.dll
 C:\Users\Burton\Desktop\repos\adult\Adult.Domain\bin\Debug\MongoDB.Driver.dll
-C:\Users\Burton\Desktop\repos\adult\Adult.Domain\bin\Debug\AutoMapper.pdb
-C:\Users\Burton\Desktop\repos\adult\Adult.Domain\bin\Debug\AutoMapper.xml
-C:\Users\Burton\Desktop\repos\adult\Adult.Domain\bin\Debug\AutoMapper.Net4.pdb
 C:\Users\Burton\Desktop\repos\adult\Adult.Domain\bin\Debug\EntityFramework.xml
 C:\Users\Burton\Desktop\repos\adult\Adult.Domain\bin\Debug\EntityFramework.SqlServer.xml
 C:\Users\Burton\Desktop\repos\adult\Adult.Domain\bin\Debug\MongoDB.Bson.xml

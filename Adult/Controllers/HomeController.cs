@@ -30,11 +30,11 @@ namespace Adult.Controllers
         public ActionResult Index()
         {
             //Start up database
-            var db = new DataContext();
-            db.SqlVideos.FirstOrDefault();
-            //populate
-            MasterPopulate.InitSqlPopulates();
-            //MasterPopulate.InitMongoPopulates();
+            //var db = new DataContext();
+            //db.SqlVideos.FirstOrDefault();
+            ////populate
+            //MasterPopulate.InitSqlPopulates();
+            ////MasterPopulate.InitMongoPopulates();
             return View();
 
         }

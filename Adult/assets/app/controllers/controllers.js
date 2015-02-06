@@ -195,24 +195,27 @@ angular.module('controllers', [])
             console.log($scope.videos);
             switch (videoType) {
                 case "general":
+                    currentIndex += videoConstants.AMOUNT_PER_LOAD;
                     generalVideoService.getVideos(startIndex).then(
                         function (videoArray) {
                             $scope.videos = $scope.videos.concat(videoArray);
-                            currentIndex += videoConstants.AMOUNT_PER_LOAD;
+                            console.log("general hit");
                         });
                     break;
                 case "pin":
+                    currentIndex += videoConstants.AMOUNT_PER_LOAD;
                     generalVideoService.getMostPinVideos(startIndex).then(
                         function (videoArray) {
                             $scope.videos = $scope.videos.concat(videoArray);
-                            currentIndex += videoConstants.AMOUNT_PER_LOAD;
+                            console.log("pin hit");
                         });
                     break;
                 case "view":
+                    currentIndex += videoConstants.AMOUNT_PER_LOAD;
                     generalVideoService.getMostViewVideos(startIndex).then(
                         function (videoArray) {
                             $scope.videos = $scope.videos.concat(videoArray);
-                            currentIndex += videoConstants.AMOUNT_PER_LOAD;
+                            console.log("view hit");
                         });
                     break;
                 default:
@@ -226,11 +229,14 @@ angular.module('controllers', [])
         }
 
         $scope.getVideos = function () {
-            if (queryFlag) {
-                $scope.getQueryVideos();
-            }
-            else {
-                $scope.getGeneralVideo(currentIndex);
+            if (currentIndex <= videoConstants.MAX_VIDEO_COUNT) {
+                console.log("current index is: " + currentIndex);
+                if (queryFlag) {
+                    $scope.getQueryVideos();
+                }
+                else {
+                    $scope.getGeneralVideo(currentIndex);
+                }
             }
         }
 
