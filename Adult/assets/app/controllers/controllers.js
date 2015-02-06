@@ -192,7 +192,7 @@ angular.module('controllers', [])
         //Generally, we continuously retrieve videos from the database and update
         //increment startIndex for database after each load
         $scope.getGeneralVideo = function (startIndex) {
-            console.log(videoType);
+            console.log($scope.videos);
             switch (videoType) {
                 case "general":
                     generalVideoService.getVideos(startIndex).then(

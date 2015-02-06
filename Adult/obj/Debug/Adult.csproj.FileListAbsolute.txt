@@ -29,9 +29,12 @@ C:\Users\Burton\Desktop\repos\adult\Adult\bin\Adult.dll.config
 C:\Users\Burton\Desktop\repos\adult\Adult\bin\Adult.dll
 C:\Users\Burton\Desktop\repos\adult\Adult\bin\Adult.pdb
 C:\Users\Burton\Desktop\repos\adult\Adult\bin\Adult.Core.dll
+C:\Users\Burton\Desktop\repos\adult\Adult\bin\Adult.Database.dll
 C:\Users\Burton\Desktop\repos\adult\Adult\bin\Adult.Domain.dll
 C:\Users\Burton\Desktop\repos\adult\Adult\bin\Antlr3.Runtime.dll
 C:\Users\Burton\Desktop\repos\adult\Adult\bin\AutoMapper.dll
+C:\Users\Burton\Desktop\repos\adult\Adult\bin\EntityFramework.dll
+C:\Users\Burton\Desktop\repos\adult\Adult\bin\EntityFramework.SqlServer.dll
 C:\Users\Burton\Desktop\repos\adult\Adult\bin\Microsoft.Web.Infrastructure.dll
 C:\Users\Burton\Desktop\repos\adult\Adult\bin\Microsoft.Web.Mvc.dll
 C:\Users\Burton\Desktop\repos\adult\Adult\bin\MongoDB.Bson.dll
@@ -50,9 +53,14 @@ C:\Users\Burton\Desktop\repos\adult\Adult\bin\System.Web.WebPages.dll
 C:\Users\Burton\Desktop\repos\adult\Adult\bin\System.Web.WebPages.Razor.dll
 C:\Users\Burton\Desktop\repos\adult\Adult\bin\WebGrease.dll
 C:\Users\Burton\Desktop\repos\adult\Adult\bin\Adult.Core.pdb
+C:\Users\Burton\Desktop\repos\adult\Adult\bin\Adult.Database.pdb
 C:\Users\Burton\Desktop\repos\adult\Adult\bin\Adult.Domain.pdb
 C:\Users\Burton\Desktop\repos\adult\Adult\bin\Server.pdb
+C:\Users\Burton\Desktop\repos\adult\Adult\bin\AutoMapper.pdb
 C:\Users\Burton\Desktop\repos\adult\Adult\bin\AutoMapper.xml
+C:\Users\Burton\Desktop\repos\adult\Adult\bin\AutoMapper.Net4.pdb
+C:\Users\Burton\Desktop\repos\adult\Adult\bin\EntityFramework.xml
+C:\Users\Burton\Desktop\repos\adult\Adult\bin\EntityFramework.SqlServer.xml
 C:\Users\Burton\Desktop\repos\adult\Adult\bin\MongoDB.Bson.xml
 C:\Users\Burton\Desktop\repos\adult\Adult\bin\MongoDB.Driver.xml
 C:\Users\Burton\Desktop\repos\adult\Adult\bin\Newtonsoft.Json.xml

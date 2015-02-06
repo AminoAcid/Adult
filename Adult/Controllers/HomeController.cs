@@ -9,7 +9,9 @@ using Adult.Builder;
 using Adult.Core.JSON;
 using Microsoft.Web.Mvc;
 using Adult.Server.Mongo;
-using Adult.Server.Mongo.MongoPopulate;
+using Adult.Database.Initalizer;
+using Adult.Database.SqlPopulate;
+
 
 namespace Adult.Controllers
 {
@@ -20,17 +22,19 @@ namespace Adult.Controllers
         {
             get { return new ModelBuilder(); }
         }
-        private MongoServers _MongoService
-        {
-            get { return new MongoServers(); }
-        }
+
         #endregion
 
         //[Route("~/")]
         [HttpGet]
         public ActionResult Index()
         {
-            new PopulateMongo();
+            //Start up database
+            var db = new DataContext();
+            db.SqlVideos.FirstOrDefault();
+            //populate
+            MasterPopulate.InitSqlPopulates();
+            //MasterPopulate.InitMongoPopulates();
             return View();
 
         }
