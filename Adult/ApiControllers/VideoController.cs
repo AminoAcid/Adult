@@ -28,6 +28,13 @@ namespace Adult.ApiControllers
         }
 
         [HttpGet]
+        [Route("getuniques/")]
+        public MongoVideo[] GetUniques([FromUri] String[] bsonIds)
+        {
+            return _MongoService.getUniqueVideos(bsonIds);
+        }
+
+        [HttpGet]
         [Route("mostpinvideos/{startIndex:int}")]
         public SqlVideoResponse[] MostPinVideos(Int32 startIndex)
         {

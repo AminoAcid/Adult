@@ -40,6 +40,16 @@
             controller: 'PinCtrl'
         }
     })
+    .directive('relatedButton', function () {
+        return {
+            restruct: 'E',
+            templateUrl: '/assets/app/templates/related/relatedbtn.html',
+            scope: {
+                bsonid: '@'
+            },
+            controller: 'RelatedBtnCtrl'
+        }
+    })
     .directive('categoryButton', function ($compile) {
         return {
             restrict: 'E',

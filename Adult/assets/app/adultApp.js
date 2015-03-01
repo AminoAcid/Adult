@@ -8,6 +8,7 @@ angular.module('adultApp', [
     'navigationServices',
     'updateInfoServices',
     'videoServices',
+    'relatedServices',
     'categoryServices',
     'ngRoute',
     'ngCookies',

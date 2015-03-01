@@ -12,7 +12,7 @@
                 <span class="icon-bar"></span>
             </button>
             <div class="navbar-form navbar-left" role="search">
-                <div class="form-group" >
+                <div class="form-group">
                     <search></search>
                 </div>
             </div>
@@ -43,10 +43,12 @@
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
                 <li><modal></modal></li>
+                <li><a href="#" role="button" ng-click="goToRelated()">Related Videos</a></li>
+                <li><a href="#" role="button" ng-click="goToMain()">Main Page</a></li>
                 <li><a href="#" scrolltop>Top</a></li>
             </ul>
         </div>
-        
+
     </div>
 </nav>
 
@@ -57,12 +59,15 @@
             <category></category>
         </div>
         <div class="col-xs-8">
-            <!--videos on show-->
-            <div ng-hide="atMainPage">
+
+            <div ng-show="atMainPage()">
+                <videos></videos>
+            </div>
+            <div ng-show="atSubPage()">
                 <sub-video></sub-video>
             </div>
-            <div ng-show="atMainPage">
-                <videos></videos>
+            <div ng-show="atRelatedPage()">
+                <related-videos></related-videos>
             </div>
         </div>
         <div class="col-xs-2">

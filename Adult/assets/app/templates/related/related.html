@@ -1,0 +1,32 @@
+﻿<span>LocalSearch: </span><input type="text" ng-model="search.title" placeholder="Search loaded..." />
+
+    <div class="row video-container">
+        <div ng-repeat="vid in relatedVids | filter:search.title">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <a href="#" ng-click="signalSubVideo(vid)">
+                        <div class="text-format truncate-fade" ng-bind="vid.title"></div>
+                    </a>
+                </div>
+                <div class="panel-body">
+                    <div class="video-slide">
+                        <a href="#" ng-click="signalSubVideo(vid)">
+                            <img ng-src="{{vid.sprites[0]}}" />
+                            <img ng-src="{{vid.sprites[1]}}" />
+                            <img ng-src="{{vid.sprites[2]}}" />
+                            <img ng-src="{{vid.profileimg}}" />
+                        </a>
+                    </div>
+                </div>
+                <div class="panel-footer">
+                    <pin-button title="{{vid.title}}" embed="{{vid.embed}}" videobsonid="{{vid._id}}"></pin-button>
+                    <div class="well">
+                        Views:<div ng-bind="vid.views"></div>
+                        Pins:<div ng-bind="vid.pins"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button ng-click="load()">load</button>
+    </div>
+

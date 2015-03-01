@@ -70,15 +70,36 @@
             var deferred = $q.defer();
             $http({
                 method: 'GET',
-                url: 'api/Video/getunique/' + bsonId
+                url: '/api/Video/getunique/' + bsonId
             }).success(deferred.resolve).error(deferred.reject);
-            return deferred.promise;
+            return deferred.promise.then(
+                function (vidObj) {
+                    return vidObj;
+                },
+                function () {
+                });
+        }
+
+        var getUniqueVideos = function (bsonIds) {
+            var deferred = $q.defer();
+            $http({
+                method: 'GET',
+                url: '/api/Video/getuniques/',
+                params: {bsonIds: bsonIds}
+            }).success(deferred.resolve).error(deferred.reject);
+            return deferred.promise.then(
+                function (videoArray) {
+                    return videoArray;
+                }, function () {
+                }
+                );
         }
         return {
             getVideos: getVideos,
             getMostPinVideos: getMostPinVideos,
             getMostViewVideos: getMostViewVideos,
-            getUniqueVideo: getUniqueVideo
+            getUniqueVideo: getUniqueVideo,
+            getUniqueVideos: getUniqueVideos
         }
     }]);
     

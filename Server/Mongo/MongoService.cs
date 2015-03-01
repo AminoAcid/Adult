@@ -35,6 +35,17 @@ namespace Adult.Server.Mongo
             return _MongoServer.videoCollection.AsQueryable<MongoVideo>().Single(x => x._id == BsonId);
         }
 
+        public MongoVideo[] getUniqueVideos(String[] BsonIds)
+        {
+            var uniqueVideos = new List<MongoVideo>();
+            var enumerable = _MongoServer.videoCollection.FindAllAs<MongoVideo>().GetEnumerator();
+            while (enumerable.MoveNext())
+            {
+                if (BsonIds.Contains(enumerable.Current._id.ToString()))
+                    uniqueVideos.Add(enumerable.Current);
+            }
+            return uniqueVideos.ToArray();
+        }
         public MongoVideo[] getVideos(Int32 amount, Int32 startIndex = 0)
         {
             //if(startIndex <= totalVideoCount && startIndex + amount > totalVideoCount){

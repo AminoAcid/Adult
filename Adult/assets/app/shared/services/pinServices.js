@@ -1,7 +1,6 @@
-﻿angular.module('pinServices', ['ngCookies'])
+﻿angular.module('pinServices', [])
     .service('pinVidModal', ['videoConstants', 'localStorageService', 'updateCount',
         function (videoConstants, localStorageService, updateCount) {
-        var startIndex = 0;
 
         var pinVid = function (BsonId, title, embedHtml) {
             var array = localStorageService.get('pinnedVids') || [];
@@ -14,6 +13,7 @@
             updateCount.updatePinCount(BsonId);
         }
 
+        var startIndex = 0;
         var getVid = function () {
             var videos = [];
             var array = localStorageService.get('pinnedVids') || [];
@@ -31,9 +31,7 @@
             if (BsonId == undefined)
                 return "false";
             var array = localStorageService.get('pinnedVids') || [];
-            var i;
-
-            for (i = 0; i < array.length; i++) {
+            for (var i = 0; i < array.length; i++) {
                 if (array[i]._id.localeCompare(BsonId) == 0)
                     return "true";
             }
@@ -44,8 +42,7 @@
             var array = localStorageService.get('pinnedVids') || [];
             if (array.length > 0) {
                 var indexToRemove = -1;
-                var i;
-                for (i = 0; i < array.length; i++) {
+                for (var i = 0; i < array.length; i++) {
                     if (array[i]._id.localeCompare(vid._id) == 0) {
                         indexToRemove = i;
                         break;

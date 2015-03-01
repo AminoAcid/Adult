@@ -10,8 +10,15 @@
         return {
             restrict: 'E',
             templateUrl: '/assets/app/templates/submain/subvideo.html',
-            controller: 'SubvideoCtrl'
-        }
+            controller: 'SubVideoCtrl'
+        };
+    })
+    .directive('relatedVideos', function () {
+        return {
+            restrict: 'E',
+            templateUrl: '/assets/app/templates/related/related.html',
+            controller: 'RelatedCtrl'
+        };
     })
     .directive('category', function () {
         return {
