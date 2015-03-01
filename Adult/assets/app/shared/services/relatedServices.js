@@ -1,6 +1,6 @@
 ﻿angular.module('relatedServices', [])
-    .service('relatedService', ['$cookieStore', 'keywordVideoService', 'videoConstants', 'generalVideoService', 'videoConstants',
-        function ($cookieStore, keywordVideoService, videoConstants, generalVideoService, videoConstants) {
+    .service('relatedService', ['$cookieStore', 'keywordVideoAjax', 'videoConstants', 'generalVideoAjax', 'videoConstants',
+        function ($cookieStore, keywordVideoAjax, videoConstants, generalVideoAjax, videoConstants) {
 
             var _relatedVids = [];
             var _startIndex = 0;
@@ -8,11 +8,11 @@
             var addRelatedVid = function (bsonId) {
                 var relatedVids_id = $cookieStore.get('relatedVids') || [];
                 //Retrieve the source_video
-                generalVideoService.getUniqueVideo(bsonId).then(
+                generalVideoAjax.getUniqueVideo(bsonId).then(
                 function (vidObj) {
                     //Retrieve videos related to source_video
                     var keywordString = vidObj.maintags.concat(vidObj.subtags).join(' ');
-                    keywordVideoService.getRelatedVideos(keywordString).then(
+                    keywordVideoAjax.getRelatedVideos(keywordString).then(
                         function (relatedVidObjs) {
                             //remove duplicates from pre-existing related videos in Cookie memory
                             for (var i = 0; i < relatedVidObjs.length; i++) {
@@ -27,7 +27,7 @@
                                 //Cookie memory
                                 relatedVids_id.push(relatedVidObjs[i]._id);
                                 //Application memory
-                                generalVideoService.getUniqueVideo(relatedVidObjs[i]._id).then(
+                                generalVideoAjax.getUniqueVideo(relatedVidObjs[i]._id).then(
                                     function (vidObj) {
                                         _relatedVids.push(vidObj);
                                         $cookieStore.put('numberOfRelatedVideos', relatedVids_id.length);
@@ -88,7 +88,7 @@
                         }
                     }
                     for (var j = 0; j < cookieMemArr.length; j++) {
-                        generalVideoService.getUniqueVideo(cookieMemArr[j]).then(
+                        generalVideoAjax.getUniqueVideo(cookieMemArr[j]).then(
                             function (vidObj) {
                                 appMemArr.push(vidObj);
                             },

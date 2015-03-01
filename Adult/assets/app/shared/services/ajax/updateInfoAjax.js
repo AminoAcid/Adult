@@ -1,5 +1,5 @@
-﻿angular.module('updateInfoServices', [])
-    .service('updateCount', ['$q', '$http', function ($q, $http) {
+﻿angular.module('updateInfoAjax', [])
+    .service('updateCountAjax', ['$q', '$http', function ($q, $http) {
         updateViewCount = function (BsonId) {
             var deferred = $q.defer();
             $http({

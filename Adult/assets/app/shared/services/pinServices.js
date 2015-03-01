@@ -1,6 +1,6 @@
 ﻿angular.module('pinServices', [])
-    .service('pinVidModal', ['videoConstants', 'localStorageService', 'updateCount',
-        function (videoConstants, localStorageService, updateCount) {
+    .service('pinVidModal', ['videoConstants', 'localStorageService', 'updateCountAjax',
+        function (videoConstants, localStorageService, updateCountAjax) {
 
         var pinVid = function (BsonId, title, embedHtml) {
             var array = localStorageService.get('pinnedVids') || [];
@@ -10,7 +10,7 @@
             //update count, used for Tooltip in modal.html
             localStorageService.set('totalPinnedVideo', (localStorageService.get('totalPinnedVideo') || 0) + 1);
             //update count, for database
-            updateCount.updatePinCount(BsonId);
+            updateCountAjax.updatePinCount(BsonId);
         }
 
         var startIndex = 0;

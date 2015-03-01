@@ -1,16 +1,4 @@
-﻿angular.module('categoryServices', [])
-    .factory('getCategoryService', ['$http', '$q', function ($http, $q) {
-        return {
-            tags: function () {
-                var deferred = $q.defer();
-                $http({
-                    method: 'GET',
-                    url: '/api/Category/get'
-                }).success(deferred.resolve).error(deferred.reject);
-                return deferred.promise;
-            }
-        };
-    }])
+﻿angular.module('tagServices', [])
     .service('pinTagService', function () {
         var pinnedTags = [];
         var addTag = function (tag) {
@@ -33,4 +21,3 @@
             getTags: getTags
         };
     });
-    

@@ -78,14 +78,14 @@ angular.module('controllers', [])
                 $cookieStore.put('route', routeConstants.MAINPAGE);
             }
         }])
-    .controller('SubVideoCtrl', ['$scope', '$rootScope', '$cookieStore', 'keywordVideoService', 'historyService', 'updateCount',
-        function ($scope, $rootScope, $cookieStore, keywordVideoService, historyService, updateCount) {
+    .controller('SubVideoCtrl', ['$scope', '$rootScope', '$cookieStore', 'keywordVideoAjax', 'historyService', 'updateCountAjax',
+        function ($scope, $rootScope, $cookieStore, keywordVideoAjax, historyService, updateCountAjax) {
             $scope.videoData = {};
             $scope.relatedVideos = [];
 
             $scope.relatedQuery = function () {
                 var keywordString = $scope.videoData.maintags.concat($scope.videoData.subtags).join(' ');
-                keywordVideoService.getRelatedVideos(keywordString).then(
+                keywordVideoAjax.getRelatedVideos(keywordString).then(
                     function (relatedVideos) {
                         //remove duplicate as the most related video, is the video itself
                         var index = relatedVideos.indexOf($scope.videoData);
@@ -100,7 +100,7 @@ angular.module('controllers', [])
             $scope.navVideoView = function (vidObj, isNewNav) {
                 if (vidObj != null) {
                     //update ViewCount
-                    updateCount.updateViewCount(vidObj._id);
+                    updateCountAjax.updateViewCount(vidObj._id);
                     $scope.videoData = vidObj;
                     $scope.relatedVideos = [];
                     $scope.relatedQuery();
@@ -139,10 +139,10 @@ angular.module('controllers', [])
         }
 
     }])
-    .controller('CategoryCtrl', ['$scope', 'getCategoryService', function ($scope, getCategoryService) {
+    .controller('CategoryCtrl', ['$scope', 'getCategoryAjax', function ($scope, getCategoryAjax) {
         $scope.popularTags = [];
         $scope.getPopularTags = function () {
-            getCategoryService.tags().then(
+            getCategoryAjax.getTags().then(
                 function (Tags) {
                     $scope.popularTags = $scope.popularTags.concat(Tags.popularTags);
                 },
@@ -166,8 +166,8 @@ angular.module('controllers', [])
             pinTagService.addTag(tag);
         }
     }])
-    .controller('SearchCtrl', ['$scope', '$rootScope', '$cookieStore', 'keywordVideoService', 'historyService',
-        function ($scope, $rootScope, $cookieStore, keywordVideoService, historyService) {
+    .controller('SearchCtrl', ['$scope', '$rootScope', '$cookieStore', 'keywordVideoAjax', 'historyService',
+        function ($scope, $rootScope, $cookieStore, keywordVideoAjax, historyService) {
             $scope.queriedVideos = [];
 
             $scope.keywordQuery = function (keywords) {
@@ -175,7 +175,7 @@ angular.module('controllers', [])
                     $rootScope.$broadcast('reloadGeneralVideos');
                 }
                 else {
-                    keywordVideoService.getQueryVideos(keywords)
+                    keywordVideoAjax.getQueryVideos(keywords)
                         .then(
                         function (searchResults) {
                             $scope.queriedVideos = [];
@@ -186,8 +186,8 @@ angular.module('controllers', [])
                 }
             }
         }])
-    .controller('VideoCtrl', ['$scope', '$rootScope', '$cookieStore', 'localStorageService', 'generalVideoService', 'videoConstants', 'pinVidModal', 'pinTagService', 'routeConstants',
-        function ($scope, $rootScope, $cookieStore, localStorageService, generalVideoService, videoConstants, pinVidModal, pinTagService, routeConstants) {
+    .controller('VideoCtrl', ['$scope', '$rootScope', '$cookieStore', 'localStorageService', 'generalVideoAjax', 'videoConstants', 'pinVidModal', 'pinTagService', 'routeConstants',
+        function ($scope, $rootScope, $cookieStore, localStorageService, generalVideoAjax, videoConstants, pinVidModal, pinTagService, routeConstants) {
 
             var queryFlag = false;
             $scope.queriedVideos = [];
@@ -202,7 +202,7 @@ angular.module('controllers', [])
                 switch (videoType) {
                     case "general":
                         currentIndex += videoConstants.AMOUNT_PER_LOAD;
-                        generalVideoService.getVideos(startIndex).then(
+                        generalVideoAjax.getVideos(startIndex).then(
                             function (videoArray) {
                                 $scope.videos = $scope.videos.concat(videoArray);
                                 console.log("general hit");
@@ -210,7 +210,7 @@ angular.module('controllers', [])
                         break;
                     case "pin":
                         currentIndex += videoConstants.AMOUNT_PER_LOAD;
-                        generalVideoService.getMostPinVideos(startIndex).then(
+                        generalVideoAjax.getMostPinVideos(startIndex).then(
                             function (videoArray) {
                                 $scope.videos = $scope.videos.concat(videoArray);
                                 console.log("pin hit");
@@ -218,7 +218,7 @@ angular.module('controllers', [])
                         break;
                     case "view":
                         currentIndex += videoConstants.AMOUNT_PER_LOAD;
-                        generalVideoService.getMostViewVideos(startIndex).then(
+                        generalVideoAjax.getMostViewVideos(startIndex).then(
                             function (videoArray) {
                                 $scope.videos = $scope.videos.concat(videoArray);
                                 console.log("view hit");
@@ -253,14 +253,6 @@ angular.module('controllers', [])
                 $scope.$emit('navSubVidSignal', { vidObj: vidObject, isNewNav: true });
             }
 
-            //when enter an empty string on search, reload.
-            $scope.$on('reloadGeneralVideos', function (event) {
-                currentIndex = 0;
-                $scope.videos = [];
-                queryFlag = false;
-                $scope.getGeneralVideo(currentIndex);
-            });
-
             $scope.$on('queryResult', function (event, queryData) {
                 $scope.queriedVideos = [];
                 $scope.queriedVideos = $scope.queriedVideos.concat(queryData.queriedVideos);
@@ -271,6 +263,15 @@ angular.module('controllers', [])
                 currentIndex = 0;
                 //initalize inital show of query videos
                 $scope.getQueryVideos();
+            });
+
+            //when enter an empty string on search, reload.
+            $scope.$on('reloadGeneralVideos', function (event) {
+                queryFlag = false;
+                currentIndex = 0;
+                $scope.videos = [];
+                videoType = "general";
+                $scope.getGeneralVideo(currentIndex);
             });
 
             $scope.$on('MostPinNavTab', function (event) {
@@ -335,9 +336,9 @@ angular.module('controllers', [])
             $scope.removePinVideo(vid);
         });
     }])
-    .controller('PinCtrl', ['$scope', 'localStorageService', 'generalVideoService', 'pinVidModal',
+    .controller('PinCtrl', ['$scope', 'localStorageService', 'generalVideoAjax', 'pinVidModal',
         //determine which pinButton to show
-        function ($scope, localStorageService, generalVideoService, pinVidModal) {
+        function ($scope, localStorageService, generalVideoAjax, pinVidModal) {
             $scope.$watch(
                 function () {
                     return (localStorageService.get('pinnedVids') || []).length;

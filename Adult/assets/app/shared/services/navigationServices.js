@@ -1,5 +1,5 @@
 ﻿angular.module('navigationServices', [])
-    .service('historyService', ['$cookieStore', 'pageState', 'generalVideoService', function ($cookieStore, pageState, generalVideoService) {
+    .service('historyService', ['$cookieStore', 'pageState', 'generalVideoAjax', function ($cookieStore, pageState, generalVideoAjax) {
         var newForward = function (vid) {
             pageState.newForwardState();
 
@@ -22,7 +22,7 @@
 
             var pageNumber = $cookieStore.get('pageNumber');
             var browseHistory = $cookieStore.get('browseHistory');    
-            return generalVideoService.getUniqueVideo(browseHistory[pageNumber - 1]);
+            return generalVideoAjax.getUniqueVideo(browseHistory[pageNumber - 1]);
         }
         var backward = function() {
             pageState.backwardState();
@@ -30,7 +30,7 @@
             var pageNumber = $cookieStore.get('pageNumber');
             if (pageNumber > 0) {
                 var browseHistory = $cookieStore.get('browseHistory');
-                return generalVideoService.getUniqueVideo(browseHistory[pageNumber - 1]).then(
+                return generalVideoAjax.getUniqueVideo(browseHistory[pageNumber - 1]).then(
                     function (vidObj) {
                         return vidObj;
                         console.log('backward ajax ' + vidObj.title + 'id: ' + browseHistory[pageNumber - 1]);
