@@ -58,12 +58,12 @@ namespace Adult.Server.Mongo
             return _MongoServer.videoCollection.AsQueryable<MongoVideo>().Skip(startIndex).Take(amount).ToArray();
         }
 
-        public MongoVideo[] getQueryVideos(String[] keywords, Int32 limitTo = -1)
+        public MongoVideo[] getQueryVideos(String[] keywords, Int32 limitTo = VideoConstants.QUERY_LIMIT)
         {
             if(keywords.Length == 0)
                 return new MongoVideo[0];
            
-            var cursorEnumerator = _MongoServer.videoCollection.FindAllAs<MongoVideo>().GetEnumerator();
+            var cursorEnumerator = _MongoServer.videoCollection.FindAllAs<MongoVideo>().SetLimit(limitTo).GetEnumerator();
             var scoreBoard = new Dictionary<String, Int32>();
 
             while(cursorEnumerator.MoveNext())

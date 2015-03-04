@@ -8,6 +8,7 @@ namespace Adult.Core.Constants
 {
     public static class VideoConstants
     {
+        public const Int32 QUERY_LIMIT = 5;
         public const Int32 AMOUNT_PER_LOAD = 4;
         public const Int32 AMOUNT_RELATED_VID = 20;
         public const Int32 TITLEPOINT = 3;

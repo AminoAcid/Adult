@@ -76,6 +76,7 @@ angular.module('controllers', [])
 
             $scope.goToMain = function () {
                 $cookieStore.put('route', routeConstants.MAINPAGE);
+                $rootScope.$broadcast('GeneralVideos', false);
             }
         }])
     .controller('SubVideoCtrl', ['$scope', '$rootScope', '$cookieStore', 'keywordVideoAjax', 'historyService', 'updateCountAjax',
@@ -166,85 +167,44 @@ angular.module('controllers', [])
             pinTagService.addTag(tag);
         }
     }])
-    .controller('SearchCtrl', ['$scope', '$rootScope', '$cookieStore', 'keywordVideoAjax', 'historyService',
-        function ($scope, $rootScope, $cookieStore, keywordVideoAjax, historyService) {
+    .controller('SearchCtrl', ['$scope', '$rootScope', '$cookieStore', 'queryServices', 'historyService',
+        function ($scope, $rootScope, $cookieStore, queryServices, historyService) {
             $scope.queriedVideos = [];
 
             $scope.keywordQuery = function (keywords) {
-                if (keywords === undefined || keywords.localeCompare('') == 0) {
-                    $rootScope.$broadcast('reloadGeneralVideos');
+                if (keywords === undefined || keywords.length == 0) {
+                    $rootScope.$broadcast('GeneralVideos', true);
                 }
                 else {
-                    keywordVideoAjax.getQueryVideos(keywords)
-                        .then(
-                        function (searchResults) {
-                            $scope.queriedVideos = [];
-                            $scope.queriedVideos = $scope.queriedVideos.concat(searchResults);
-                            $rootScope.$broadcast('queryResult', { queriedVideos: $scope.queriedVideos });
-                            historyService.navToMainPage();
-                        });
+                    queryServices.initQueryBank(keywords);
+                    //keywordVideoAjax.getQueryVideos(keywords)
+                    //    .then(
+                    //    function (searchResults) {
+                    //        $scope.queriedVideos = [];
+                    //        $scope.queriedVideos = $scope.queriedVideos.concat(searchResults);
+                    //        $rootScope.$broadcast('queryResult', { queriedVideos: $scope.queriedVideos });
+                    //        historyService.navToMainPage();
+                    //    });
                 }
             }
         }])
-    .controller('VideoCtrl', ['$scope', '$rootScope', '$cookieStore', 'localStorageService', 'generalVideoAjax', 'videoConstants', 'pinVidModal', 'pinTagService', 'routeConstants',
-        function ($scope, $rootScope, $cookieStore, localStorageService, generalVideoAjax, videoConstants, pinVidModal, pinTagService, routeConstants) {
+    .controller('VideoCtrl', ['$scope', '$rootScope', '$cookieStore', 'localStorageService', 'generalVideoServices', 'videoConstants', 'pinVidModal', 'pinTagService', 'routeConstants', 'queryServices',
+        function ($scope, $rootScope, $cookieStore, localStorageService, generalVideoServices, videoConstants, pinVidModal, pinTagService, routeConstants, queryServices) {
 
             var queryFlag = false;
-            $scope.queriedVideos = [];
-            var currentIndex = 0;
             $scope.videos = [];
             $scope.tagsForQuery = [];
             var videoType = "general";
 
-            //Generally, we continuously retrieve videos from the database and update
-            //increment startIndex for database after each load
-            $scope.getGeneralVideo = function (startIndex) {
-                switch (videoType) {
-                    case "general":
-                        currentIndex += videoConstants.AMOUNT_PER_LOAD;
-                        generalVideoAjax.getVideos(startIndex).then(
-                            function (videoArray) {
-                                $scope.videos = $scope.videos.concat(videoArray);
-                                console.log("general hit");
-                            });
-                        break;
-                    case "pin":
-                        currentIndex += videoConstants.AMOUNT_PER_LOAD;
-                        generalVideoAjax.getMostPinVideos(startIndex).then(
-                            function (videoArray) {
-                                $scope.videos = $scope.videos.concat(videoArray);
-                                console.log("pin hit");
-                            });
-                        break;
-                    case "view":
-                        currentIndex += videoConstants.AMOUNT_PER_LOAD;
-                        generalVideoAjax.getMostViewVideos(startIndex).then(
-                            function (videoArray) {
-                                $scope.videos = $scope.videos.concat(videoArray);
-                                console.log("view hit");
-                            });
-                        break;
-                    default:
-                        console.log("error in videoType");
-                }
-
-            }
-            //Upon Query, we recieve a broadcast, and recieve the entire array of videos, and we update accordingly
-            $scope.getQueryVideos = function () {
-                $scope.videos = $scope.videos.concat($scope.queriedVideos.splice(0, videoConstants.AMOUNT_PER_LOAD));
-            }
-
             $scope.getVideos = function () {
-                if (currentIndex <= videoConstants.MAX_VIDEO_COUNT) {
-                    console.log("current index is: " + currentIndex);
-                    if (queryFlag) {
-                        $scope.getQueryVideos();
-                    }
-                    else {
-                        $scope.getGeneralVideo(currentIndex);
-                    }
+                if (queryFlag) {
+                    $scope.videos = queryServices.getQueryVideos();
                 }
-                console.log('getvideo is hit for infinitescroll');
+                else {
+                    
+                    $scope.videos = generalVideoServices.getVideoBank(videoType);
+                    console.log('videotype ' + videoType);
+                }
             }
 
             //if a video was clicked on the main page
@@ -253,45 +213,33 @@ angular.module('controllers', [])
                 $scope.$emit('navSubVidSignal', { vidObj: vidObject, isNewNav: true });
             }
 
-            $scope.$on('queryResult', function (event, queryData) {
-                $scope.queriedVideos = [];
-                $scope.queriedVideos = $scope.queriedVideos.concat(queryData.queriedVideos);
-                //when we have a query, show queried videos, not main videos
+            $scope.$on('queryEvent', function (event) {
                 queryFlag = true;
-                //clear the videos whenever we get a new query
-                $scope.videos = [];
-                currentIndex = 0;
-                //initalize inital show of query videos
-                $scope.getQueryVideos();
+                $scope.videos = queryServices.getQueryVideos();
             });
 
             //when enter an empty string on search, reload.
-            $scope.$on('reloadGeneralVideos', function (event) {
+            $scope.$on('GeneralVideos', function (event, reload) {
+                if (reload) {
+                    generalVideoServices.reloadGbank();
+                }
                 queryFlag = false;
-                currentIndex = 0;
-                $scope.videos = [];
                 videoType = "general";
-                $scope.getGeneralVideo(currentIndex);
+                $scope.getVideos();
             });
 
             $scope.$on('MostPinNavTab', function (event) {
                 //create cookie to unactivate the navtab
                 queryFlag = false;
-                currentIndex = 0;
-                $scope.videos = [];
-                $scope.queriedVideos = [];
                 videoType = "pin";
-                $scope.getGeneralVideo(currentIndex);
+                $scope.getVideos();
             });
 
             $scope.$on('MostViewNavTab', function (event) {
                 //cookie to unactivate the navtab
                 queryFlag = false;
-                currentIndex = 0;
-                $scope.videos = [];
-                $scope.queriedVideos = [];
                 videoType = "view";
-                $scope.getGeneralVideo(currentIndex);
+                $scope.getVideos();
             })
 
             //updates tag filter

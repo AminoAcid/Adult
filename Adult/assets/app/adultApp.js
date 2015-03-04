@@ -6,6 +6,8 @@ angular.module('adultApp', [
     'shared.directives',
     'pagingServices',
     'navigationServices',
+    'searchServices',
+    'videoServices',
     'updateInfoAjax',
     'videoAjax',
     'relatedServices',
